@@ -6,6 +6,6 @@
 
 # プラグイン
 
-プラグイン名 | やれること
---------|-------
-[Auto-Open Markdown Preview](https://marketplace.visualstudio.com/items?itemName=hnw.vscode-auto-open-markdown-preview) | 自動でプレビューしたり、パネルを閉じたりする
+プラグイン名 | やれること | 備考
+--------|------- |------
+[Auto-Open Markdown Preview](https://marketplace.visualstudio.com/items?itemName=hnw.vscode-auto-open-markdown-preview) | 自動でプレビューしたり、パネルを閉じたりする | コードの差分を表示する際に markdown のプレビューが表示されるので、使えない！
