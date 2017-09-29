@@ -1,4 +1,8 @@
 module Main where
 
+import System.Environment (getArgs)
+
 main :: IO ()
-main = putStrLn "hello world"
+main = do
+  [fp] <- getArgs
+  putStrLn fp
