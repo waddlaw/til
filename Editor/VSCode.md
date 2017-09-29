@@ -1,3 +1,12 @@
+# 問題点
+
+- 複数プロジェクトを開けない問題
+  - [Add support for opening multiple project folders in same window #396](https://github.com/Microsoft/vscode/issues/396)
+
+- サイドバーのフォントサイズが変更できない問題
+  - [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
+
+
 # マークダウンのプレビュー
 > Markdownのファイルを開いているときに、command+shift+VでMarkdownをプレビューすることが出来ます。
 
