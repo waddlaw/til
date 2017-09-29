@@ -6,6 +6,12 @@
 - サイドバーのフォントサイズが変更できない問題
   - [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
 
+# 空白の設定
+- `editor.renderWhitespace: "all"` を設定して半角の空白を可視化する
+- [`zenkaku`](https://marketplace.visualstudio.com/items?itemName=mosapride.zenkaku) という拡張機能を使って全角の空白を可視化する
+
+## 参考
+- [VS Code でドキュメントの空白文字を見やすくしてみる](https://qiita.com/satokaz/items/cb45d82f6f8f1e24c0d6)
 
 # マークダウンのプレビュー
 > Markdownのファイルを開いているときに、command+shift+VでMarkdownをプレビューすることが出来ます。
