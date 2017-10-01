@@ -6,6 +6,26 @@
 - サイドバーのフォントサイズが変更できない問題
   - [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
 
+# まとめ
+## 拡張機能
+- Haskell Language Server
+  - Haskell Language support
+- Material Icon Theme
+- Zenkaku
+- Haskell GHCi debug viewer Phoityne
+
+## 設定
+
+```json
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "files.autoSave": "afterDelay",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "all"
+}
+```
+
 # 空白の設定
 - `editor.renderWhitespace: "all"` を設定して半角の空白を可視化する
 - [`zenkaku`](https://marketplace.visualstudio.com/items?itemName=mosapride.zenkaku) という拡張機能を使って全角の空白を可視化する
