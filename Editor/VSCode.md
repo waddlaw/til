@@ -9,7 +9,7 @@
 # まとめ
 ## 拡張機能
 - Haskell Language Server
-  - Haskell Language support
+- Haskell Syntax Highlighting
 - Material Icon Theme
 - Zenkaku
 - Haskell GHCi debug viewer Phoityne
