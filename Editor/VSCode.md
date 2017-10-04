@@ -19,10 +19,14 @@
 ```json
 {
     "workbench.startupEditor": "newUntitledFile",
-    "files.autoSave": "afterDelay",
     "workbench.iconTheme": "material-icon-theme",
+    "files.autoSave": "afterDelay",
+    "files.trimTrailingWhitespace": true,
     "editor.tabSize": 2,
-    "editor.renderWhitespace": "all"
+    "editor.renderWhitespace": "all",
+    "editor.renderIndentGuides": true,
+    "editor.insertSpaces": true,
+    "extensions.autoUpdate": true
 }
 ```
 
