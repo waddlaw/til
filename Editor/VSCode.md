@@ -18,15 +18,16 @@
 
 ```json
 {
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.iconTheme": "material-icon-theme",
+    "editor.insertSpaces": true,
+    "editor.renderIndentGuides": true,
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "extensions.autoUpdate": true,
     "files.autoSave": "afterDelay",
     "files.trimTrailingWhitespace": true,
-    "editor.tabSize": 2,
-    "editor.renderWhitespace": "all",
-    "editor.renderIndentGuides": true,
-    "editor.insertSpaces": true,
-    "extensions.autoUpdate": true
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.iconTheme": "material-icon-theme"
 }
 ```
 
