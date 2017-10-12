@@ -33,3 +33,9 @@ Errors were encountered while processing:
  google-cloud-sdk
 E: Sub-process /usr/bin/dpkg returned an error code (1)
 ```
+
+`gcloud` コマンドを削除してやり直す。
+
+```bash
+$ sudo apt purge google-cloud-sdk
+```
