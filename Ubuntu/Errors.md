@@ -15,6 +15,12 @@ locale: Cannot set LC_ALL to default locale: No such file or directory
 
 ## 解決方法
 
+### その1
+
+- [Ubuntu Server 12.04: 警告「Setting locale failed」への対処法](http://d.hatena.ne.jp/tkrd/20120828/1346123699)
+
+### その2
+
 ```bash
 $ export LANG=en_US.UTF-8
 $ export LC_ALL=$LANG
