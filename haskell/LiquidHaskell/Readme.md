@@ -10,6 +10,7 @@
 - [liquidhaskell-blog](https://github.com/ucsd-progsys/liquidhaskell-blog)
 - [liquidhaskell-tutorial](https://github.com/ucsd-progsys/liquidhaskell-tutorial)
   - long tutorial
+  - [book](http://ucsd-progsys.github.io/liquidhaskell-tutorial/book.pdf)
   - [programming-with-refinement-types.pdf](https://github.com/ucsd-progsys/liquidhaskell-tutorial/blob/master/pdf/programming-with-refinement-types.pdf)
   
 ## 日本語
