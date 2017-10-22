@@ -124,3 +124,21 @@ $ cp mathsat-5.4.1-linux-x86_64/bin/mathsat /usr/local/bin/
 $ mathsat -version
 MathSAT5 version 5.4.1 (3ca22be05d13) (May 11 2017 17:18:01, gmp 6.1.0, gcc 4.8.5, 64-bit)
 ```
+
+## プラグイン
+### emacs 
+- [Emacs’ flycheck plugin](https://github.com/ucsd-progsys/liquid-types.el)
+- [2015年Emacsパッケージ事情](https://qiita.com/tadsan/items/6c658cc471be61cbc8f6)
+- [cask/cask](https://github.com/cask/cask)
+
+```bash
+$ sudo apt-get install python
+$ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
+$ export PATH="/root/.cask/bin:$PATH"
+$ cd ~/.emacs.d
+$ cask init
+$ cask install
+```
+
+### vim
+- [Vim’s syntastic checker](https://github.com/ucsd-progsys/liquid-types.vim)
