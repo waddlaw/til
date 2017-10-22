@@ -17,6 +17,8 @@
 ```bash
 $ sudo apt-get update
 $ sudo apt-get install z3
+$ z3 --version
+Z3 version 4.4.1
 ```
 
 ## [CVC4](http://cvc4.cs.stanford.edu/web/)
