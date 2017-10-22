@@ -144,3 +144,7 @@ $ cask install
 
 ### vim
 - [Vim’s syntastic checker](https://github.com/ucsd-progsys/liquid-types.vim)
+- [vimコマンドを端末から実行する](https://qiita.com/yoan/items/6216646324f68e54809d)
+- [Shougo/dein.vim](https://github.com/Shougo/dein.vim)
+- [dein.vimで設定したプラグインをシェルからインストール](https://qiita.com/junkjunctions/items/69964c81bd5b93379e71)
+- [syntax - Vim日本語ドキュメント](http://vim-jp.org/vimdoc-ja/syntax.html)
