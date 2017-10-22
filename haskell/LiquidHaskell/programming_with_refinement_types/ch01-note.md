@@ -26,6 +26,30 @@ Z3 version 4.4.1
 - [github](https://github.com/CVC4/CVC4)
 - [rnbdev/cvc4_install.sh](https://gist.github.com/rnbdev/0ec49d578abde036f459a0a75d6cedf6)
 
+```bash
+$ git clone https://github.com/cvc4/cvc4
+
+# install cvc4 locally
+$ mkdir -p cvc4pref
+$ CVC4PREF=$HOME/cvc4pref
+
+# change directory to checkout
+$ cd cvc4/
+
+# to build from github checkout
+$ sudo apt-get install make autoconf libtool
+
+# to build
+$ sudo apt-get install gcc g++ libgmp3-dev libboost-dev g++-multilib gcc-multilib
+
+$ ./autogen.sh
+$ ./contrib/get-antlr-3.4
+$ ./configure --with-antlr-dir=`pwd`/antlr-3.4 ANTLR=`pwd`/antlr-3.4/bin/antlr3 --prefix=$CVC4PREF
+$ make
+$ make check
+$ make install
+```
+
 ## MathSat
 
 上記のどれかをインストールしておく。
