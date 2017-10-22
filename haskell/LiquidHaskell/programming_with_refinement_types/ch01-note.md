@@ -12,8 +12,18 @@
 
 # 必須依存関係
 
-- Z3
-- CVC4
+## [Z3](https://github.com/Z3Prover/z3)
+
+```bash
+$ sudo apt-get update
+$ sudo apt-get install z3
+```
+
+## [CVC4](http://cvc4.cs.stanford.edu/web/)
+
+- [github](https://github.com/CVC4/CVC4)
+- [rnbdev/cvc4_install.sh](https://gist.github.com/rnbdev/0ec49d578abde036f459a0a75d6cedf6)
+
 - MathSat
 
 上記のどれかをインストールしておく。
