@@ -130,6 +130,8 @@ MathSAT5 version 5.4.1 (3ca22be05d13) (May 11 2017 17:18:01, gmp 6.1.0, gcc 4.8.
 - [Emacs’ flycheck plugin](https://github.com/ucsd-progsys/liquid-types.el)
 - [2015年Emacsパッケージ事情](https://qiita.com/tadsan/items/6c658cc471be61cbc8f6)
 - [cask/cask](https://github.com/cask/cask)
+- [package.elから Caskに切り替えました](http://syohex.hatenablog.com/entry/20140424/1398310931)
+- [rdallasgray/pallet](https://github.com/rdallasgray/pallet)
 
 ```bash
 $ sudo apt-get install python
