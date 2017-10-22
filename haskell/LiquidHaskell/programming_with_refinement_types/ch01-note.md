@@ -1,4 +1,4 @@
-# Well-Typed プログラムでも間違いが起きてしまう時
+# Well-Typed なプログラムでも間違いが起きてしまう例
 
 - 0除算
 - key-value の構造で key が無い
@@ -10,7 +10,48 @@
 - 既存のHaskellの型システム + 述語
 - SMT ソルバを利用する
 
-# 必須依存関係
+# 停止しないプログラムの検査について
+
+どちらかを使う。
+
+- `liquid --no-termination` として実行
+- `{-@ LIQUID "--no-termination" @-}` をソースファイルの先頭に記述
+
+
+# SMT について
+
+- [SAT/SMTソルバの仕組み](https://www.slideshare.net/sakai/satsmt)
+
+# 環境構築
+
+`Dockerfile` を用意したので詳しくはそっちを見てください。OS は `ubuntu:16.04 LTS` です。
+
+アプリケーション | バージョン
+------ | -----
+stack | 1.5.1
+z3 | 4.4.1
+cvc4 | 1.6-prerelease [git master 6b5c27d7]
+mathsat | 5.4.1 (3ca22be05d13)
+liquidhaskell | 2013-17
+vim | VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Nov 24 2016 16:44:48)
+emacs | GNU Emacs 24.5.1
+
+
+## stack を使った liquidhaskell (git master) のインストール
+
+```bash
+# hint パッケージでこけるのでインストール
+$ sudo apt-get install libtinfo-dev
+
+$ git clone https://github.com/ucsd-progsys/liquidhaskell.git
+$ cd liquidhaskell
+$ stack setup
+$ stack build
+$ stack install
+
+$ liquid --version
+LiquidHaskell Copyright 2013-17 Regents of the University of California. All Rights Reserved.
+```
 
 ## [Z3](https://github.com/Z3Prover/z3)
 
@@ -74,7 +115,7 @@ all binaries) for the full CVC4 copyright, licensing, and (lack of)
 warranty information.
 ```
 
-## [MathSat](http://mathsat.fbk.eu/download.html)
+## [MathSat5](http://mathsat.fbk.eu/download.html)
 
 ```bash
 $ curl -L http://mathsat.fbk.eu/download.php?file=mathsat-5.4.1-linux-x86_64.tar.gz -o mathsat-5.4.1-linux-x86_64.tar.gz
@@ -83,19 +124,3 @@ $ cp mathsat-5.4.1-linux-x86_64/bin/mathsat /usr/local/bin/
 $ mathsat -version
 MathSAT5 version 5.4.1 (3ca22be05d13) (May 11 2017 17:18:01, gmp 6.1.0, gcc 4.8.5, 64-bit)
 ```
-
-# stack を使ったインストール方法
-
-# Dockerfile
-
-# 停止しないプログラムの検査について
-
-どちらかを使う。
-
-- `liquid --no-termination` として実行
-- `{-@ LIQUID "--no-termination" @-}` をソースファイルの先頭に記述
-
-
-# SMT について
-
-- [SAT/SMTソルバの仕組み](https://www.slideshare.net/sakai/satsmt)
