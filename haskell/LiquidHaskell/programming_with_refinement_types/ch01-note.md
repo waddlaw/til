@@ -24,7 +24,7 @@ $ sudo apt-get install z3
 - [github](https://github.com/CVC4/CVC4)
 - [rnbdev/cvc4_install.sh](https://gist.github.com/rnbdev/0ec49d578abde036f459a0a75d6cedf6)
 
-- MathSat
+## MathSat
 
 上記のどれかをインストールしておく。
 
