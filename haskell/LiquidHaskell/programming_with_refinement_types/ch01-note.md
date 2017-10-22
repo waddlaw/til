@@ -74,9 +74,15 @@ all binaries) for the full CVC4 copyright, licensing, and (lack of)
 warranty information.
 ```
 
-## MathSat
+## [MathSat](http://mathsat.fbk.eu/download.html)
 
-上記のどれかをインストールしておく。
+```bash
+$ curl -L http://mathsat.fbk.eu/download.php?file=mathsat-5.4.1-linux-x86_64.tar.gz -o mathsat-5.4.1-linux-x86_64.tar.gz
+$ tar xvf mathsat-5.4.1-linux-x86_64.tar.gz
+$ cp mathsat-5.4.1-linux-x86_64/bin/mathsat /usr/local/bin/
+$ mathsat -version
+MathSAT5 version 5.4.1 (3ca22be05d13) (May 11 2017 17:18:01, gmp 6.1.0, gcc 4.8.5, 64-bit)
+```
 
 # stack を使ったインストール方法
 
@@ -88,3 +94,8 @@ warranty information.
 
 - `liquid --no-termination` として実行
 - `{-@ LIQUID "--no-termination" @-}` をソースファイルの先頭に記述
+
+
+# SMT について
+
+- [SAT/SMTソルバの仕組み](https://www.slideshare.net/sakai/satsmt)
