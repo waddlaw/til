@@ -8,8 +8,3 @@
 # Errata
 
 ## Ch01
-
-```haskell
-average :: [Int] -> Int
-average xs = sum xs `div` length xs
-```
