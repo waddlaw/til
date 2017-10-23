@@ -22,6 +22,24 @@
 
 - [SAT/SMTソルバの仕組み](https://www.slideshare.net/sakai/satsmt)
 
+## liquid コマンドについて
+
+`liquid` コマンドを実行するとカレントディレクトリに `.liquid` ディレクトリが生成される。これがアノテーションのファイル。
+
+```bash
+$ tree .liquid/
+.liquid/
+|-- 01-intro.lhs.bak
+|-- 01-intro.lhs.bspec
+|-- 01-intro.lhs.cst.html
+|-- 01-intro.lhs.err
+|-- 01-intro.lhs.html
+|-- 01-intro.lhs.json
+|-- 01-intro.lhs.smt2
+|-- 01-intro.lhs.vim.annot
+`-- liquid.css
+```
+
 # 環境構築
 
 `Dockerfile` を用意したので詳しくはそっちを見てください。OS は `ubuntu:16.04 LTS` です。
@@ -145,6 +163,8 @@ $ cask install
 ### vim
 - [Vim’s syntastic checker](https://github.com/ucsd-progsys/liquid-types.vim)
 - [vimコマンドを端末から実行する](https://qiita.com/yoan/items/6216646324f68e54809d)
-- [Shougo/dein.vim](https://github.com/Shougo/dein.vim)
 - [dein.vimで設定したプラグインをシェルからインストール](https://qiita.com/junkjunctions/items/69964c81bd5b93379e71)
 - [syntax - Vim日本語ドキュメント](http://vim-jp.org/vimdoc-ja/syntax.html)
+- [vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
+- [panagosg7/vim-annotations](https://github.com/panagosg7/vim-annotations)
+- [begriffs/haskell-vim-now](https://github.com/begriffs/haskell-vim-now)
