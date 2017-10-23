@@ -1,0 +1,13 @@
+(source gnu)
+(source melpa)
+
+(depends-on "flycheck-liquidhs" :git "https://github.com/waddlaw/flycheck-liquidhs.el")
+(depends-on "graphene" "20141030.219")
+(depends-on "pallet" :git "https://github.com/rdallasgray/pallet")
+
+(depends-on "flycheck")
+(depends-on "haskell-mode")
+(depends-on "pos-tip")
+(depends-on "popup")
+(depends-on "button-lock")
+(depends-on "flycheck-color-mode-line")
