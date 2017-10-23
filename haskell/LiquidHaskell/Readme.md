@@ -16,7 +16,7 @@
 ## 日本語
 
 - [LiquidHaskell コトハジメ](http://ccvanishing.hateblo.jp/entry/2016/12/24/193038)
-- [入門 LiquidHaskell −篩型による静的コード解析−](http://lh101.dodgsonlabs.com/)
+- [入門 LiquidHaskell −篩型による静的コード解析−](https://dodgsonlabs.booth.pm/items/490689)
 
 ## papar
 
