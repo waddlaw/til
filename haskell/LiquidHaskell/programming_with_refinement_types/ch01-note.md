@@ -5,6 +5,16 @@
 - セグメンテーションフォールト
 - ハートブリード
 
+# 実行結果
+
+セグメンテーションフォールトの実行結果。
+自分の環境では以下のようなメッセージとなった。
+
+```haskell
+Prelude Data.Vector> unsafeIndex v 3
+"Segmentation fault (core dumped)
+```
+
 # リファインメント型
 
 - 既存のHaskellの型システム + 述語
