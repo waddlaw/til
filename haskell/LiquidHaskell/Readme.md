@@ -16,6 +16,7 @@
 1. [Evaluation](http://goto.ucsd.edu/~rjhala/flops14/lhs/11_Evaluation.lhs.slides.html#/)
 
 - [Finding and Fixing Bugs in Liquid Haskell](https://web.eecs.umich.edu/~weimerw/students/anish-ms-pres.pdf)
+- [Scrap your Bounds Checks with Liquid Haskell](https://github.com/Gabriel439/slides/blob/master/liquidhaskell/slides.md)
 
 ## GitHub
 
