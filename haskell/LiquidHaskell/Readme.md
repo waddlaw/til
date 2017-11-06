@@ -5,6 +5,10 @@
 
 > Liquid = Logically Qualified Data 
 
+## 関係者
+
+- [Niki Vazou](https://nikivazou.github.io/)
+
 ## slide
 1. [Liquid Types For Haskell](http://goto.ucsd.edu/~rjhala/flops14/lhs/00_Index.lhs.slides.html#/)
 1. [Simple Refinement Types](http://goto.ucsd.edu/~rjhala/flops14/lhs/01_SimpleRefinements.lhs.slides.html#/)
