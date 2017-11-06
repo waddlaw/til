@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>/home/liquid/ex.hs</title>
+</head>
+<head>
+<link type='text/css' rel='stylesheet' href='liquid.css' />
+</head>
+
+<body>
+<hr>
+Put mouse over identifiers to see inferred types
+<pre><span class=hs-linenum> 1: </span><a class=annot href="#"><span class=annottext>GHC.Types.Module</span><span class='hs-keyword'>{-@</span></a> <span class='hs-layout'>(</span><span class='hs-varop'>==&gt;</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>p</span><span class='hs-conop'>:</span><span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>q</span><span class='hs-conop'>:</span><span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyword'>{v:</span><span class='hs-conid'>Bool</span> <span class='hs-keyword'>| v &lt;=&gt; (p ==&gt; q)}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 2: </span><span class='hs-conid'>False</span> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; (x1 =&gt; x2)}</span><span class='hs-varop'>==&gt;</span></a> <span class='hs-conid'>False</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<span class=hs-linenum> 3: </span><span class='hs-conid'>False</span> <span class='hs-varop'>==&gt;</span> <span class='hs-conid'>True</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<span class=hs-linenum> 4: </span><span class='hs-conid'>True</span> <span class='hs-varop'>==&gt;</span> <span class='hs-conid'>True</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<span class=hs-linenum> 5: </span><span class='hs-conid'>True</span> <span class='hs-varop'>==&gt;</span> <span class='hs-conid'>False</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<span class=hs-linenum> 6: </span>
+<span class=hs-linenum> 7: </span><span class='hs-keyword'>{-@</span> <span class='hs-layout'>(</span><span class='hs-varop'>&lt;=&gt;</span><span class='hs-layout'>)</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>p</span><span class='hs-conop'>:</span><span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>q</span><span class='hs-conop'>:</span><span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyword'>{v:</span><span class='hs-conid'>Bool</span> <span class='hs-keyword'>| v &lt;=&gt; (p &lt;=&gt; q)}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 8: </span><span class='hs-conid'>False</span> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; (x1 &lt;=&gt; x2)}</span><span class='hs-varop'>&lt;=&gt;</span></a> <span class='hs-conid'>False</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<span class=hs-linenum> 9: </span><span class='hs-conid'>False</span> <span class='hs-varop'>&lt;=&gt;</span> <span class='hs-conid'>True</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<span class=hs-linenum>10: </span><span class='hs-conid'>True</span> <span class='hs-varop'>&lt;=&gt;</span> <span class='hs-conid'>True</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<span class=hs-linenum>11: </span><span class='hs-conid'>True</span> <span class='hs-varop'>&lt;=&gt;</span> <span class='hs-conid'>False</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>False</span>
+<span class=hs-linenum>12: </span>
+<span class=hs-linenum>13: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>TRUE</span>  <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>|</span> <span class='hs-varid'>v</span>     <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>14: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>FALSE</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>|</span> <span class='hs-varid'>not</span> <span class='hs-varid'>v</span> <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>15: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>ex0</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>TRUE</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>16: </span><a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v}</span><span class='hs-definition'>ex0</span></a> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>True</span>
+<span class=hs-linenum>17: </span>
+<span class=hs-linenum>18: </span><span class='hs-comment'>-- UNSAFE</span>
+<span class=hs-linenum>19: </span><span class='hs-comment'>-- {-@ ex0' :: TRUE @-}</span>
+<span class=hs-linenum>20: </span><span class='hs-comment'>-- ex0' = False</span>
+<span class=hs-linenum>21: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>ex1</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>TRUE</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>22: </span><a class=annot href="#"><span class=annottext>GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v}</span><span class='hs-definition'>ex1</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>b</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v == b}</span><span class='hs-varid'>b</span></a> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1
+                                                                           || x2} | v == GHC.Classes.||}</span><span class='hs-varop'>||</span></a> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; not x1} | v == GHC.Classes.not}</span><span class='hs-varid'>not</span></a> <span class='hs-varid'>b</span>
+<span class=hs-linenum>23: </span>
+<span class=hs-linenum>24: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>ex2</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>FALSE</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>25: </span><a class=annot href="#"><span class=annottext>GHC.Types.Bool -&gt; {v : GHC.Types.Bool | not v}</span><span class='hs-definition'>ex2</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>b</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v == b}</span><span class='hs-varid'>b</span></a> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1
+                                                                           &amp;&amp; x2} | v == GHC.Classes.&amp;&amp;}</span><span class='hs-varop'>&amp;&amp;</span></a> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; not x1} | v == GHC.Classes.not}</span><span class='hs-varid'>not</span></a> <span class='hs-varid'>b</span>
+<span class=hs-linenum>26: </span>
+<span class=hs-linenum>27: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>ex3</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>TRUE</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>28: </span><a class=annot href="#"><span class=annottext>GHC.Types.Bool -&gt; GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v}</span><span class='hs-definition'>ex3</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>a</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>b</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v == a}</span><span class='hs-layout'>(</span></a><a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v &lt;=&gt; a
+                            &amp;&amp; b}</span><span class='hs-varid'>a</span></a> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1
+                                                                           &amp;&amp; x2} | v == GHC.Classes.&amp;&amp;}</span><span class='hs-varop'>&amp;&amp;</span></a> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; (x1 =&gt; x2)} | v == Main.==&gt;}</span><span class='hs-varop'>==&gt;</span></a> <span class='hs-varid'>a</span>
+<span class=hs-linenum>29: </span>
+<span class=hs-linenum>30: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>ex4</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Bool</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>TRUE</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>31: </span><a class=annot href="#"><span class=annottext>GHC.Types.Bool -&gt; GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v}</span><span class='hs-definition'>ex4</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>a</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>b</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v == b}</span><span class='hs-layout'>(</span></a><a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v &lt;=&gt; a
+                            &amp;&amp; b}</span><span class='hs-varid'>a</span></a> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1
+                                                                           &amp;&amp; x2} | v == GHC.Classes.&amp;&amp;}</span><span class='hs-varop'>&amp;&amp;</span></a> <span class='hs-varid'>b</span><span class='hs-layout'>)</span> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; (x1 =&gt; x2)} | v == Main.==&gt;}</span><span class='hs-varop'>==&gt;</span></a> <span class='hs-varid'>b</span><span class='hs-comment'>{-
+
+{-@ ex3' :: Bool -&gt; Bool -&gt; TRUE @-}
+ex3' a b = (a || b) ==&gt; a
+
+{-@ ex6 :: Bool -&gt; Bool -&gt; TRUE @-}
+ex6 a b = (a &amp;&amp; (a ==&gt; b)) ==&gt; b
+
+{-@ ex7 :: Bool -&gt; Bool -&gt; TRUE @-}
+ex7 a b = a ==&gt; (a ==&gt; b) ==&gt; b
+
+{-@ exDeMorgan1 :: Bool -&gt; Bool -&gt; TRUE @-}
+exDeMorgan1 a b = not (a || b) &lt;=&gt; (not a &amp;&amp; not b)
+
+{-@ exDeMorgan2 :: Bool -&gt; Bool -&gt; TRUE @-}
+exDeMorgan2 a b = not (a &amp;&amp; b) &lt;=&gt; (not a &amp;&amp; not b)
+
+{-@ ax0 :: TRUE @-}
+ax0 = 1 + 1 == 2
+
+{-@ ax0' :: TRUE @-}
+ax0' = 1 + 2 == 2
+
+{-@ ax1 :: Int -&gt; TRUE @-}
+ax1 x = x &lt; x + 1
+
+{-@ ax2 :: Int -&gt; TRUE @-}
+ax2 x = (x &lt; 0) ==&gt; (0 &lt;= 0 - x)
+
+{-@ ax3 :: Int -&gt; Int -&gt; TRUE @-}
+ax3 x y = (0 &lt;= x) ==&gt; (0 &lt;= y) ==&gt; (0 &lt;= x + y)
+
+{-@ ax4 :: Int -&gt; Int -&gt; TRUE @-}
+ax4 x y = (x == y - 1) ==&gt; (x + 2 == y + 1)
+
+{-@ ax5 :: Int -&gt; Int -&gt; Int -&gt; TRUE @-}
+ax5 x y z =   (x &lt;= 0 &amp;&amp; x &gt;= 0)
+          ==&gt; (y == x + z)
+          ==&gt; (y == z)
+
+{-@ fx0 :: [a] -&gt; [a] -&gt; TRUE @-}
+fx0 xs ys = (xs == ys) ==&gt; (size xs == size ys)
+
+{-@ fx2 :: a -&gt; [a] -&gt; TRUE @-}
+fx2 x xs = 0 &lt; size ys
+  where
+    ys = x : xs
+
+{-@ fx2VC :: _ -&gt; _ -&gt; _ -&gt; TRUE @-}
+fx2VC x xs ys =   (0 &lt;= size xs)
+              ==&gt; (size ys == 1 + size xs)
+              ==&gt; (0 &lt; size ys)
+-}</span>
+</pre>
+</body>
+</html>

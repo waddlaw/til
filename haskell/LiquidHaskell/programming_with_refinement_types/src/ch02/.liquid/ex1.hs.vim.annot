@@ -1,0 +1,3 @@
+1:1-1:1::Main.$trModule :: "GHC.Types.Module"
+5:1-5:5::Main.zero :: "{v : GHC.Types.Int | v == 0}"
+8:1-8:6::Main.zero' :: "{v : GHC.Types.Int | v == 1}"
