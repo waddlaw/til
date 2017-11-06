@@ -166,6 +166,13 @@ f = False
  Perhaps you meant: fst
 ```
 
+ただし、`NoImplecitPrelude`を使うとエラーになるため、 `Prelude` とは別に特別な関数を色々とインポートしているみたい。([Prelude.spec](https://github.com/ucsd-progsys/liquidhaskell/blob/master/include/Prelude.spec)) 
+
+```
+{-# LANGUAGE NoImplicitPrelude #-}
+
+```
+
 ### true と false のスペルについて
 
 `true`, `True` どちらでも良い。同様に `false`, `False` もどちらでも許容される。(ただし、`not`, `Not` などはだめ)
