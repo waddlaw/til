@@ -1,8 +1,0 @@
-{-@ type Zero = { v:Int | v == 0 } @-}
-{-@ type One = { v:Int | v == 1 } @-}
-
-{-@ zero :: Zero @-}
-zero = 0 :: Int
-
-{-@ zero' :: One @-}
-zero' = zero

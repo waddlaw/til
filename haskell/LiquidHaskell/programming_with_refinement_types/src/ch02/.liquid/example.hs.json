@@ -1,1 +1,0 @@
-{"status":"error","types":{},"errors":[[{"line":74,"column":19},{"line":74,"column":20},"/home/liquid/example.hs:74:19: Error: Illegal type specification for `Main.congruence`\n    Main.congruence :: (Eq a) => (Int a) -> (Int a) -> {v : Bool | v}\n    Type constructor GHC.Types.Int expects a maximum 0 arguments but was given 1 arguments"]]}
