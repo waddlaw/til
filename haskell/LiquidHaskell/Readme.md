@@ -38,3 +38,8 @@
 - [Refinement Types For Haskell, ICFP 2014](http://goto.ucsd.edu/~rjhala/papers/refinement_types_for_haskell.pdf)
 - [LiquidHaskell in the Real World, Haskell 2014](http://goto.ucsd.edu/~rjhala/papers/real_world_liquid.pdf)
 - [Abstract Refinement Types, ESOP 2013](http://goto.ucsd.edu/~rjhala/papers/abstract_refinement_types.pdf)
+- [An Introduction to Liquid Haskell](https://arxiv.org/pdf/1701.03320.pdf)
+
+## Youtube
+
+- [Liquid Types for Haskell](https://www.youtube.com/watch?v=LEsEME7JwEE)
