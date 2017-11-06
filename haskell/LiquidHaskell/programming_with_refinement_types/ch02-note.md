@@ -4,7 +4,7 @@
 
 > Refinement Types = Type + Logical Predicates
 
-## 構文
+## Syntax
 
 チュートリアルの内容と githubu の Readme に載っている [Formal Grammar of Refinement Predicates](https://github.com/ucsd-progsys/liquidhaskell#formal-grammar-of-refinement-predicates) で少し構文が違う
 
@@ -99,6 +99,44 @@ p := (e r e)          -- binary relation
    | False
 ```
 
+## Semantics
+
+### 環境
+変数 → 型
+
+```
+x :: Int
+y :: Int
+z :: INt
+```
+
+### 割り当て
+変数 → 値
+
+```
+x := 1
+y := 2
+z := 3
+```
+
+### 充足可能
+
+与えられた論理式を満たす割り当てが少なくとも1つは存在する。
+
+```
+x + y == z
+```
+
+### 妥当
+
+与えられた論理式は割り当てによらず、常に真である。
+
+```
+x < 10 || x == 10 || x > 10
+```
+
+
+
 ## 実験によりわかったこと
 
 ### `{ ... }` の内部は `Haskell` とは関係無さそうな感じがする。
@@ -152,3 +190,21 @@ t | SAFE | UNSAFE | SAFE | SAFE | UNSAFE | UNSAFE
 f | UNSAFE | SAFE | SAFE | SAFE | UNSAFE | UNSAFE
 
 ということで、戻り値が `v` に束縛されると考えて良さそう。
+
+
+### -> の結合性
+
+通常通り、右結合。
+
+```
+{-@ P4 = { false -> true -> false } @-}
+{-@ P5 = { (false -> true) -> false } @-}
+
+t = True
+f = False
+```
+
+関数名 | P4 | P5
+-------|-----|-------
+t | SAFE | UNSAFE
+f | SAFE | UNSAFE
