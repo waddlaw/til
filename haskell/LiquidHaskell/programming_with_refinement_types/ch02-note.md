@@ -64,6 +64,7 @@ p := true
    | p && p
    | p || p
    | p ==> p
+   | p ===> p
    | p <=> p
    | not p
 ```
@@ -89,6 +90,8 @@ p := (e r e)          -- binary relation
    | (p && p)         -- and
    | (p || p)         -- or
    | (p => p)         -- implies
+   | (p ==> p)
+   | (p <=> p)
    | (not p)          -- negation
    | true
    | True
@@ -132,7 +135,7 @@ f = False
 ### 基本的な動作確認
 
 ```
-{-@ type TRUE = { v:Bool | v } @-}
+{-@ type TRUE  = { v:Bool | v } @-}
 {-@ type FALSE = { v:Bool | not v } @-}
 {-@ type BOOL1 = { true } @-}
 {-@ type BOOL2 = { True } @-}
