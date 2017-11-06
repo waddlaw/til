@@ -6,8 +6,9 @@
 
 訳 | ノート
 --- | ---
-[Ch01. Introduction](/haskell/LiquidHaskell/programming_with_refinement_types/ch01.md) | [note](/haskell/LiquidHaskell/programming_with_refinement_types/ch01-note.md)
-
+[Ch01. Introduction](/haskell/LiquidHaskell/programming_with_refinement_types/ch01.md) | [note](./ch01-note.md)
+_ | [note](./ch02-note.md)
+_ | [note](./ch03-note.md)
 
 # Errata
 
