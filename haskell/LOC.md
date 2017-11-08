@@ -1,6 +1,7 @@
 # lines of code
 
-計測方法は `cloc $(git ls-files)` とする。
+- 計測方法は `cloc $(git ls-files)` とする。
+- `git ls-files` としているので実際はもっとある
 
 ## hpack
 
