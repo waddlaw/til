@@ -40,3 +40,8 @@ $ sudo make -j8
 BuildFlavour = devel2
 stage=2
 ```
+
+```bash
+$ sudo docker run --rm -i -t -v `pwd`:/home/ghc gregweber/ghc-haskell-dev /bin/bash
+$ sudo PATH=/opt/ghc/8.2.1/bin:$PATH make -j8
+```
