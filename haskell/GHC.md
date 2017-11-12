@@ -15,7 +15,7 @@ $ sudo apt update && sudo apt upgrade -y \
   && sudo apt build-dep -y ghc \
   && sudo apt install -y git autoconf automake libtool make gcc g++ libgmp-dev ncurses-dev libtinfo-dev python3 xz-utils linux-tools-generic xutils-dev \
   && curl -sSL https://get.haskellstack.org/ | sh \
-  && stack install -j happy alex cabal-install --install-ghc
+  && stack install --ghc-options="-j" happy alex cabal-install --install-ghc
 
 $ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/
 $ git clone --recursive git://github.com/ghc/ghc \
