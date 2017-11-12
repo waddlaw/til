@@ -62,7 +62,7 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
 
 ### Defaulting に関するところ
 
-- [tcGetDefaultTys](hhttps://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcEnv.hs#L751)
+- [tcGetDefaultTys](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcEnv.hs#L751)
 
 ```haskell
 tcGetDefaultTys :: TcM ([Type], -- Default types
