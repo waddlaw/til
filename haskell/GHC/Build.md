@@ -26,6 +26,7 @@ $ git clone --recursive git://github.com/ghc/ghc \
 
 $ ./boot && ./configure
 $ make -j
+$ sudo make install
 ```
 
 ## 高速リビルド
