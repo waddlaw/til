@@ -12,7 +12,7 @@
 
 ```bash
 $ sudo apt update && sudo apt upgrade && sudo apt build-dep ghc \
-  && sudo apt install git autoconf automake libtool make gcc g++ libgmp-dev ncurses-dev libtinfo-dev python3 xz-utils linux-tools-generic xutils-dev \
+  && sudo apt install -y git autoconf automake libtool make gcc g++ libgmp-dev ncurses-dev libtinfo-dev python3 xz-utils linux-tools-generic xutils-dev \
   && curl -sSL https://get.haskellstack.org/ | sh \
   && stack install happy alex cabal-install --install-ghc
 
