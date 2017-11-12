@@ -18,11 +18,11 @@ $ sudo apt update && sudo apt upgrade -y \
   && stack install happy alex cabal-install --install-ghc
 
 $ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/ \
-  && git clone --recursive git://github.com/ghc/ghc \
+$ git clone --recursive git://github.com/ghc/ghc \
   && cd ghc \
   && git checkout ghc-8.2 \
-  && git update submodule --init
-$ cp mk/build.mk.sample mk/build.mk
+  && git update submodule --init \
+  && cp mk/build.mk.sample mk/build.mk
 
 $ ./boot
 $ ./configure
