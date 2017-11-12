@@ -1,6 +1,7 @@
 # GHC
 
 - [Resources for newcomers to GHC](https://ghc.haskell.org/trac/ghc/wiki/Newcomers)
+- [Setting up a Linux system for building GHC](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Linux)
 
 ## ビルド方法
 
