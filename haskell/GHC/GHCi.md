@@ -62,7 +62,14 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
 
 ### Defaulting に関するところ
 
-- [compiler/typecheck/TcDefaults.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcDefaults.hs)
+- [tcGetDefaultTys](hhttps://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcEnv.hs#L751)
+
+```haskell
+let deflt_tys = opt_deflt extended_defaults [unitTy, list_ty]
+                          -- Note [Extended defaults]
+                          ++ [integer_ty, doubleTy]
+                          ++ opt_deflt ovl_strings [stringTy]
+```
 
 ### コード
 
@@ -70,5 +77,6 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
 - [ghc/compiler/main/HscMain.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/HscMain.hs)
 - [ghc/compiler/typecheck/TcRnDriver.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcRnDriver.hs)
 - [ghc/compiler/typecheck/TcSimplify.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcSimplify.hs)
-
+- [compiler/typecheck/TcDefaults.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcDefaults.hs)
+- [ghc/compiler/typecheck/TcEnv.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcEnv.hs)
 
