@@ -83,9 +83,47 @@ n1-standard-16 （vCPU x 16、メモリ 60 GB） | SSD | | | | | |
 
 ```makefile
 BuildFlavour = devel2
+
 ifneq "$(BuildFlavour)" ""
 include mk/flavours/$(BuildFlavour).mk
 endif
+
+STRIP_CMD = :
+```
+
+マシンタイプ | ディスクタイプ | -j | -j64 | -j32 | -j16 | -j8 | none |
+-----------|-------------|----|------|------|------|-----|------|
+n1-standard-16 （vCPU x 16、メモリ 60 GB） | SSD | | | | | |
+
+
+#### devel2 + stage=2
+
+```makefile
+BuildFlavour = devel2
+
+ifneq "$(BuildFlavour)" ""
+include mk/flavours/$(BuildFlavour).mk
+endif
+
+stage=2
+
+STRIP_CMD = :
+```
+
+マシンタイプ | ディスクタイプ | -j | -j64 | -j32 | -j16 | -j8 | none |
+-----------|-------------|----|------|------|------|-----|------|
+n1-standard-16 （vCPU x 16、メモリ 60 GB） | SSD | | | | | |
+
+#### devel2 + stage=2 + make fast
+
+```makefile
+BuildFlavour = devel2
+
+ifneq "$(BuildFlavour)" ""
+include mk/flavours/$(BuildFlavour).mk
+endif
+
+stage=2
 
 STRIP_CMD = :
 ```
