@@ -21,7 +21,7 @@ $ git config --global url."git://github.com/ghc/packages-".insteadOf git://githu
 $ git clone --recursive git://github.com/ghc/ghc \
   && cd ghc \
   && git checkout ghc-8.2 \
-  && git update submodule --init \
+  && git submodule update --init \
   && cp mk/build.mk.sample mk/build.mk
 
 $ ./boot && ./configure
@@ -51,6 +51,11 @@ $ time make -jN
 ### 初回ビルド
 
 ```makefile
+ifneq "$(BuildFlavour)" ""
+include mk/flavours/$(BuildFlavour).mk
+endif
+
+STRIP_CMD = :
 ```
 
 マシンタイプ | ディスクタイプ | -j | -j32 | -j16 | -j8 | none |
