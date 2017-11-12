@@ -11,6 +11,11 @@
 - [gregwebs/ghc-docker-dev](https://github.com/gregwebs/ghc-docker-dev)
 
 ```bash
+$ sudo apt update && sudo apt upgrade && sudo apt build-dep ghc \
+  && sudo apt install git autoconf automake libtool make gcc g++ libgmp-dev ncurses-dev libtinfo-dev python3 xz-utils linux-tools-generic xutils-dev \
+  && curl -sSL https://get.haskellstack.org/ | sh \
+  && stack install happy alex cabal-install --install-ghc
+
 $ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/
 $ git clone --recursive git://github.com/ghc/ghc
 $ cd ghc
@@ -35,3 +40,17 @@ stage=2
 $ sudo docker run --rm -i -t -v `pwd`:/home/ghc gregweber/ghc-haskell-dev /bin/bash
 $ sudo PATH=/opt/ghc/8.2.1/bin:$PATH make -j8
 ```
+
+## ビルド時間
+
+ビルド時間の計測は以下のコマンドで行った
+
+```bash
+$ time make -jN
+```
+
+### 初回ビルド
+
+マシンタイプ | ディスクタイプ | -j |
+-----------|-------------|----|
+n1-standard-16 （vCPU x 16、メモリ 60 GB） | HDD | |
