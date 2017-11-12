@@ -64,6 +64,23 @@ n1-standard-16 （vCPU x 16、メモリ 60 GB） | SSD | | | | | |
 
 ### リビルド
 
+#### 変更なし
+
+```makefile
+ifneq "$(BuildFlavour)" ""
+include mk/flavours/$(BuildFlavour).mk
+endif
+
+STRIP_CMD = :
+```
+
+マシンタイプ | ディスクタイプ | -j | -j64 | -j32 | -j16 | -j8 | none |
+-----------|-------------|----|------|------|------|-----|------|
+n1-standard-16 （vCPU x 16、メモリ 60 GB） | SSD | | | | | |
+
+
+#### devel2
+
 ```makefile
 BuildFlavour = devel2
 ifneq "$(BuildFlavour)" ""
