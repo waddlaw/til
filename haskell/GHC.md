@@ -17,11 +17,11 @@ $ sudo apt update && sudo apt upgrade -y \
   && curl -sSL https://get.haskellstack.org/ | sh \
   && stack install happy alex cabal-install --install-ghc
 
-$ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/
-$ git clone --recursive git://github.com/ghc/ghc
-$ cd ghc
-$ git checkout ghc-8.2
-$ git update submodule --init
+$ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/ \
+  && git clone --recursive git://github.com/ghc/ghc \
+  && cd ghc \
+  && git checkout ghc-8.2 \
+  && git update submodule --init
 $ cp mk/build.mk.sample mk/build.mk
 
 $ ./boot
