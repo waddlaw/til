@@ -6,11 +6,9 @@
 
 ## ビルド方法
 
-今は GHC のビルド用の Dockerfile が用意されている。
+今は GHC のビルド用の Dockerfile が用意されている。(今回は使ってない)
 
 - [gregwebs/ghc-docker-dev](https://github.com/gregwebs/ghc-docker-dev)
-
-### ソースコードの取得と設定
 
 ```bash
 $ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/
