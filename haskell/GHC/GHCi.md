@@ -60,6 +60,10 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
 1. [simplifyInfer](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcSimplify.hs#L572)
 1. [decideQuantification](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcSimplify.hs#L785)
 
+### Defaulting に関するところ
+
+- [compiler/typecheck/TcDefaults.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcDefaults.hs)
+
 ### コード
 
 - [ghc/compiler/main/InteractiveEval.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/InteractiveEval.hs)
