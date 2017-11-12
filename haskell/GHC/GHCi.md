@@ -3,11 +3,6 @@
 `ghc-8.2.2-rc3` の情報
 
 - [ghc/ghc/GHCi/UI.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/ghc/GHCi/UI.hs)
-- [ghc/compiler/utils/Outputable.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/utils/Outputable.hs)
-- [ghc/compiler/utils/Pretty.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/utils/Pretty.hs)
-- [ghc/compiler/main/PprTyThing.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/PprTyThing.hs)
-- [ghc/compiler/types/TyCoRep.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/types/TyCoRep.hs)
-- [ghc/compiler/iface/IfaceType.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/iface/IfaceType.hs)
 
 ## type オプション
 
@@ -46,3 +41,27 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc
 ppr_iface_forall_part :: ShowForAllFlag -> [IfaceForAllBndr] -> [IfacePredType] -> SDoc -> SDoc
 ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
 ```
+
+### コード
+
+- [ghc/compiler/utils/Outputable.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/utils/Outputable.hs)
+- [ghc/compiler/utils/Pretty.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/utils/Pretty.hs)
+- [ghc/compiler/main/PprTyThing.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/PprTyThing.hs)
+- [ghc/compiler/types/TyCoRep.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/types/TyCoRep.hs)
+- [ghc/compiler/iface/IfaceType.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/iface/IfaceType.hs)
+
+## type オプション (+d)
+
+評価関数の呼び出し
+
+1. [exprType](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/InteractiveEval.hs#L825)
+1. [hscTcExpr](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/HscMain.hs#L1668)
+1. [tcRnExpr](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcRnDriver.hs#L2159)
+
+### コード
+
+- [ghc/compiler/main/InteractiveEval.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/InteractiveEval.hs)
+- [ghc/compiler/main/HscMain.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/main/HscMain.hs)
+- [ghc/compiler/typecheck/TcRnDriver.hs](https://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcRnDriver.hs)
+
+
