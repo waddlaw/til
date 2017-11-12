@@ -15,7 +15,7 @@ $ sudo apt update && sudo apt upgrade -y \
   && sudo apt build-dep -y ghc \
   && sudo apt install -y git autoconf automake libtool make gcc g++ libgmp-dev ncurses-dev libtinfo-dev python3 xz-utils linux-tools-generic xutils-dev \
   && curl -sSL https://get.haskellstack.org/ | sh \
-  && stack install happy alex cabal-install --install-ghc
+  && stack install -j happy alex cabal-install --install-ghc
 
 $ git config --global url."git://github.com/ghc/packages-".insteadOf git://github.com/ghc/packages/
 $ git clone --recursive git://github.com/ghc/ghc \
@@ -24,8 +24,7 @@ $ git clone --recursive git://github.com/ghc/ghc \
   && git update submodule --init \
   && cp mk/build.mk.sample mk/build.mk
 
-$ ./boot
-$ ./configure
+$ ./boot && ./configure
 $ make -j16
 ```
 
@@ -50,6 +49,9 @@ $ time make -jN
 `OS` は `Ubuntu 16.04 LTS`
 
 ### 初回ビルド
+
+```makefile
+```
 
 マシンタイプ | ディスクタイプ | -j | -j32 | -j16 | -j8 | none |
 -----------|-------------|----|-----|------|-----|------|
