@@ -41,3 +41,8 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc
 ```
 
 ここを Hack したら良さそう。
+
+```haskell
+ppr_iface_forall_part :: ShowForAllFlag -> [IfaceForAllBndr] -> [IfacePredType] -> SDoc -> SDoc
+ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
+```
