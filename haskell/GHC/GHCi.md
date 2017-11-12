@@ -65,10 +65,70 @@ ppr_iface_forall_part show_forall tvs ctxt sdoc = sep [sdoc]
 - [tcGetDefaultTys](hhttps://github.com/ghc/ghc/blob/ghc-8.2.2-rc3/compiler/typecheck/TcEnv.hs#L751)
 
 ```haskell
-let deflt_tys = opt_deflt extended_defaults [unitTy, list_ty]
+tcGetDefaultTys :: TcM ([Type], -- Default types
+                        (Bool,  -- True <=> Use overloaded strings
+                         Bool)) -- True <=> Use extended defaulting rules
+tcGetDefaultTys
+  = do  { dflags <- getDynFlags
+        ; let ovl_strings = xopt LangExt.OverloadedStrings dflags
+              extended_defaults = xopt LangExt.ExtendedDefaultRules dflags
+                                        -- See also Trac #1974
+              flags = (ovl_strings, extended_defaults)
+
+        ; mb_defaults <- getDeclaredDefaultTys
+        ; case mb_defaults of {
+           Just tys -> return (tys, flags) ;
+                                -- User-supplied defaults
+           Nothing  -> do
+
+        -- No use-supplied default
+        -- Use [Integer, Double], plus modifications
+        { integer_ty <- tcMetaTy integerTyConName
+        ; list_ty <- tcMetaTy listTyConName
+        ; checkWiredInTyCon doubleTyCon
+        ; let deflt_tys = opt_deflt extended_defaults [unitTy, list_ty]
                           -- Note [Extended defaults]
                           ++ [integer_ty, doubleTy]
                           ++ opt_deflt ovl_strings [stringTy]
+        ; return (deflt_tys, flags) } } }
+  where
+    opt_deflt True  xs = xs
+    opt_deflt False _  = []
+```
+
+ここを Hack したら良さそう。
+
+```haskell
+tcGetDefaultTys :: TcM ([Type], -- Default types
+                        (Bool,  -- True <=> Use overloaded strings
+                         Bool)) -- True <=> Use extended defaulting rules
+tcGetDefaultTys
+  = do  { dflags <- getDynFlags
+        ; let ovl_strings = xopt LangExt.OverloadedStrings dflags
+              extended_defaults = xopt LangExt.ExtendedDefaultRules dflags
+                                        -- See also Trac #1974
+              flags = (ovl_strings, extended_defaults)
+
+        ; mb_defaults <- getDeclaredDefaultTys
+        ; case mb_defaults of {
+           Just tys -> return (tys, flags) ;
+                                -- User-supplied defaults
+           Nothing  -> do
+
+        -- No use-supplied default
+        -- Use [Integer, Double], plus modifications
+        { integer_ty <- tcMetaTy integerTyConName
+        ; int_ty <- tcMetaTy intTyConName
+        ; list_ty <- tcMetaTy listTyConName
+        ; checkWiredInTyCon doubleTyCon
+        ; let deflt_tys = opt_deflt extended_defaults [unitTy, list_ty]
+                          -- Note [Extended defaults]
+                          ++ [int_ty, integer_ty, doubleTy]
+                          ++ opt_deflt ovl_strings [stringTy]
+        ; return (deflt_tys, flags) } } }
+  where
+    opt_deflt True  xs = xs
+    opt_deflt False _  = []
 ```
 
 ### コード
