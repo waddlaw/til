@@ -62,7 +62,7 @@ endif
 STRIP_CMD = :
 ```
 
-##### n1-standard-16 + SSD
+##### n1-standard-16 (Broadwell) + SSD (20GB)
 
 time | -j | -j64 | -j32 | -j16 | -j8 | none |
 -----|----|------|------|------|-----|------|
@@ -70,13 +70,22 @@ real | 25m43.549s | 25m41.320s | 25m49.189s | | | 104m57.999s |
 user | 136m2.388s | 135m16.192s | 135m28.380s | | | 98m43.048s |
 sys	 | 6m28.216s  | 6m25.296s | 6m16.864s | | | 4m31.972s |
 
-##### n1-highcpu-16 + SSD
+##### n1-highcpu-16 (Broadwell) + SSD (20GB)
 
 time | -j | -j64 | -j32 | -j16 | -j8 | none |
 -----|----|------|------|------|-----|------|
 real | | | | | | |
 user | | | | | | |
 sys	 | | | | | | |
+
+##### n1-highcpu-16 (Skylake) + SSD (20GB)
+
+time | -j | -j64 | -j32 | -j16 | -j8 | none |
+-----|----|------|------|------|-----|------|
+real | | | | | | |
+user | | | | | | |
+sys	 | | | | | | |
+
 
 #### V=0
 
@@ -90,7 +99,7 @@ endif
 STRIP_CMD = :
 ```
 
-##### n1-standard-16 + SSD
+##### n1-standard-16 (Broadwell) + SSD (20GB)
 
 time | -j | -j64 | -j32 | -j16 | -j8 | none |
 -----|----|------|------|------|-----|------|
