@@ -64,6 +64,14 @@ endif
 STRIP_CMD = :
 ```
 
+##### n1-standard-8 (Broadwell) + SSD (20GB)
+
+time | -j |
+-----|----|
+real | |
+user | |
+sys	 | |
+
 ##### n1-standard-16 (Broadwell) + SSD (20GB)
 
 time | -j | -j64 | -j32 | -j16 | -j8 | none |
