@@ -67,14 +67,6 @@ endif
 STRIP_CMD = :
 ```
 
-##### n1-standard-8 (Broadwell) + SSD (20GB)
-
-time | -j |
------|----|
-real | |
-user | |
-sys	 | |
-
 ##### n1-standard-16 (Broadwell) + SSD (20GB)
 
 time | -j | -j64 | -j32 | -j16 | -j8 | none |
@@ -83,30 +75,15 @@ real | 25m43.549s | 25m41.320s | 25m49.189s | 25m27.498s | 26m33.077s | 104m57.9
 user | 136m2.388s | 135m16.192s | 135m28.380s | 128m10.044s | 112m56.304s | 98m43.048s |
 sys	 | 6m28.216s  | 6m25.296s | 6m16.864s | 5m57.400s | 5m16.548s | 4m31.972s |
 
-##### n1-highcpu-16 (Broadwell) + SSD (20GB)
+##### n1-standard-8 (Broadwell) + SSD (20GB)
 
-time | -j |
------|----|
-real | 29m11.533s |
-user | 151m2.040s |
-sys	 | 8m21.668s |
-
-##### n1-highcpu-16 (Skylake) + SSD (20GB)
-
-time | -j |
------|----|
-real | |
-user | |
-sys	 | |
-
-##### n1-highcpu-64 (Skylake) + SSD (20GB)
-
-time | -j |
------|----|
-real | |
-user | |
-sys	 | |
-
+time | real | user | sys |
+-----|------|------|-----|
+n1-standard-8 (Broadwell) | | | |
+n1-standard-16 (Broadwell) | 25m43.549s | 136m2.388s | 6m28.216s |
+n1-highcpu-16 (Broadwell) | 29m11.533s | 151m2.040s | 8m21.668s |
+n1-highcpu-16 (Skylake) | | | |
+n1-highcpu-64 (Skylake) | | | |
 
 #### V=0
 
