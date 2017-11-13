@@ -90,22 +90,22 @@ sys	 | 8m21.668s |
 
 ##### n1-highcpu-16 (Skylake) + SSD (20GB)
 
-time | -j | -j64 | -j32 | -j16 | -j8 | none |
------|----|------|------|------|-----|------|
-real | | | | | | |
-user | | | | | | |
-sys	 | | | | | | |
+time | -j |
+-----|----|
+real | |
+user | |
+sys	 | |
 
 ##### custom (Skylake) + SSD (20GB)
 
 - CPU: 64
 - memory: 416GB
 
-time | -j | -j64 | -j32 | -j16 | -j8 | none |
------|----|------|------|------|-----|------|
-real | | | | | | |
-user | | | | | | |
-sys	 | | | | | | |
+time | -j |
+-----|----|
+real | |
+user | |
+sys	 | |
 
 
 #### V=0
