@@ -1,8 +1,11 @@
 # GHC
 
+とても参考になります。
+
 - [Resources for newcomers to GHC](https://ghc.haskell.org/trac/ghc/wiki/Newcomers)
 - [Setting up a Linux system for building GHC](https://ghc.haskell.org/trac/ghc/wiki/Building/Preparation/Linux)
 - [Fast rebuilding](https://ghc.haskell.org/trac/ghc/wiki/Building/Using#HowtomakeGHCbuildquickly)
+- [Haskell GHCをソースからビルドする手順](https://qiita.com/takenobu-hs/items/c1309b93ca17b87e5955)
 
 ## ビルド方法
 
