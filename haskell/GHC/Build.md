@@ -96,10 +96,7 @@ real | |
 user | |
 sys	 | |
 
-##### custom (Skylake) + SSD (20GB)
-
-- CPU: 64
-- memory: 416GB
+##### n1-highcpu-64 (Skylake) + SSD (20GB)
 
 time | -j |
 -----|----|
