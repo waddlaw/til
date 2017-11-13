@@ -75,9 +75,9 @@ real | 25m43.549s | 25m41.320s | 25m49.189s | 25m27.498s | 26m33.077s | 104m57.9
 user | 136m2.388s | 135m16.192s | 135m28.380s | 128m10.044s | 112m56.304s | 98m43.048s |
 sys	 | 6m28.216s  | 6m25.296s | 6m16.864s | 5m57.400s | 5m16.548s | 4m31.972s |
 
-##### n1-standard-8 (Broadwell) + SSD (20GB)
+##### 色々なマシンタイプでビルドした結果 (`-j` オプション)
 
-time | real | user | sys |
+machine type | real | user | sys |
 -----|------|------|-----|
 n1-standard-8 (Broadwell) | | | |
 n1-standard-16 (Broadwell) | 25m43.549s | 136m2.388s | 6m28.216s |
