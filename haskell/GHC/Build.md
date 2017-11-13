@@ -109,7 +109,7 @@ machine type | real | user | sys |
 -----|------|------|-----|
 n1-standard-96 | 21m42.379s | 104m57.016s | 7m34.600s |
 n1-highmem-96 | 21m51.841s | 105m14.448s | 7m31.348s |
-n1-highcpu-96 | | | |
+n1-highcpu-96 | 21m51.931s | 105m10.492s | 7m32.024s |
 
 
 #### V=0
