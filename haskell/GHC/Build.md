@@ -80,7 +80,7 @@ sys	 | 6m28.216s  | 6m25.296s | 6m16.864s | 5m57.400s | 5m16.548s | 4m31.972s |
 machine type | real | user | sys |
 -----|------|------|-----|
 n1-standard-8 (Broadwell) | 43m38.673s | 207m49.560s | 9m4.836s |
-n1-standard-16 (Broadwell) | | | |
+n1-standard-16 (Broadwell) | 33m35.458s | 181m44.796s | 9m18.284s |
 n1-standard-32 (Broadwell) | | | |
 n1-standard-64 (Broadwell) | | | |
 
