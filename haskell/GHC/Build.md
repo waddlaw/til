@@ -6,10 +6,6 @@
 
 ## ビルド方法
 
-今は GHC のビルド用の Dockerfile が用意されている。(今回は使ってない)
-
-- [gregwebs/ghc-docker-dev](https://github.com/gregwebs/ghc-docker-dev)
-
 ```bash
 $ sudo apt update && sudo apt upgrade -y \
   && sudo apt build-dep -y ghc \
@@ -28,6 +24,10 @@ $ ./boot && ./configure
 $ make -j
 $ sudo make install
 ```
+
+GHC のビルド用の Dockerfile が用意されている。(今回は使ってない)
+
+- [gregwebs/ghc-docker-dev](https://github.com/gregwebs/ghc-docker-dev)
 
 ## 高速リビルド
 - `mk/build.mk` で以下の行のコメントを外す
