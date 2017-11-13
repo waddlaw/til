@@ -108,7 +108,7 @@ n1-highcpu-64 (Skylake) | | | |
 machine type | real | user | sys |
 -----|------|------|-----|
 n1-standard-96 | 21m42.379s | 104m57.016s | 7m34.600s |
-n1-highmem-96 | | | |
+n1-highmem-96 | 21m51.841s | 105m14.448s | 7m31.348s |
 n1-highcpu-96 | | | |
 
 
