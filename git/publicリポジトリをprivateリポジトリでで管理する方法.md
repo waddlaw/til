@@ -32,3 +32,21 @@ $ git remote add public https://github.com/exampleuser/public-repo.git
 $ git pull public master # Creates a merge commit
 $ git push origin master
 ```
+
+## 具体的に GHC でやってみる。
+
+```bash
+$ git clone --bare http://git.haskell.org/ghc.git
+$ cd ghc.git
+$ git push --mirror git@github.com:waddlaw/ghc.git
+$ cd ..
+$ rm -rf ghc.git
+```
+
+```bash
+$ git clone git@github.com:waddlaw/ghc.git
+$ cd ghc
+$ git remote add public http://git.haskell.org/ghc.git
+$ git pull public master
+$ git push origin master
+```
