@@ -97,7 +97,7 @@ machine type | real | user | sys |
 -----|------|------|-----|
 n1-highmem-8 (Broadwell) | 32m0.106s | 148m31.856s | 7m9.996s |
 n1-highmem-16 (Broadwell) | 29m11.533s | 151m2.040s | 8m21.668s |
-n1-highmem-32 (Broadwell) | | | |
+n1-highmem-32 (Broadwell) | 23m24.097s | 115m29.908s | 7m2.080s |
 n1-highmem-64 (Broadwell) | | | |
 
 machine type | real | user | sys |
