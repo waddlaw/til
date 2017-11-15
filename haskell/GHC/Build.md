@@ -105,7 +105,21 @@ machine type | real | user | sys |
 n1-highmem-8 (Skylake) | 32m56.001s | 152m16.408s | 7m17.568s |
 n1-highmem-16 (Skylake) | 30m42.682s | 156m32.500s | 8m45.136s |
 n1-highmem-32 (Skylake) | 26m6.185s | 128m45.560s | 8m0.376s |
-n1-highmem-64 (Skylake) | | | |
+n1-highmem-64 (Skylake) | 25m22.220s | 124m37.780s | 8m14.612s |
+
+machine type | real | user | sys |
+-----|------|------|-----|
+n1-highcpu-8 (Broadwell) | | | |
+n1-highcpu-16 (Broadwell) | | | |
+n1-highcpu-32 (Broadwell) | | | |
+n1-highcpu-64 (Broadwell) | | | |
+
+machine type | real | user | sys |
+-----|------|------|-----|
+n1-highcpu-8 (Skylake) | | | |
+n1-highcpu-16 (Skylake) | | | |
+n1-highcpu-32 (Skylake) | | | |
+n1-highcpu-64 (Skylake) | | | |
 
 machine type | real | user | sys |
 -----|------|------|-----|
