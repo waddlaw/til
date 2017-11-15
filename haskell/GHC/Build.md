@@ -102,7 +102,7 @@ n1-highmem-64 (Broadwell) | 24m3.772s | 117m12.660s | 8m5.072s |
 
 machine type | real | user | sys |
 -----|------|------|-----|
-n1-highmem-8 (Skylake) | | | |
+n1-highmem-8 (Skylake) | 29m27.282s | 137m54.896s | 6m54.216s |
 n1-highmem-16 (Skylake) | 30m42.682s | 156m32.500s | 8m45.136s |
 n1-highmem-32 (Skylake) | | | |
 n1-highmem-64 (Skylake) | | | |
