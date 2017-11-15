@@ -28,7 +28,7 @@ $ make -j
 $ sudo make install
 ```
 
-GHC のビルド用の Dockerfile が用意されている。(今回は使ってない)
+GHC ビルド用の Dockerfile が用意されている。(今回は使ってない)
 
 - [gregwebs/ghc-docker-dev](https://github.com/gregwebs/ghc-docker-dev)
 
