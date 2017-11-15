@@ -88,7 +88,7 @@ machine type | real | user | sys |
 -----|------|------|-----|
 n1-standard-8 (Skylake) | 35m7.448s | 163m34.492s | 7m49.996s |
 n1-standard-16 (Skylake) | 28m4.200s | 143m38.128s | 8m4.736s |
-n1-standard-32 (Skylake) | | | |
+n1-standard-32 (Skylake) | 24m58.640s | 123m3.324s | 7m28.076s |
 n1-standard-64 (Skylake) | | | |
 
 machine type | real | user | sys |
