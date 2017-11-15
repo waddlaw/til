@@ -9,6 +9,8 @@
 
 ## ビルド方法
 
+- 今回は `ghc-8.2.2-rc3` を対象にした。
+
 ```bash
 $ sudo apt update && sudo apt upgrade -y \
   && sudo apt build-dep -y ghc \
