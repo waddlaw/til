@@ -86,7 +86,7 @@ n1-standard-64 (Broadwell) | 21m3.820s | 101m32.456s | 6m52.124s |
 
 machine type | real | user | sys |
 -----|------|------|-----|
-n1-standard-8 (Skylake) | | | |
+n1-standard-8 (Skylake) | 35m7.448s | 163m34.492s | 7m49.996s |
 n1-standard-16 (Skylake) | | | |
 n1-standard-32 (Skylake) | | | |
 n1-standard-64 (Skylake) | | | |
