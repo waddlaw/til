@@ -82,7 +82,7 @@ machine type | real | user | sys |
 n1-standard-8 (Broadwell) | 43m38.673s | 207m49.560s | 9m4.836s |
 n1-standard-16 (Broadwell) | 33m35.458s | 181m44.796s | 9m18.284s |
 n1-standard-32 (Broadwell) | 30m36.038s | 151m20.468s | 9m8.224s |
-n1-standard-64 (Broadwell) | | | |
+n1-standard-64 (Broadwell) | 21m3.820s | 101m32.456s | 6m52.124s |
 
 machine type | real | user | sys |
 -----|------|------|-----|
