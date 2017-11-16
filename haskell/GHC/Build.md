@@ -116,7 +116,7 @@ n1-highcpu-64 (Broadwell) | 22m18.056s | 108m5.168s | 7m17.084s |
 
 machine type | real | user | sys |
 -----|------|------|-----|
-n1-highcpu-8 (Skylake) | | | |
+n1-highcpu-8 (Skylake) | 30m35.997s | 141m27.904s | 7m0.284s |
 n1-highcpu-16 (Skylake) | 24m5.295s | 124m14.136s | 6m46.628s |
 n1-highcpu-32 (Skylake) | 23m38.677s | 115m5.860s | 7m18.016s |
 n1-highcpu-64 (Skylake) | 22m49.772s | 110m6.596s | 7m18.700s |
