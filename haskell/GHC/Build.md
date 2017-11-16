@@ -112,7 +112,7 @@ machine type | real | user | sys |
 n1-highcpu-8 (Broadwell) | 28m25.893s | 133m1.192s | 6m23.972s |
 n1-highcpu-16 (Broadwell) | 24m35.758s | 125m35.276s | 6m55.000s |
 n1-highcpu-32 (Broadwell) | 24m37.776s | 118m15.760s | 7m34.008s |
-n1-highcpu-64 (Broadwell) | | | |
+n1-highcpu-64 (Broadwell) | 22m18.056s | 108m5.168s | 7m17.084s |
 
 machine type | real | user | sys |
 -----|------|------|-----|
