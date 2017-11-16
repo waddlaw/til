@@ -118,7 +118,7 @@ machine type | real | user | sys |
 -----|------|------|-----|
 n1-highcpu-8 (Skylake) | | | |
 n1-highcpu-16 (Skylake) | | | |
-n1-highcpu-32 (Skylake) | | | |
+n1-highcpu-32 (Skylake) | 23m38.677s | 115m5.860s | 7m18.016s |
 n1-highcpu-64 (Skylake) | 22m49.772s | 110m6.596s | 7m18.700s |
 
 machine type | real | user | sys |
