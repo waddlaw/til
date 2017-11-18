@@ -24,7 +24,6 @@ v8.9.1
 # update npm
 $ sudo npm install npm@latest -g
 $ sudo chown -R $USER:$(id -gn $USER) /home/bm12/.config
-
 $ npm -v
 5.5.1
 ```
@@ -35,6 +34,9 @@ $ npm -v
 
 ```bash
 $ sudo apt install -y libgtk2.0-0 libxss-dev libgconf2-dev libnss3-dev libasound2-dev libx11-xcb-dev libxtst6
+
+# electron のインストール
+$ sudo npm install electron@1.4.13 -g --unsafe-perm=true --allow-root
 ```
 
 Quickstart
@@ -42,9 +44,6 @@ Quickstart
 ```bash
 $ git clone https://github.com/electron/electron-quick-start
 $ cd electron-quick-start
-
-# electron のインストール
-$ sudo npm install electron@1.4.13 -g --unsafe-perm=true
 
 $ npm install
 $ npm start
