@@ -23,6 +23,7 @@ v8.9.1
 
 # update npm
 $ sudo npm install npm@latest -g
+$ sudo chown -R $USER:$(id -gn $USER) /home/bm12/.config
 
 $ npm -v
 5.5.1
