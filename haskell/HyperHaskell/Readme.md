@@ -44,8 +44,8 @@ v1.4.13
 ### stack
 
 ```bash
-$ curl -sSL https://get.haskellstack.org/ | sh
 $ stack --version
+Version 1.6.0, Git revision 10559c85d45e53dc4957aae1dda2a911cf7a961b (5337 commits) x86_64 hpack-0.18.1
 ```
 
 ### hyper-haskell
