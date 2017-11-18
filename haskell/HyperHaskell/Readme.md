@@ -19,7 +19,7 @@ $ sudo apt upgrade -y
 $ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 $ node -v
-v9.2.0
+v8.9.1
 
 # update npm
 $ sudo npm install npm@latest -g
@@ -30,28 +30,22 @@ $ npm -v
 
 ### Electron
 
-- [electron/electron](https://github.com/electron/electron/)
-- [ubuntu16.04LTS で electron を試してみる](https://qiita.com/pandaNO12/items/63fbc06db228fd0968f1)
-- [[Electron] プロキシ環境下でUbuntuにElectronを導入する方法](https://qiita.com/takahiro_itazuri/items/be1099285d69edc62f75)
+- [electron/electron](https://github.com/electron/electron#installation)
 
 ```bash
-$ sudo apt install -y nodejs npm libappindicator1 libxss1 libgconf2-dev libnss3-dev libasound2-dev
-
-# node のバージョン管理ツールらしい。
-$ sudo npm -g install n
-
-# 最新版の node をインストール
-$ sudo n stable
-
-# バージョン確認
-$ sudo npm -v
-5.5.1
-$ sudo node -v
-v9.2.0
+$ sudo apt install -y libgtk2.0-0 libxss-dev libgconf2-dev libnss3-dev libasound2-dev
 
 # electron のインストール
 $ npm install electron --save-dev --save-exact
-$ electron -v
+```
+
+Quickstart
+
+```bash
+$ git clone https://github.com/electron/electron-quick-start
+$ cd electron-quick-start
+$ npm install
+$ npm start
 ```
 
 ###
