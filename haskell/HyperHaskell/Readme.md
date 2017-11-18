@@ -9,15 +9,23 @@ $ sudo apt update
 $ sudo apt upgrade -y
 ```
 
-### npm
+### node & npm
 
 - [Installing Node.js and updating npm](https://docs.npmjs.com/getting-started/installing-node)
 - [nodesource/distributions](https://github.com/nodesource/distributions#debinstall)
 
 ```bash
-$ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+# version 9 はサポートされていないので 8 にした
+$ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 $ node -v
+v9.2.0
+
+# update npm
+$ sudo npm install npm@latest -g
+
+$ npm -v
+5.5.1
 ```
 
 ### Electron
