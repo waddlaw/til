@@ -2,7 +2,7 @@
 
 - [HeinrichApfelmus/hyper-haskell](https://github.com/HeinrichApfelmus/hyper-haskell)
 
-## Install (Ubuntu 16.04 LTS)
+## Install (Ubuntu 17.10)
 
 ```bash
 $ sudo apt update
@@ -37,20 +37,27 @@ $ sudo apt install -y libgtk2.0-0 libxss-dev libgconf2-dev libnss3-dev libasound
 
 # electron のインストール
 $ sudo npm install electron@1.4.13 -g --unsafe-perm=true --allow-root
+$ electron -v
+v1.4.13
 ```
 
-Quickstart
-
-```bash
-$ git clone https://github.com/electron/electron-quick-start
-$ cd electron-quick-start
-
-$ npm install
-$ npm start
-```
-
-###
+### stack
 
 ```bash
 $ curl -sSL https://get.haskellstack.org/ | sh
+$ stack --version
+```
+
+### hyper-haskell
+
+`Makefile` の `ELECTRON` の行を以下のように書き換える。
+
+```Makefile
+ELECTRON=$(which electron)
+```
+
+```bash
+$ git clone https://github.com/HeinrichApfelmus/hyper-haskell.git
+$ cd hyper-haskell
+$ make run
 ```
