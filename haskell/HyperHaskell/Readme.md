@@ -50,10 +50,10 @@ $ stack --version
 
 ### hyper-haskell
 
-`Makefile` の `ELECTRON` の行を以下のように書き換える。
+`Makefile` の `ELECTRON` の行を `$ which electron` で表示されたパスで書き換える。 
 
 ```Makefile
-ELECTRON=$(which electron)
+ELECTRON=/usr/bin/electron
 ```
 
 ```bash
