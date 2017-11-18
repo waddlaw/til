@@ -34,10 +34,7 @@ $ npm -v
 - [electron/electron](https://github.com/electron/electron#installation)
 
 ```bash
-$ sudo apt install -y libgtk2.0-0 libxss-dev libgconf2-dev libnss3-dev libasound2-dev
-
-# electron のインストール
-$ npm install electron --save-dev --save-exact
+$ sudo apt install -y libgtk2.0-0 libxss-dev libgconf2-dev libnss3-dev libasound2-dev libx11-xcb-dev libxtst6
 ```
 
 Quickstart
@@ -45,6 +42,10 @@ Quickstart
 ```bash
 $ git clone https://github.com/electron/electron-quick-start
 $ cd electron-quick-start
+
+# electron のインストール
+$ sudo npm install electron@1.4.13 -g --unsafe-perm=true
+
 $ npm install
 $ npm start
 ```
