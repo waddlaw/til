@@ -4,6 +4,22 @@
 
 ## Install (Ubuntu 16.04 LTS)
 
+```bash
+$ sudo apt update
+$ sudo apt upgrade -y
+```
+
+### npm
+
+- [Installing Node.js and updating npm](https://docs.npmjs.com/getting-started/installing-node)
+- [nodesource/distributions](https://github.com/nodesource/distributions#debinstall)
+
+```bash
+$ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+$ node -v
+```
+
 ### Electron
 
 - [electron/electron](https://github.com/electron/electron/)
@@ -26,7 +42,7 @@ $ sudo node -v
 v9.2.0
 
 # electron のインストール
-$ sudo npm -g install electron --save-dev --save-exact --unsafe-perm=true --allow-root
+$ npm install electron --save-dev --save-exact
 $ electron -v
 ```
 
