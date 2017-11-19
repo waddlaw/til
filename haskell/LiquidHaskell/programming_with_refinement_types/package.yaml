@@ -2,7 +2,7 @@ name:                LiquidHaskell-tutorial
 version:             0.1.0.0
 #synopsis:
 #description:
-homepage:            https://github.com/waddlaw/src-dir#readme
+homepage:            https://github.com/waddlaw/LiquidHaskell-tutorial#readme
 license:             BSD3
 author:              shinya yamaguchi
 maintainer:          ingroze@gmail.com
@@ -14,7 +14,5 @@ extra-source-files:
 dependencies:
   - base >= 4.7 && < 5
 
-executables:
-  src-dir:
-    source-dirs:      src
-    main:             Main.hs
+library:
+  source-dirs: src

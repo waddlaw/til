@@ -1,1 +1,0 @@
-{"status":"error","types":{},"errors":[[{"line":3,"column":1},{"line":3,"column":13},"/home/bm12/repo/guchi/til/haskell/LiquidHaskell/programming_with_refinement_types/src-dir/src/ch04/example2.hs:3:1-12: Error: GHC Error\n    Invalid type signature: measure vlen :: ...\nShould be of form <variable> :: <type>"]]}

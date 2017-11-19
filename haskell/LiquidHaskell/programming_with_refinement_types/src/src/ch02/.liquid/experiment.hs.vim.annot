@@ -1,3 +1,0 @@
-1:1-1:1::Main.$trModule :: "GHC.Types.Module"
-25:1-25:2::Main.t :: "{VV : GHC.Types.Bool | (false => (true => false))\n                       && (true <=> true)\n                       && (true => true)\n                       && VV}"
-38:1-38:2::Main.f :: "{VV : GHC.Types.Bool | (false => (true => false))\n                       && (true <=> true)\n                       && (true => true)\n                       && not VV}"
