@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>/home/bm12/repo/guchi/til/haskell/LiquidHaskell/programming_with_refinement_types/src-dir/src/ch03/exercise.hs</title>
+</head>
+<head>
+<link type='text/css' rel='stylesheet' href='liquid.css' />
+</head>
+
+<body>
+<hr>
+Put mouse over identifiers to see inferred types
+<pre><span class=hs-linenum> 1: </span><a class=annot href="#"><span class=annottext>GHC.Types.Module</span><span class='hs-keyword'>{-@</span></a> <span class='hs-keyword'>type</span> <span class='hs-conid'>NonZero</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Int</span> <span class='hs-keyglyph'>|</span> <span class='hs-varid'>v</span> <span class='hs-varop'>/=</span> <span class='hs-num'>0</span> <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 2: </span>
+<span class=hs-linenum> 3: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>die</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>{ v:</span><span class='hs-conid'>String</span> <span class='hs-keyword'>| false }</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 4: </span><a class=annot href="#"><span class=annottext>{VV : [GHC.Types.Char] | false} -&gt; a</span><span class='hs-definition'>die</span></a> <a class=annot href="#"><span class=annottext>{VV : [GHC.Types.Char] | false}</span><span class='hs-varid'>msg</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : [GHC.Types.Char] | false} -&gt; a</span><span class='hs-varid'>error</span></a> <span class='hs-varid'>msg</span>
+<span class=hs-linenum> 5: </span>
+<span class=hs-linenum> 6: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>divide</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>NonZero</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 7: </span><span class='hs-definition'>divide</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<span class=hs-linenum> 8: </span><a class=annot href="#"><span class=annottext>GHC.Types.Int -&gt; {v : GHC.Types.Int | v /= 0} -&gt; GHC.Types.Int</span><span class='hs-definition'>divide</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>n</span></a> <span class='hs-num'>0</span> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>[GHC.Types.Char]</span><span class='hs-varid'>die</span></a> <span class='hs-str'>"divide by zero"</span>
+<span class=hs-linenum> 9: </span><span class='hs-definition'>divide</span> <span class='hs-varid'>n</span> <span class='hs-varid'>d</span> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int | v /= 0}</span><span class='hs-varid'>n</span></a> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Int -&gt; x2:{v : GHC.Types.Int | v /= 0} -&gt; {v : GHC.Types.Int | v == x1 / x2
+                                                                            &amp;&amp; (x1 &gt;= 0
+                                                                                &amp;&amp; x2 &gt;= 0 =&gt; v &gt;= 0)
+                                                                            &amp;&amp; (x1 &gt;= 0
+                                                                                &amp;&amp; x2 &gt;= 1 =&gt; v &lt;= x1)
+                                                                            &amp;&amp; (1 &lt; x2 =&gt; v &lt; x1)
+                                                                            &amp;&amp; (x2 &gt;= 1 =&gt; v &lt;= x1)}</span><span class='hs-varop'>`div`</span></a> <span class='hs-varid'>d</span>
+<span class=hs-linenum>10: </span>
+<span class=hs-linenum>11: </span><span class='hs-comment'>-- Why does LiquidHaskell flag an error at n?</span>
+<span class=hs-linenum>12: </span><span class='hs-comment'>-- xs = [] の場合があるため</span>
+<span class=hs-linenum>13: </span>
+<span class=hs-linenum>14: </span><span class='hs-definition'>avg</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Int</span><span class='hs-keyglyph'>]</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<span class=hs-linenum>15: </span><a class=annot href="#"><span class=annottext>[GHC.Types.Int] -&gt; GHC.Types.Int</span><span class='hs-definition'>avg</span></a> <span class='hs-conid'>[]</span> <span class='hs-keyglyph'>=</span> <span class='hs-num'>0</span>
+<span class=hs-linenum>16: </span><span class='hs-definition'>avg</span> <span class='hs-varid'>xs</span> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int -&gt; {v : GHC.Types.Int | v /= 0} -&gt; GHC.Types.Int | v == Main.divide}</span><span class='hs-varid'>divide</span></a> <span class='hs-varid'>total</span> <span class='hs-varid'>n</span>
+<span class=hs-linenum>17: </span>  <span class='hs-keyword'>where</span>
+<span class=hs-linenum>18: </span>    <a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>total</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>[GHC.Types.Int] -&gt; GHC.Types.Int</span><span class='hs-varid'>sum</span></a> <span class='hs-varid'>xs</span>
+<span class=hs-linenum>19: </span>    <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int | v &gt;= 0}</span><span class='hs-varid'>n</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>xs:[GHC.Types.Int] -&gt; {v : GHC.Types.Int | v &gt;= 0
+                                           &amp;&amp; v == len xs}</span><span class='hs-varid'>length</span></a> <span class='hs-varid'>xs</span>
+<span class=hs-linenum>20: </span>
+<span class=hs-linenum>21: </span><span class='hs-comment'>-- 3.2 わからない</span>
+<span class=hs-linenum>22: </span>
+<span class=hs-linenum>23: </span>
+<span class=hs-linenum>24: </span><span class='hs-comment'>-- 3.3</span>
+<span class=hs-linenum>25: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>lAssert</span> <span class='hs-keyglyph'>::</span> <span class='hs-keyword'>{ v:</span><span class='hs-conid'>Bool</span> <span class='hs-keyword'>| v }</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>26: </span><a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v} -&gt; a -&gt; a</span><span class='hs-definition'>lAssert</span></a> <span class='hs-conid'>True</span> <a class=annot href="#"><span class=annottext>a</span><span class='hs-varid'>x</span></a> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>x</span>
+<span class=hs-linenum>27: </span><span class='hs-definition'>lAssert</span> <span class='hs-conid'>False</span> <span class='hs-keyword'>_</span> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>[GHC.Types.Char]</span><span class='hs-varid'>die</span></a> <span class='hs-str'>"yikes, assertion fails!"</span>
+<span class=hs-linenum>28: </span>
+<span class=hs-linenum>29: </span><a class=annot href="#"><span class=annottext>()</span><span class='hs-definition'>yes</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>() -&gt; ()</span><span class='hs-varid'>lAssert</span></a> <span class='hs-layout'>(</span><a class=annot href="#"><span class=annottext>GHC.Integer.Type.Integer</span><span class='hs-num'>1</span></a> <a class=annot href="#"><span class=annottext>x1:GHC.Integer.Type.Integer -&gt; x2:GHC.Integer.Type.Integer -&gt; {v : GHC.Integer.Type.Integer | v == x1 + x2}</span><span class='hs-varop'>+</span></a> <span class='hs-num'>1</span> <a class=annot href="#"><span class=annottext>x1:GHC.Integer.Type.Integer -&gt; x2:GHC.Integer.Type.Integer -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1 == x2}</span><span class='hs-varop'>==</span></a> <span class='hs-num'>2</span><span class='hs-layout'>)</span> <span class='hs-conid'>()</span>
+<span class=hs-linenum>30: </span><span class='hs-comment'>{- UNSAFE
+no = lAssert (1 + 1 == 3) ()
+-}</span>
+</pre>
+</body>
+</html>

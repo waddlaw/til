@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>/home/bm12/repo/guchi/til/haskell/LiquidHaskell/programming_with_refinement_types/src-dir/src/ch04/example.hs</title>
+</head>
+<head>
+<link type='text/css' rel='stylesheet' href='liquid.css' />
+</head>
+
+<body>
+<hr>
+Put mouse over identifiers to see inferred types
+<pre><span class=hs-linenum> 1: </span><a class=annot href="#"><span class=annottext>GHC.Types.Module</span><span class='hs-keyword'>import</span></a> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Vector</span> <span class='hs-layout'>(</span><span class='hs-conid'>Vector</span><span class='hs-layout'>,</span> <span class='hs-layout'>(</span><span class='hs-varop'>!</span><span class='hs-layout'>)</span><span class='hs-layout'>,</span> <span class='hs-varid'>fromList</span><span class='hs-layout'>)</span>
+<span class=hs-linenum> 2: </span><span class='hs-keyword'>import</span> <span class='hs-keyword'>qualified</span> <span class='hs-conid'>Data</span><span class='hs-varop'>.</span><span class='hs-conid'>Vector</span> <span class='hs-keyword'>as</span> <span class='hs-conid'>V</span>
+<span class=hs-linenum> 3: </span><span class='hs-keyword'>import</span> <span class='hs-conid'>Prelude</span> <span class='hs-varid'>hiding</span> <span class='hs-layout'>(</span><span class='hs-varid'>head</span><span class='hs-layout'>)</span>
+<span class=hs-linenum> 4: </span><span class='hs-comment'>--import Language.Haskell.Liquid.Prelude</span>
+<span class=hs-linenum> 5: </span>
+<span class=hs-linenum> 6: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>VectorN</span> <span class='hs-varid'>a</span> <span class='hs-conid'>N</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>|</span> <span class='hs-varid'>vlen</span> <span class='hs-varid'>v</span> <span class='hs-varop'>==</span> <span class='hs-conid'>N</span> <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 7: </span>
+<span class=hs-linenum> 8: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>twoLangs</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>VectorN</span> <span class='hs-conid'>String</span> <span class='hs-num'>2</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 9: </span><a class=annot href="#"><span class=annottext>{v : (Data.Vector.Vector [GHC.Types.Char]) | vlen v == 2}</span><span class='hs-definition'>twoLangs</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>[[GHC.Types.Char]]</span><span class='hs-varid'>fromList</span></a> <span class='hs-keyglyph'>[</span><span class='hs-str'>"haskell"</span><span class='hs-layout'>,</span> <span class='hs-str'>"javascript"</span><span class='hs-keyglyph'>]</span>
+<span class=hs-linenum>10: </span>
+<span class=hs-linenum>11: </span><span class='hs-comment'>{- UNSAFE
+eeks = [ok, yup, nono]
+  where
+    ok = twoLangs ! 0
+    yup = twoLangs ! 1
+    nono = twoLangs ! 3
+-}</span>
+<span class=hs-linenum>18: </span>
+<span class=hs-linenum>19: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>NEVector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>|</span> <span class='hs-num'>0</span> <span class='hs-varop'>&lt;</span> <span class='hs-varid'>vlen</span> <span class='hs-varid'>v</span><span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>20: </span>
+<span class=hs-linenum>21: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>head</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>NEVector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>22: </span><span class='hs-definition'>head</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<span class=hs-linenum>23: </span><a class=annot href="#"><span class=annottext>{v : (Data.Vector.Vector a) | 0 &lt; vlen v} -&gt; a</span><span class='hs-definition'>head</span></a> <a class=annot href="#"><span class=annottext>{v : (Data.Vector.Vector a) | 0 &lt; vlen v}</span><span class='hs-varid'>vec</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int | v == (0 : int)}</span><span class='hs-varid'>vec</span></a> <span class='hs-varop'>!</span> <span class='hs-num'>0</span>
+<span class=hs-linenum>24: </span>
+<span class=hs-linenum>25: </span><span class='hs-comment'>-- | Exercise 4.1</span>
+<span class=hs-linenum>26: </span><span class='hs-definition'>head'</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span>
+<span class=hs-linenum>27: </span><a class=annot href="#"><span class=annottext>(Data.Vector.Vector a) -&gt; (GHC.Base.Maybe a)</span><span class='hs-definition'>head'</span></a> <a class=annot href="#"><span class=annottext>(Data.Vector.Vector a)</span><span class='hs-varid'>vec</span></a>
+<span class=hs-linenum>28: </span>  <span class='hs-keyglyph'>|</span> <a class=annot href="#"><span class=annottext>(Data.Vector.Vector a) -&gt; GHC.Types.Bool</span><span class='hs-varid'>null</span></a> <span class='hs-varid'>vec</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Nothing</span>
+<span class=hs-linenum>29: </span>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>x1:a -&gt; {v : (GHC.Base.Maybe a) | fromJust v == x1
+                                  &amp;&amp; (isJust v &lt;=&gt; true)}</span><span class='hs-conid'>Just</span></a> <span class='hs-varop'>$</span> <a class=annot href="#"><span class=annottext>a</span><span class='hs-conid'>V</span></a><span class='hs-varop'>.</span><span class='hs-varid'>head</span> <span class='hs-varid'>vec</span>
+<span class=hs-linenum>30: </span>
+<span class=hs-linenum>31: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>Btwn</span> <span class='hs-conid'>Lo</span> <span class='hs-conid'>Hi</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Int</span> <span class='hs-keyglyph'>|</span> <span class='hs-conid'>Lo</span> <span class='hs-varop'>&lt;=</span> <span class='hs-varid'>v</span> <span class='hs-varop'>&amp;&amp;</span> <span class='hs-varid'>v</span> <span class='hs-varop'>&lt;</span> <span class='hs-conid'>Hi</span><span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>32: </span>
+<span class=hs-linenum>33: </span><span class='hs-comment'>-- | Exercise 4.2</span>
+<span class=hs-linenum>34: </span><span class='hs-comment'>-- (!) :: Vector a -&gt; Int -&gt; a</span>
+<span class=hs-linenum>35: </span><span class='hs-comment'>-- assume ! :: x:Vector a -&gt; vec:{v:Nat | v &lt; vlen x } -&gt; a</span>
+<span class=hs-linenum>36: </span>
+<span class=hs-linenum>37: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>unsafeLookup</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>x</span><span class='hs-conop'>:</span><span class='hs-conid'>Nat</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyword'>{v:</span><span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>| x == vlen v &amp;&amp; vlen v &lt; x}</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>38: </span><span class='hs-definition'>unsafeLookup</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>a</span>
+<span class=hs-linenum>39: </span><a class=annot href="#"><span class=annottext>x1:{v : GHC.Types.Int | v &gt;= 0} -&gt; {v : (Data.Vector.Vector a) | x1 == vlen v
+                                                                 &amp;&amp; vlen v &lt; x1} -&gt; a</span><span class='hs-definition'>unsafeLookup</span></a> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int | v &gt;= 0}</span><span class='hs-varid'>index</span></a> <a class=annot href="#"><span class=annottext>{v : (Data.Vector.Vector a) | index == vlen v
+                              &amp;&amp; vlen v &lt; index}</span><span class='hs-varid'>vec</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int | v &gt;= 0
+                     &amp;&amp; v == index}</span><span class='hs-varid'>vec</span></a> <span class='hs-varop'>!</span> <span class='hs-varid'>index</span>
+<span class=hs-linenum>40: </span>
+<span class=hs-linenum>41: </span><span class='hs-comment'>-- | Exercise 4.3</span>
+<span class=hs-linenum>42: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>safeLookup</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Vector</span> <span class='hs-varid'>a</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Maybe</span> <span class='hs-varid'>a</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>43: </span><a class=annot href="#"><span class=annottext>(Data.Vector.Vector a) -&gt; GHC.Types.Int -&gt; (GHC.Base.Maybe a)</span><span class='hs-definition'>safeLookup</span></a> <a class=annot href="#"><span class=annottext>(Data.Vector.Vector a)</span><span class='hs-varid'>x</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>i</span></a>
+<span class=hs-linenum>44: </span>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>ok</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Just</span> <span class='hs-layout'>(</span><a class=annot href="#"><span class=annottext>a</span><span class='hs-varid'>x</span></a> <span class='hs-varop'>!</span> <span class='hs-varid'>i</span><span class='hs-layout'>)</span>
+<span class=hs-linenum>45: </span>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Nothing</span>
+<span class=hs-linenum>46: </span>  <span class='hs-keyword'>where</span>
+<span class=hs-linenum>47: </span>    <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>ok</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-num'>0</span></a> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Int -&gt; x2:GHC.Types.Int -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1 &lt;= x2}</span><span class='hs-varop'>&lt;=</span></a> <span class='hs-varid'>i</span> <a class=annot href="#"><span class=annottext>{v : x1:GHC.Types.Bool -&gt; x2:GHC.Types.Bool -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1
+                                                                           &amp;&amp; x2} | v == GHC.Classes.&amp;&amp;}</span><span class='hs-varop'>&amp;&amp;</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Bool</span><span class='hs-varid'>i</span></a> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Int -&gt; x2:GHC.Types.Int -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1 &lt; x2}</span><span class='hs-varop'>&lt;</span></a> <span class='hs-conid'>V</span><span class='hs-varop'>.</span><span class='hs-varid'>length</span> <span class='hs-varid'>x</span>
+<span class=hs-linenum>48: </span>
+<span class=hs-linenum>49: </span><span class='hs-comment'>-- |</span>
+<span class=hs-linenum>50: </span><span class='hs-comment'>-- &gt;&gt;&gt; vectorSum (fromList [1 ,-2, 3])</span>
+<span class=hs-linenum>51: </span><span class='hs-comment'>-- 2</span>
+<span class=hs-linenum>52: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>vectorSum</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Vector</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>53: </span><span class='hs-definition'>vectorSum</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Vector</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span>
+<span class=hs-linenum>54: </span><a class=annot href="#"><span class=annottext>(Data.Vector.Vector GHC.Types.Int) -&gt; GHC.Types.Int</span><span class='hs-definition'>vectorSum</span></a> <a class=annot href="#"><span class=annottext>(Data.Vector.Vector GHC.Types.Int)</span><span class='hs-varid'>vec</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int -&gt; {v : GHC.Types.Int | v &lt;= sz
+                                           &amp;&amp; v &gt;= 0} -&gt; GHC.Types.Int | v == go}</span><span class='hs-varid'>go</span></a> <span class='hs-num'>0</span> <span class='hs-num'>0</span>
+<span class=hs-linenum>55: </span>  <span class='hs-keyword'>where</span>
+<span class=hs-linenum>56: </span>    <a class=annot href="#"><span class=annottext>GHC.Types.Int -&gt; {VV : GHC.Types.Int | VV &lt;= sz
+                                       &amp;&amp; VV &gt;= 0} -&gt; GHC.Types.Int</span><span class='hs-varid'>go</span></a> <a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>acc</span></a> <a class=annot href="#"><span class=annottext>{VV : GHC.Types.Int | VV &lt;= sz
+                      &amp;&amp; VV &gt;= 0}</span><span class='hs-varid'>i</span></a>
+<span class=hs-linenum>57: </span>      <span class='hs-keyglyph'>|</span> <a class=annot href="#"><span class=annottext>{v : GHC.Types.Bool | v &lt;=&gt; i &lt; sz}</span><span class='hs-varid'>i</span></a> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Int -&gt; x2:GHC.Types.Int -&gt; {v : GHC.Types.Bool | v &lt;=&gt; x1 &lt; x2}</span><span class='hs-varop'>&lt;</span></a> <span class='hs-varid'>sz</span> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>GHC.Types.Int -&gt; {VV : GHC.Types.Int | VV &lt;= sz
+                                       &amp;&amp; VV &gt;= 0} -&gt; GHC.Types.Int</span><span class='hs-varid'>go</span></a> <span class='hs-layout'>(</span><span class=hs-error><a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>acc</span></a></span><span class=hs-error> </span><span class=hs-error><a class=annot href="#"><span class=annottext>x1:GHC.Types.Int -&gt; x2:GHC.Types.Int -&gt; {v : GHC.Types.Int | v == x1 + x2}</span><span class='hs-varop'>+</span></a></span><span class=hs-error> </span><span class=hs-error><span class='hs-layout'>(</span></span><span class=hs-error><a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>vec</span></a></span><span class=hs-error> </span><span class=hs-error><span class='hs-varop'>!</span></span><span class=hs-error> </span><span class=hs-error><span class='hs-varid'>i</span></span><span class=hs-error><span class='hs-layout'>)</span></span><span class='hs-layout'>)</span> <span class='hs-layout'>(</span><a class=annot href="#"><span class=annottext>GHC.Types.Int</span><span class='hs-varid'>i</span></a> <a class=annot href="#"><span class=annottext>x1:GHC.Types.Int -&gt; x2:GHC.Types.Int -&gt; {v : GHC.Types.Int | v == x1 + x2}</span><span class='hs-varop'>+</span></a> <span class='hs-num'>1</span><span class='hs-layout'>)</span>
+<span class=hs-linenum>58: </span>      <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>acc</span>
+<span class=hs-linenum>59: </span>    <a class=annot href="#"><span class=annottext>{v : GHC.Types.Int | v &gt;= 0
+                     &amp;&amp; v == len vec}</span><span class='hs-varid'>sz</span></a> <span class='hs-keyglyph'>=</span> <a class=annot href="#"><span class=annottext>xs:(Data.Vector.Vector GHC.Types.Int) -&gt; {v : GHC.Types.Int | v &gt;= 0
+                                                              &amp;&amp; v == len xs}</span><span class='hs-varid'>length</span></a> <span class='hs-varid'>vec</span>
+<span class=hs-linenum>60: </span>
+<span class=hs-linenum>61: </span><span class='hs-comment'>-- go acc i</span>
+<span class=hs-linenum>62: </span><span class='hs-comment'>--   | i &lt; sz = go (acc + (vec ! i)) (i + 1)</span>
+<span class=hs-linenum>63: </span><span class='hs-comment'>--   | otherwise = acc</span>
+<span class=hs-linenum>64: </span><span class='hs-comment'>--   where sz = length vec</span>
+<span class=hs-linenum>65: </span>
+<span class=hs-linenum>66: </span><span class='hs-comment'>-- | Exercise 4.4</span>
+<span class=hs-linenum>67: </span><span class='hs-comment'>-- Error になる (index が range を超えるため)</span>
+<span class=hs-linenum>68: </span><span class='hs-comment'>-- vectorSum' :: Vector Int -&gt; Int</span>
+<span class=hs-linenum>69: </span><span class='hs-comment'>-- vectorSum' vec = go 0 0</span>
+<span class=hs-linenum>70: </span><span class='hs-comment'>--   where</span>
+<span class=hs-linenum>71: </span><span class='hs-comment'>--     go acc i</span>
+<span class=hs-linenum>72: </span><span class='hs-comment'>--       | i &lt;= sz = go (acc + (vec ! i)) (i + 1)</span>
+<span class=hs-linenum>73: </span><span class='hs-comment'>--       | otherwise = acc</span>
+<span class=hs-linenum>74: </span><span class='hs-comment'>--     sz = length vec</span>
+<span class=hs-linenum>75: </span>
+<span class=hs-linenum>76: </span><span class='hs-comment'>-- | Exercise 4.5</span>
+<span class=hs-linenum>77: </span><span class='hs-comment'>-- &gt;&gt;&gt; absoluteSum (fromList [1, -2, 3])</span>
+<span class=hs-linenum>78: </span><span class='hs-comment'>-- 6</span>
+<span class=hs-linenum>79: </span><span class='hs-comment'>-- absoluteSum :: Vector Int -&gt; Int</span>
+<span class=hs-linenum>80: </span><span class='hs-comment'>-- absoluteSum vec = go 0 0</span>
+<span class=hs-linenum>81: </span><span class='hs-comment'>--   where</span>
+<span class=hs-linenum>82: </span><span class='hs-comment'>--     go acc i</span>
+<span class=hs-linenum>83: </span><span class='hs-comment'>--       | i &lt; sz = go (acc + abs (vec ! i)) (i + 1)</span>
+<span class=hs-linenum>84: </span><span class='hs-comment'>--       | otherwise = acc</span>
+<span class=hs-linenum>85: </span><span class='hs-comment'>--     sz = length vec</span></pre>
+</body>
+</html>

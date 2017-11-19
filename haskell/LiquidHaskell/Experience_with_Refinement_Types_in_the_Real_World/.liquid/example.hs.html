@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>/home/liquid/example.hs</title>
+</head>
+<head>
+<link type='text/css' rel='stylesheet' href='liquid.css' />
+</head>
+
+<body>
+<hr>
+Put mouse over identifiers to see inferred types
+<pre><span class=hs-linenum> 1: </span><a class=annot href="#"><span class=annottext>Module</span><span class='hs-keyword'>{-@</span></a> <span class='hs-conid'>LIQUID</span> <span class='hs-str'>"--short-names"</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 2: </span>
+<span class=hs-linenum> 3: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>Nat</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Int</span> <span class='hs-keyglyph'>|</span> <span class='hs-num'>0</span> <span class='hs-varop'>&lt;=</span> <span class='hs-varid'>v</span> <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 4: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>Pos</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Int</span> <span class='hs-keyglyph'>|</span> <span class='hs-num'>0</span> <span class='hs-varop'>&lt;</span>  <span class='hs-varid'>v</span> <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 5: </span>
+<span class=hs-linenum> 6: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>predicate</span> <span class='hs-conid'>Btwn</span> <span class='hs-conid'>Lo</span> <span class='hs-conid'>N</span> <span class='hs-conid'>Hi</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>Lo</span> <span class='hs-varop'>&lt;=</span> <span class='hs-conid'>N</span> <span class='hs-varop'>&amp;&amp;</span> <span class='hs-conid'>N</span> <span class='hs-varop'>&lt;</span> <span class='hs-conid'>Hi</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 7: </span><span class='hs-keyword'>{-@</span> <span class='hs-keyword'>type</span> <span class='hs-conid'>Rng</span> <span class='hs-conid'>Lo</span> <span class='hs-conid'>Hi</span> <span class='hs-keyglyph'>=</span> <span class='hs-layout'>{</span> <span class='hs-varid'>v</span><span class='hs-conop'>:</span><span class='hs-conid'>Int</span> <span class='hs-keyglyph'>|</span> <span class='hs-layout'>(</span><span class='hs-conid'>Btwn</span> <span class='hs-conid'>Lo</span> <span class='hs-varid'>v</span> <span class='hs-conid'>Hi</span><span class='hs-layout'>)</span> <span class='hs-layout'>}</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum> 8: </span><span class='hs-comment'>--{-@ range :: lo:Int -&gt; hi:{Int | lo &lt;= hi} -&gt; [(Rng lo hi)] @-}</span>
+<span class=hs-linenum> 9: </span><span class='hs-keyword'>{-@</span> <span class='hs-varid'>range</span> <span class='hs-keyglyph'>::</span> <span class='hs-varid'>lo</span><span class='hs-conop'>:</span><span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-varid'>hi</span><span class='hs-conop'>:</span><span class='hs-keyword'>{Int | lo &lt;= hi}</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-keyword'>{ v:</span><span class='hs-conid'>Int</span> <span class='hs-keyword'>| lo &lt;= v &amp;&amp; v &lt; hi }</span><span class='hs-keyglyph'>]</span> <span class='hs-keyword'>@-}</span>
+<span class=hs-linenum>10: </span><span class='hs-definition'>range</span> <span class='hs-keyglyph'>::</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-conid'>Int</span> <span class='hs-keyglyph'>-&gt;</span> <span class='hs-keyglyph'>[</span><span class='hs-conid'>Int</span><span class='hs-keyglyph'>]</span>
+<span class=hs-linenum>11: </span><span class=hs-error><a class=annot href="#"><span class=annottext>x1:Int -&gt; x2:{hi : Int | x1 &lt;= hi} -&gt; [{v : Int | x1 &lt;= v
+                                                  &amp;&amp; v &lt; x2}]</span><span class='hs-definition'>range</span></a></span> <a class=annot href="#"><span class=annottext>Int</span><span class='hs-varid'>lo</span></a> <a class=annot href="#"><span class=annottext>{hi : Int | lo &lt;= hi}</span><span class='hs-varid'>hi</span></a>
+<span class=hs-linenum>12: </span>  <span class='hs-keyglyph'>|</span> <a class=annot href="#"><span class=annottext>{v : Bool | v &lt;=&gt; lo &lt;= hi}</span><span class='hs-varid'>lo</span></a> <a class=annot href="#"><span class=annottext>x1:Int -&gt; x2:Int -&gt; {v : Bool | v &lt;=&gt; x1 &lt;= x2}</span><span class='hs-varop'>&lt;=</span></a> <span class='hs-varid'>hi</span> <span class='hs-keyglyph'>=</span> <span class='hs-varid'>lo</span> <span class='hs-conop'>:</span> <span class=hs-error><a class=annot href="#"><span class=annottext>x1:Int -&gt; x2:{hi : Int | x1 &lt;= hi} -&gt; [{v : Int | x1 &lt;= v
+                                                  &amp;&amp; v &lt; x2}]</span><span class='hs-varid'>range</span></a></span><span class=hs-error> </span><span class=hs-error><span class='hs-layout'>(</span></span><span class=hs-error><a class=annot href="#"><span class=annottext>Int</span><span class='hs-varid'>lo</span></a></span><span class=hs-error> </span><span class=hs-error><a class=annot href="#"><span class=annottext>x1:Int -&gt; x2:Int -&gt; {v : Int | v == x1 + x2}</span><span class='hs-varop'>+</span></a></span><span class=hs-error> </span><span class=hs-error><span class='hs-num'>1</span></span><span class=hs-error><span class='hs-layout'>)</span></span><span class=hs-error> </span><span class=hs-error><span class='hs-varid'>hi</span></span>
+<span class=hs-linenum>13: </span>  <span class='hs-keyglyph'>|</span> <span class='hs-varid'>otherwise</span> <span class='hs-keyglyph'>=</span> <span class='hs-conid'>[]</span>
+</pre>
+</body>
+</html>

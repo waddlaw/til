@@ -1,0 +1,26 @@
+-- This file has been generated from package.yaml by hpack version 0.18.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           src-dir
+version:        0.1.0.0
+category:       Your Projects Category
+homepage:       https://github.com/waddlaw/src-dir#readme
+author:         shinya yamaguchi
+maintainer:     ingroze@gmail.com
+copyright:      Copyright (c) 2017 Shinya Yamaguchi
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+
+executable src-dir
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  build-depends:
+      base >= 4.7 && < 5
+  default-language: Haskell2010

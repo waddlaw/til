@@ -1,0 +1,1 @@
+{"status":"safe","types":{"1":{"1":{"ann":"GHC.Types.Module","ident":"Main.$trModule","row":1,"col":1}},"4":{"1":{"ann":"{v : GHC.Types.Bool | v}","ident":"Main.f","row":4,"col":1}},"8":{"1":{"ann":"{v : GHC.Types.Int | v >= 0}","ident":"Main.g","row":8,"col":1}}},"errors":[]}
