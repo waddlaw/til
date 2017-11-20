@@ -3,8 +3,9 @@
 ## サブモジュールの更新
 
 ```bash
+$ cd <submodule dir>
 $ git checkout <branch name>
-$ cd ..
+$ cd ../
 $ git add <submodule name>
 $ git commit -m "Update submodule: Bootstrap"
 ```
@@ -14,6 +15,10 @@ $ git commit -m "Update submodule: Bootstrap"
 `.git/config` のサブモジュールの `URL` をした後には以下のコマンドを実行しないと反映されない。
 
 ```bash
+# サブモジュール追加
+$ git submodule add <repo> <submodule name>
+$ git submodule add --force <repo> <submodule name># URLの同期
+
 $ git submodule sync
 
 # init と update
