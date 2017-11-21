@@ -18,3 +18,14 @@ $ stack repl src/chXX/XXX.hs
 _ | [note](./ch02-note.md)
 _ | [note](./ch03-note.md)
 
+## LIQUID プラグマ
+
+{-@ LIQUID "--higherorder" @-}
+{-@ LIQUID "--no-totality" @-}
+{-@ LIQUID "--no-termination" @-}
+{-@ LIQUID "--automatic-instances=liquidinstances" @-}
+{-@ LIQUID "--diff"        @-}
+{-@ LIQUID "--short-names" @-}
+{-@ LIQUID "--cabaldir"    @-}
+{-@ LIQUID "--total-Haskell" @-}
+{-@ LIQUID "--prune-unsorted" @-}
