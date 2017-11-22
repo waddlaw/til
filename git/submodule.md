@@ -12,7 +12,7 @@ $ git commit -m "Update submodule: Bootstrap"
 
 ## コマンド
 
-`.git/config` のサブモジュールの `URL` をした後には以下のコマンドを実行しないと反映されない。
+`.git/config` のサブモジュールの `URL` を変更した後には `git submodule sync` を実行しないと反映されない。
 
 ```bash
 # サブモジュール追加
