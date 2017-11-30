@@ -31,6 +31,9 @@
 - [Boilerplate considered harmful](http://neilmitchell.blogspot.jp/2007/04/boilerplate-condsidered-harmful.html)
 - [The Play class](http://neilmitchell.blogspot.jp/2006/06/play-class.html)
 
+## stackoverflow
+
+- [serach keyword on haskell uniplate](https://stackoverflow.com/search?q=haskell+uniplate)
 
 ## others
 
