@@ -41,4 +41,7 @@ f x
 f [] = 1
 f (x:xs) = 2
 -- FunBind _ [Match _ (Ident _ "f") [PList _ []] (UnGuardedRhs _ (Lit _ (Int _ 1 "1"))) Nothing,Match _ (Ident _ "f") [PParen _ (PInfixApp _ (PVar _ (Ident _ "x")) (Special _ (Cons _)) (PVar _ (Ident _ "xs")))] (UnGuardedRhs _ (Lit _ (Int _ 2 "2"))) Nothing]
+
+g x1 x2 = x1 + x2 + 2
+-- [FunBind _ [Match _ (Ident _ "g") [PVar _ (Ident _ "x1"),PVar _ (Ident _ "x2")] (UnGuardedRhs _ (InfixApp _ (InfixApp _ (Var _ (UnQual _ (Ident _ "x1"))) (QVarOp _ (UnQual _ (Symbol _ "+"))) (Var _ (UnQual _ (Ident _ "x2")))) (QVarOp _ (UnQual _ (Symbol _ "+"))) (Lit _ (Int _ 2 "2")))) Nothing]]
 ```
