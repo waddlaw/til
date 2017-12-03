@@ -23,7 +23,7 @@ genCallGraph (FunBind _ matches) = constructFunctionCall (getName $ head matches
     fvs = vs \\ bs
     -- bound variables
     bs = mapMaybe getName $ concatMap getPat matches
-    -- free variables
+    -- all variables
     vs = nub $ concatMap (getCallee . getRhs) matches
 genCallGraph _ = Nothing
 
