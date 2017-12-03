@@ -1,0 +1,9 @@
+default-template: hpack
+templates:
+  scm-init: git
+  params:
+    author-name: <author>
+    author-email: <email>
+    category: Your Projects Category
+    copyright: 'Copyright (c) 2017 <author>'
+    github-username: <github_username>
