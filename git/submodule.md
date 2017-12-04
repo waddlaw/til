@@ -23,6 +23,7 @@ $ git submodule sync
 
 # init と update
 $ git submodule update -i
+$ git submodule update --init --recursive
 
 # サブモジュールの削除
 $ git submodule deinit foo/bar
