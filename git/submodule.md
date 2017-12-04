@@ -35,3 +35,4 @@ $ git rm foo/bar .git/modules/foo/bar
 - [Git submodule の基礎](https://qiita.com/sotarok/items/0d525e568a6088f6f6bb)
 - [Git submoduleの抑えておきたい理解ポイントのまとめ](https://qiita.com/kinpira/items/3309eb2e5a9a422199e9)
 - [git submodule の削除](http://fd0.hatenablog.jp/entry/2017/02/08/013327)
+- [自分が必要とする最低限の git submodule の知識](https://qiita.com/ma2saka/items/4bd00ef6f8c240847807)
