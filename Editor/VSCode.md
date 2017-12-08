@@ -24,7 +24,8 @@
     "files.autoSave": "afterDelay",
     "files.trimTrailingWhitespace": true,
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "window.restoreWindows": "all"
 }
 ```
 
