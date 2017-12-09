@@ -4,7 +4,7 @@
 
 ```bash
 $ cd <submodule dir>
-$ git checkout <branch name>
+$ git checkout <commit>
 $ cd ../
 $ git add <submodule name>
 $ git commit -m "Update submodule: Bootstrap"
