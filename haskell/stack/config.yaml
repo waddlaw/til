@@ -1,4 +1,4 @@
-default-template: hpack
+default-template: new-template
 templates:
   scm-init: git
   params:
