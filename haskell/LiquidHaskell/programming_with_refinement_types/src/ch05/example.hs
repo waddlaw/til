@@ -37,16 +37,17 @@ dotProd' x (SP _ y) = foldl' body 0 y
     body acc (i, v) = acc + (x ! i) * v
 
 -- | Exercise 4.9
--- 解けない
--- {-@ fromList :: d:Nat -> [(Int, a)] -> Maybe (SparseN a d) @-}
--- fromList :: Int -> [(Int, a)] -> Maybe (Sparse a)
--- fromList dim elts
---   | all ((\x -> 0 <= x && x < dim) . fst) elts = Just $ SP dim elts
---   | otherwise = Nothing
+{-@ fromList :: d:Nat -> [(Int, a)] -> Maybe (SparseN a d) @-}
+fromList :: Int -> [(Int, a)] -> Maybe (Sparse a)
+fromList dim elts
+  | Just ys <- check elts = Just $ SP dim ys
+  | otherwise = Nothing
+  where
+    check = sequence . map (\(x, y) -> if 0 <= x && x < dim then Just (x,y) else Nothing)
 
--- {-@ test1 :: SparseN String 3 @-}
--- test1 :: Sparse String
--- test1 = fromJust $ fromList 3 [(1, "cat"), (2, "mouse")]
+{-@ test1 :: SparseN String 3 @-}
+test1 :: Sparse String
+test1 = fromJust $ fromList 3 [(1, "cat"), (2, "mouse")]
 
 -- | Exercise 4.10
 -- 仮定その1: 昇順
@@ -106,9 +107,8 @@ split (x:y:zs) = (x:xs, y:ys)
 split xs = (xs, [])
 
 merge :: (Ord a) => IncList a -> IncList a -> IncList a
--- merge :: IncList Int -> IncList Int -> IncList Int
 merge Emp Emp = Emp
--- merge Emp ys = ys
--- merge (x :< xs) (y :< ys)
-  -- | x <= y    = x :< merge xs (y :< ys)
-  -- | otherwise = y :< merge (x :< xs) ys
+merge Emp ys = ys
+merge (x :< xs) (y :< ys)
+  | x <= y    = x :< merge xs (y :< ys)
+  | otherwise = y :< merge (x :< xs) ys
