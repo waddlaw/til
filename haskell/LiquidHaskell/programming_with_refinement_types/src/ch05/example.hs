@@ -1,4 +1,5 @@
 {-@ LIQUID "--no-termination" @-}
+{-@ LIQUID "--no-totality" @-}
 import Data.List (foldl', find)
 import Data.Vector (Vector, (!))
 import Data.Maybe (fromJust, catMaybes, isJust)
@@ -70,11 +71,14 @@ test2 = plus vec1 vec2
     vec1 = SP 3 [(0, 12), (2, 9)]
     vec2 = SP 3 [(0, 8), (1, 100)]
 
-{-@ data IncList a = Emp
-                   | (:<) { hd :: a, tl :: IncList { v:a | hd <= v }}
-@-}
-data IncList a = Emp
-               | (:<) { hd :: a, tl :: IncList a }
+{-@ data IncList [llen] a = Emp | (:<) { hd :: a, tl :: IncList { v:a | hd <= v }} @-}
+data IncList a = Emp | (:<) { hd :: a, tl :: IncList a }
+
+{-@ measure llen @-}
+{-@ llen :: IncList a -> Nat @-}
+llen :: IncList a -> Int
+llen Emp = 0
+llen (_:<xs) = 1 + llen xs
 
 infixr 9 :<
 
@@ -107,8 +111,111 @@ split (x:y:zs) = (x:xs, y:ys)
 split xs = (xs, [])
 
 merge :: (Ord a) => IncList a -> IncList a -> IncList a
-merge Emp Emp = Emp
+merge xs Emp = xs
 merge Emp ys = ys
 merge (x :< xs) (y :< ys)
   | x <= y    = x :< merge xs (y :< ys)
   | otherwise = y :< merge (x :< xs) ys
+
+mergeSort :: (Ord a) => [a] -> IncList a
+mergeSort [] = Emp
+mergeSort [x] = x :< Emp
+mergeSort xs = merge (mergeSort ys) (mergeSort zs)
+  where
+    (ys, zs) = split xs
+
+-- | Ex.4.12
+-- append の制約で z がxsの全ての要素より大きいことが制約として現れていない
+quickSort :: (Ord a) => [a] -> IncList a
+quickSort (x:xs) = append x lessers greaters
+  where
+    lessers  = quickSort [y | y <- xs, y < x]
+    greaters = quickSort [z | z <- xs, z >= x]
+
+{-@ append :: z:a -> IncList { v:a | v < z } -> IncList { v:a | v >= z } -> IncList a @-}
+append :: (Ord a) => a -> IncList a  -> IncList a -> IncList a
+append z Emp ys = z :< ys
+append z (x :< xs) ys = x :< append z xs ys
+
+data BST a = Leaf
+           | Node { root  :: a
+                  , left  :: BST a
+                  , right :: BST a}
+  deriving (Eq, Show)
+
+okBST :: BST Int
+okBST = Node 6
+          (Node 2
+            (Node 1 Leaf Leaf)
+            (Node 4 Leaf Leaf))
+          (Node 9
+            (Node 7 Leaf Leaf)
+            Leaf)
+
+{-@ data BST a = Leaf
+               | Node { root :: a
+                      , left :: BSTL a root
+                      , right :: BSTR a root
+                      }
+@-}
+
+{-@ type BSTL a X = BST { v:a | v < X } @-}
+{-@ type BSTR a X = BST { v:a | X < v } @-}
+
+{- UNSAFE
+badBST :: BST Int
+badBST = Node 66
+          (Node 4
+            (Node 1 Leaf Leaf)
+            (Node 69 Leaf Leaf))
+          (Node 99
+            (Node 77 Leaf Leaf)
+            Leaf)
+-}
+
+{- UNSAFE
+duplicateBST :: BST Int
+duplicateBST = Node 1 (Node 1 Leaf Leaf) (Node 1 Leaf Leaf)
+-}
+
+mem :: (Ord a) => a -> BST a -> Bool
+mem _ Leaf = False
+mem k (Node k' l r)
+  | k == k' = True
+  | k < k' = mem k l
+  | otherwise = mem k r
+
+one :: a -> BST a
+one x = Node x Leaf Leaf
+
+add :: (Ord a) => a -> BST a -> BST a
+add k' Leaf = one k'
+add k' t@(Node k l r)
+  | k' < k = Node k (add k' l) r
+  | k < k' = Node k l (add k' r)
+  | otherwise = t
+
+{-@ data MinPair a = MP {mElt :: a, rest :: BSTR a mElt} @-}
+data MinPair a = MP { mElt :: a, rest :: BST a }
+  deriving Show
+
+delMin :: (Ord a) => BST a -> MinPair a
+delMin (Node k Leaf r) = MP k r
+delMin (Node k l r) = MP k' (Node k l' r)
+  where
+    MP k' l' = delMin l
+-- delMin Leaf = die "Don't say I didn't warn ya!"
+
+{-@ die :: { v:String | false } -> a @-}
+die msg = error msg
+
+-- | Exercise 4.14
+del :: (Ord a) => a -> BST a -> BST a
+del k' t@(Node k l Leaf) = l
+del k' t@(Node k l r)
+  | k' == k   = Node newRoot l restTree
+  | k' < k    = Node k (del k' l) r
+  | otherwise = Node k l (del k' r)
+  where
+    MP newRoot restTree = delMin r
+del _ Leaf = Leaf
