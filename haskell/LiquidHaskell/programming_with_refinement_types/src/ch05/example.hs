@@ -133,7 +133,7 @@ quickSort (x:xs) = append x lessers greaters
     greaters = quickSort [z | z <- xs, z >= x]
 
 {-@ append :: z:a -> IncList { v:a | v < z } -> IncList { v:a | v >= z } -> IncList a @-}
-append :: (Ord a) => a -> IncList a  -> IncList a -> IncList a
+append :: a -> IncList a -> IncList a -> IncList a
 append z Emp ys = z :< ys
 append z (x :< xs) ys = x :< append z xs ys
 
@@ -195,23 +195,26 @@ add k' t@(Node k l r)
   | k < k' = Node k l (add k' r)
   | otherwise = t
 
-{-@ data MinPair a = MP {mElt :: a, rest :: BSTR a mElt} @-}
+{-@ data MinPair a = MP { mElt :: a, rest :: BSTR a mElt } @-}
 data MinPair a = MP { mElt :: a, rest :: BST a }
   deriving Show
 
+{-@ delMin :: (Ord a) => { x:BST a | nonLeaf x } -> MinPair a  @-}
 delMin :: (Ord a) => BST a -> MinPair a
 delMin (Node k Leaf r) = MP k r
 delMin (Node k l r) = MP k' (Node k l' r)
   where
     MP k' l' = delMin l
--- delMin Leaf = die "Don't say I didn't warn ya!"
+delMin Leaf = die "Don't say I didn't warn ya!"
 
 {-@ die :: { v:String | false } -> a @-}
 die msg = error msg
 
 -- | Exercise 4.14
 del :: (Ord a) => a -> BST a -> BST a
-del k' t@(Node k l Leaf) = l
+del k' t@(Node k l Leaf)
+  | k' == k = l
+  | otherwise = del k' l
 del k' t@(Node k l r)
   | k' == k   = Node newRoot l restTree
   | k' < k    = Node k (del k' l) r
@@ -219,3 +222,20 @@ del k' t@(Node k l r)
   where
     MP newRoot restTree = delMin r
 del _ Leaf = Leaf
+
+-- | Exercise 4.15
+{-@ measure nonLeaf @-}
+nonLeaf :: BST a -> Bool
+nonLeaf Leaf = False
+nonLeaf (Node _ _ _) = True
+
+-- | Exercise 4.16
+bstSort :: (Ord a) => [a] -> IncList a
+bstSort = toIncList . toBST
+
+toBST :: (Ord a) => [a] -> BST a
+toBST = foldr add Leaf
+
+toIncList :: BST a -> IncList a
+toIncList Leaf = Emp
+toIncList (Node x l r) = append x (toIncList l) (toIncList r)
