@@ -36,14 +36,10 @@ average xs = divide total elems
     elems = size xs
 
 -- | Exercise 5.1
-{-@ average' :: NEList Int -> Maybe Int @-}
+{-@ average' :: [Int] -> Maybe Int @-}
 average' :: [Int] -> Maybe Int
-average' xs
-  | ok = Just $ divide (sum xs) elems
-  | otherwise = Nothing
-  where
-    elems = size xs
-    ok = elems > 0
+average' [] = Nothing
+average' xs = Just $ divide (sum xs) $ size xs
 
 -- | Exercise 5.2
 {-@ type Pos = { v:Int | v > 0 } @-}
@@ -97,7 +93,7 @@ foldl1 _ []        = die "foldl1"
 
 foldl              :: (a -> b -> b) -> b -> [a] -> b
 foldl _ acc []     = acc
-foldl f acc (x:xs) = f x (foldl f acc xs)
+foldl f acc (x:xs) = foldl f (f x acc) xs
 
 {-@ sum :: (Num a) => NEList a -> a @-}
 sum [] = die "cannot add up empty list"
