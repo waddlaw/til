@@ -10,6 +10,7 @@
 - Material Icon Theme
 - Zenkaku
 - Haskell GHCi debug viewer Phoityne
+- [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
 
 ## 設定
 
