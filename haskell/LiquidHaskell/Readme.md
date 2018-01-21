@@ -22,6 +22,7 @@
 - [Finding and Fixing Bugs in Liquid Haskell](https://web.eecs.umich.edu/~weimerw/students/anish-ms-pres.pdf)
 - [Scrap your Bounds Checks with Liquid Haskell](https://github.com/Gabriel439/slides/blob/master/liquidhaskell/slides.md)
 - [Refinement Reflection: Complete Verification with SMT](https://nikivazou.github.io/static/popl18/reflection.pdf)
+- [Liquid Haskell: Refinement Types for Haskell](https://popl18.sigplan.org/event/plmw-popl-2018-liquidhaskell-overview)
 
 ## GitHub
 
