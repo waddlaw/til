@@ -140,7 +140,8 @@ append z (x :< xs) ys = x :< append z xs ys
 data BST a = Leaf
            | Node { root  :: a
                   , left  :: BST a
-                  , right :: BST a}
+                  , right :: BST a
+                  }
   deriving (Eq, Show)
 
 okBST :: BST Int
@@ -152,11 +153,12 @@ okBST = Node 6
             (Node 7 Leaf Leaf)
             Leaf)
 
-{-@ data BST a = Leaf
-               | Node { root :: a
-                      , left :: BSTL a root
-                      , right :: BSTR a root
-                      }
+{-@
+data BST a = Leaf
+           | Node { root  :: a
+                  , left  :: BSTL a root
+                  , right :: BSTR a root
+                  }
 @-}
 
 {-@ type BSTL a X = BST { v:a | v < X } @-}
