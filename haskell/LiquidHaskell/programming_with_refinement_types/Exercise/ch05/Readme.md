@@ -219,4 +219,96 @@ insertSort' :: (Ord a) => [a] -> IncList a
 insertSort' = foldr insert Emp
 ```
 
+## Exercise 5.4 (QuickSort) **
+
+以下の `quickSort` の実装が `LiquidHaskell` で受理されないのは何故か？
+
+また、受理されるように修正せよ。
+
+ヒント: `quickSort` が必要とする性質を保証するためには、 `append` はどのような振る舞いをすれば良いか考えよ。`ys` と `zs` が昇順であると仮定したとき、`append x ys zs` もまた昇順になるだろうか？そうではない。他にどんな仮定が必要だろうか？ `append` の適切な仕様を考え、コードがその仕様を満たすことを保証せよ。
+
+
+```haskell
+quickSort :: (Ord a) => [a] -> IncList a
+quickSort [] = Emp
+quickSort (x:xs) = append x lessers greaters
+  where
+    lessers  = quickSort [y | y <- xs, y < x]
+    greaters = quickSort [z | z <- xs, z >= x]
+
+{-@ append :: z:a -> IncList a -> IncList a -> IncList a @-}
+append :: a -> IncList a -> IncList a -> IncList a
+append z Emp ys = z :< ys
+append z (x :< xs) ys = x :< append z xs ys
+```
+
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 30 | append z Emp ys = z :< ys
+      ^^^^^^
+
+   Inferred type
+     VV : a
+
+   not a subtype of Required type
+     VV : {VV : a | z <= VV}
+
+   In Context
+     z : a
+
+
+ /home/bm12/repo/guchi/til/haskell/LiquidHaskell/programming_with_refinement_types/Exercise/ch05/Ex5-4.hs:31:30-43: Error: Liquid Type Mismatch
+
+ 31 | append z (x :< xs) ys = x :< append z xs ys
+                                   ^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : a
+
+   not a subtype of Required type
+     VV : {VV : a | x <= VV}
+
+   In Context
+     x : a
+```
+
+### 解答
+
+`append z xs ys` で、「リスト `xs` の要素は `z` より真に小さく、リスト `ys` の要素は `z` 以上である」ことが明示されていないのでエラーとなる。
+
+```haskell
+{-@
+data IncList [llen] a = Emp
+                      | (:<) { hd :: a
+                             , tl :: IncList { v:a | hd <= v }
+                             }
+@-}
+data IncList a = Emp
+               | (:<) { hd :: a
+                      , tl :: IncList a
+                      }
+
+infixr 9 :<
+
+{-@ measure llen @-}
+{-@ llen :: IncList a -> Nat @-}
+llen :: IncList a -> Int
+llen Emp = 0
+llen (_:<xs) = 1 + llen xs
+
+quickSort :: (Ord a) => [a] -> IncList a
+quickSort [] = Emp
+quickSort (x:xs) = append x lessers greaters
+  where
+    lessers  = quickSort [y | y <- xs, y < x]
+    greaters = quickSort [z | z <- xs, z >= x]
+
+{-@ append :: z:a -> IncList { v:a | v < z } -> IncList { v:a | v >= z } -> IncList a @-}
+append :: a -> IncList a -> IncList a -> IncList a
+append z Emp ys = z :< ys
+append z (x :< xs) ys = x :< append z xs ys
+```
 
