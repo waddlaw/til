@@ -316,6 +316,10 @@ append z (x :< xs) ys = x :< append z xs ys
 
 `BST Int` に重複を含めることができるだろうか？
 
+### LiquidHaskell の結果
+
+無し
+
 ### 解答
 
 `left` は `root` より真に小さい要素、 `right` は `root` より真に大きい要素でなければならないので、 `BST Int` の `root` に同じ値を含めることはできない．
