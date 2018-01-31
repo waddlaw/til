@@ -169,7 +169,54 @@ test2 = plus vec1 vec2
 
 コメントの仮定は `LiquidHaskell` で書けそう。あとで試す。
 
+## Exercise 5.3 (Insertion Sort)
 
+`insertSort` の明示的な再帰を `foldr` を使った定義に直せ。
 
+```haskell
+insertSort' :: (Ord a) => [a] -> IncList a
+insertSort' xs = foldr f b xs
+  where
+    f = undefined
+    b = undefined
+```
+
+### LiquidHaskell の結果
+
+`SAFE` となる。
+
+### 解答
+
+```haskell
+{-@
+data IncList [llen] a = Emp
+                      | (:<) { hd :: a
+                             , tl :: IncList { v:a | hd <= v }
+                             }
+@-}
+data IncList a = Emp
+               | (:<) { hd :: a
+                      , tl :: IncList a
+                      }
+
+infixr 9 :<
+
+{-@ measure llen @-}
+{-@ llen :: IncList a -> Nat @-}
+llen :: IncList a -> Int
+llen Emp = 0
+llen (_:<xs) = 1 + llen xs
+
+{-@ insert :: (Ord a) => a -> IncList a -> IncList a @-}
+insert :: (Ord a) => a -> IncList a -> IncList a
+insert y Emp = y :< Emp
+insert y (x :< xs)
+  | y <= x = y :< x :< xs
+  | otherwise = x :< insert y xs
+
+{-@ insertSort' :: (Ord a) => [a] -> IncList a @-}
+insertSort' :: (Ord a) => [a] -> IncList a
+insertSort' = foldr insert Emp
+```
 
 
