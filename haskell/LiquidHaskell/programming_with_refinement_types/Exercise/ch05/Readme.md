@@ -322,9 +322,59 @@ append z (x :< xs) ys = x :< append z xs ys
 以下のような `BST` は `UNSAFE` となる．
 
 ```haskell
+{-@
+data BST a = Leaf
+           | Node { root  :: a
+                  , left  :: BSTL a root
+                  , right :: BSTR a root
+                  }
+@-}
+data BST a = Leaf
+           | Node { root  :: a
+                  , left  :: BST a
+                  , right :: BST a
+                  }
+  deriving (Eq, Show)
+
+{-@ type BSTL a X = BST { v:a | v < X } @-}
+{-@ type BSTR a X = BST { v:a | X < v } @-}
+
+badBST :: BST Int
 badBST = Node 1 (Node 1 Leaf Leaf)
                 (Node 1 Leaf Leaf)
 ```
 
+以下のエラーが発生する
+
+```shell
+Error: Liquid Type Mismatch
+
+ 19 | badBST = Node 1 (Node 1 Leaf Leaf)
+                       ^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : Int
+
+   not a subtype of Required type
+     VV : {VV : Int | VV < ?a}
+
+   In Context
+     ?a : {?a : Int | ?a == (1 : int)}
+
+
+Error: Liquid Type Mismatch
+
+ 20 |                 (Node 1 Leaf Leaf)
+                       ^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : Int
+
+   not a subtype of Required type
+     VV : {VV : Int | ?a < VV}
+
+   In Context
+     ?a : {?a : Int | ?a == (1 : int)}
+```
 
 
