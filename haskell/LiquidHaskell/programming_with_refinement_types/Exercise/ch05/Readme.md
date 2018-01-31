@@ -312,3 +312,19 @@ append z Emp ys = z :< ys
 append z (x :< xs) ys = x :< append z xs ys
 ```
 
+## Exercise 5.5 (Duplicates)
+
+`BST Int` に重複を含めることができるだろうか？
+
+### 解答
+
+`left` は `root` より真に小さい要素、 `right` は `root` より真に大きい要素でなければならないので、 `BST Int` の `root` に同じ値を含めることはできない．
+以下のような `BST` は `UNSAFE` となる．
+
+```haskell
+badBST = Node 1 (Node 1 Leaf Leaf)
+                (Node 1 Leaf Leaf)
+```
+
+
+
