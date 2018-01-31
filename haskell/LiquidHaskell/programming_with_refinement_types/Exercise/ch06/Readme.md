@@ -233,3 +233,116 @@ safeHead xs
   | null xs = Nothing
   | otherwise = Just $ head xs
 ```
+
+## Exercise 6.4 (Weighted Average)
+
+以下の関数は与えられた入力の加重平均を計算する。しかし、`LiquidHaskell` はこれを拒否する。
+
+なぜエラーとなるか答えよ。また、コードまたは仕様を適切に修正せよ。
+
+```haskell
+{-@ wtAverage :: NEList (Pos, Pos) -> Int @-}
+wtAverage :: [(Int, Int)] -> Int
+wtAverage wxs = divide totElems totWeight
+  where
+    elems     = map (\(w, x) -> w * x) wxs
+    weights   = map (\(w, _) -> w  ) wxs
+    totElems  = sum elems
+    totWeight = sum weights
+    sum = foldl1 (+)
+    
+map :: (a -> b) -> [a] -> [b]
+map _ [] = []
+map f (x:xs) = f x : map f xs
+```
+
+### LiquidHaskell の結果
+
+```haskell
+Error: Liquid Type Mismatch
+
+ 35 |     totElems  = sum elems
+                      ^^^^^^^^^
+
+   Inferred type
+     VV : {v : [Int] | len v >= 0
+                       && v == elems}
+
+   not a subtype of Required type
+     VV : {VV : [{v : Int | v > 0
+                            && v /= 0
+                            && v >= 0}] | Main.notEmpty VV}
+
+   In Context
+     elems : {elems : [Int] | len elems >= 0}
+
+
+Error: Liquid Type Mismatch
+
+ 36 |     totWeight = sum weights
+                      ^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : [Int] | len v >= 0
+                       && v == weights}
+
+   not a subtype of Required type
+     VV : {VV : [{v : Int | v > 0
+                            && v /= 0
+                            && v >= 0}] | Main.notEmpty VV}
+
+   In Context
+     weights : {weights : [Int] | len weights >= 0}
+```
+
+### 解答
+
+`wxs` は `NEList (Pos, Pos)` であるので `elems` と `weights` は `NEList (Pos, Pos)` であることが予想されるが、
+`map` は空リストを返す可能性があるため `sum elems` と `sum weights` で怒られる．
+
+#### 仕様を修正
+
+```haskell
+import Prelude hiding (map, foldl, foldl1)
+
+{-@ type NonZero = { v:Int | v /= 0 } @-}
+{-@ type Pos = { v:Int | v > 0 } @-}
+
+{-@ measure notEmpty @-}
+notEmpty :: [a] -> Bool
+notEmpty [] = False
+notEmpty (_:_) = True
+
+{-@ type NEList a = { v:[a] | notEmpty v} @-}
+
+{-@ die :: {v:_ | false} -> a @-}
+die msg = error msg
+
+{-@ divide :: Int -> NonZero -> Int @-}
+divide :: Int -> Int -> Int
+divide _ 0 = die "divide-by-zero"
+divide x n = x `div` n
+
+{-@ foldl1 :: (a -> a -> a) -> NEList a -> a @-}
+foldl1 f (x:xs)    = foldl f x xs
+foldl1 _ []        = die "foldl1"
+
+foldl              :: (a -> b -> b) -> b -> [a] -> b
+foldl _ acc []     = acc
+foldl f acc (x:xs) = foldl f (f x acc) xs
+
+{-@ wtAverage :: NEList (Pos, Pos) -> Int @-}
+wtAverage :: [(Int, Int)] -> Int
+wtAverage wxs = divide totElems totWeight
+  where
+    elems     = map (\(w, x) -> w * x) wxs
+    weights   = map (\(w, _) -> w  ) wxs
+    totElems  = sum elems
+    totWeight = sum weights
+    sum = foldl1 (+)
+
+{-@ map :: (a -> b) -> xs:[a] -> { ys:[b] | notEmpty xs => notEmpty ys } @-}
+map :: (a -> b) -> [a] -> [b]
+map _ [] = []
+map f (x:xs) = f x : map f xs
+```
