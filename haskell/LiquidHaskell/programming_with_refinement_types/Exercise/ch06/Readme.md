@@ -169,7 +169,67 @@ Error: Liquid Type Mismatch
 `size2` の返り値の型は `notEmpty xs` が成り立たない場合に負の数も取りうる （`Int`） ため、`1 + size2 xs` で怒られる。
 `Int` の代わりに `Nat` であれば、 `notEmpty xs` が成り立たない場合でも `v > 0` であることが保証される。
 
+## Exercise 6.3 (Safe Head)
 
+`safeHead` が正しく動作するように `null` の仕様を書け。ただし、`null` が非空の入力のみをとるように強制する方法は目的に沿わないため不可とする。その代わり、型を変更することで、任意のリストについて動作し、入力が空でなければ `True` を返すようにせよ。(その逆もまた然り)
 
+```haskell
+safeHead :: [a] -> Maybe a
+safeHead xs
+  | null xs = Nothing
+  | otherwise = Just $ head xs
 
+null       :: [a] -> Bool
+null []    = True
+null (_:_) = False
+```
 
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 26 |   | otherwise = Just $ head xs
+                             ^^^^^^^
+
+   Inferred type
+     VV : {v : [a] | len v >= 0
+                     && v == xs}
+
+   not a subtype of Required type
+     VV : {VV : [a] | Main.notEmpty VV}
+
+   In Context
+     xs : {v : [a] | len v >= 0}
+```
+
+### 解答
+
+```haskell
+import Prelude hiding (head, null)
+
+{-@ die :: {v:_ | false} -> a @-}
+die msg = error msg
+
+{-@ measure notEmpty @-}
+notEmpty :: [a] -> Bool
+notEmpty [] = False
+notEmpty (_:_) = True
+
+{-@ type NEList a = { v:[a] | notEmpty v} @-}
+
+{-@ head :: NEList a -> a @-}
+head :: [a] -> a
+head [] = die "Fear not! 'twill ne'er come to pass"
+head (x:_) = x
+
+{-@ null :: xs:[a] -> { v:Bool | notEmpty xs <=> not v } @-}
+null :: [a] -> Bool
+null [] = True
+null (_:_) = False
+
+safeHead :: [a] -> Maybe a
+safeHead xs
+  | null xs = Nothing
+  | otherwise = Just $ head xs
+```
