@@ -20,6 +20,10 @@ _ | [note](./ch03-note.md)
 
 ## LIQUID プラグマ
 
+プラグマ | 意味
+--------|------
+`{-@ lazy <func> @-}` | `func` の停止性判定を無効化する
+
 {-@ LIQUID "--higherorder" @-}
 {-@ LIQUID "--no-totality" @-}
 {-@ LIQUID "--no-termination" @-}
