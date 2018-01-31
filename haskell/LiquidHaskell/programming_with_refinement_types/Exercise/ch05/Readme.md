@@ -260,7 +260,7 @@ Error: Liquid Type Mismatch
      z : a
 
 
- /home/bm12/repo/guchi/til/haskell/LiquidHaskell/programming_with_refinement_types/Exercise/ch05/Ex5-4.hs:31:30-43: Error: Liquid Type Mismatch
+Error: Liquid Type Mismatch
 
  31 | append z (x :< xs) ys = x :< append z xs ys
                                    ^^^^^^^^^^^^^^
