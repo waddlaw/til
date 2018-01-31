@@ -93,3 +93,14 @@ average' :: [Int] -> Maybe Int
 average' [] = Nothing
 average' xs = divide (sum xs) $ size xs
 ```
+
+## Exercise 6.2 (Debugging Specifications)
+
+`LiquidHaskell` のような形式検証ツールにとって重要なことは、あなたの実装だけでなく、より重要な仕様についても性質を保証するための手助けをしてくれます。それを踏まえた上で、以下の `size` の変種がなぜ `LiquidHaskell` によって拒否されるかわかりますか？
+
+```haskell
+{-@ size2 :: xs:[a] -> { v:Int | notEmpty xs => v > 0} @-}
+size2 [] = 0
+size2 (_:xs) = 1 + size2 xs
+```
+
