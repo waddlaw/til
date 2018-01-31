@@ -472,7 +472,24 @@ del k' t@(Node k l r)
 
 ## Exercise 5.7 (Safely Deleting Minimum) *
 
-`delMin` 関数は空ではないツリーにのみ正しく動作する。先読みを行うように
+`delMin` 関数は空ではないツリーにのみ正しく動作するため、要素のあるツリーでのみ呼び出されるように保証せよ。(英語よくわからない)
+
+> The function `delMin` is only sensible for non-empty trees. Read ahead to learn how to specify and verify that it is only called with such trees, and then apply that technique here to verify the call to `die` in `delMin`
+
+### LiquidHaskell の結果
+
+無し。
+
+### 解答
+
+```haskell
+{-@ measure nonLeaf @-}
+nonLeaf :: BST a -> Bool
+nonLeaf Leaf = False
+nonLeaf (Node _ _ _) = True
+
+{-@ delMin :: (Ord a) => { x:BST a | nonLeaf x } -> MinPair a  @-}
+```
 
 ## Exercise 5.8 (BST Sort)
 
