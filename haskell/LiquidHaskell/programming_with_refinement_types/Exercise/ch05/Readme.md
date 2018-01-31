@@ -386,12 +386,31 @@ Error: Liquid Type Mismatch
 `delMin` を使って `BST` から指定した要素を削除する `del` 関数の実装を完成させよ。
 
 ```haskell
-
+del                   :: (Ord a) => a -> BST a -> BST a
+del k' t@(Node k l r) = undefined
+del _ Leaf            = Leaf
 ```
 
+### LiquidHaskell の結果
 
+`SAFE` となる
 
-## 補足
+### 解答
+
+```haskell
+del :: Ord a => a -> BST a -> BST a
+del k' t@(Node k l Leaf)
+    | k' == k        = l
+del k' t@(Node k l r)
+    | k' < k         = Node k (del k' l) r
+    | k' > k         = Node k l (del k' r)
+    | otherwise      = Node mk l r'
+    where
+      MP mk r' = delMin r
+del _ Leaf           = Leaf
+```
+
+### 補足
 
 `delMin` と `del` を全域関数にしてみた。
 
@@ -399,11 +418,12 @@ Error: Liquid Type Mismatch
 import Prelude hiding (max)
 import Data.Maybe (isJust)
 
-{-@ data BST [bstLen] a = Leaf
-               | Node { root :: a
-                      , left :: BSTL a root
-                      , right :: BSTR a root
-                      }
+{-@
+data BST a = Leaf
+           | Node { root  :: a
+                  , left  :: BSTL a root
+                  , right :: BSTR a root
+                  }
 @-}
 data BST a = Leaf
            | Node { root  :: a
