@@ -93,7 +93,8 @@ Error: Liquid Type Mismatch
 ```haskell
 {-@ type Btwn Lo Hi = { v:Int | Lo <= v && v < Hi} @-}
 
-{-@ data Sparse a = SP
+{-@
+data Sparse a = SP
   { spDim :: Nat
   , spElems :: [(Btwn 0 spDim, a)]
   }
@@ -131,7 +132,8 @@ test2 = plus vec1 vec2
 ```haskell
 {-@ type Btwn Lo Hi = { v:Int | Lo <= v && v < Hi} @-}
 
-{-@ data Sparse a = SP
+{-@
+data Sparse a = SP
   { spDim :: Nat
   , spElems :: [(Btwn 0 spDim, a)]
   }
