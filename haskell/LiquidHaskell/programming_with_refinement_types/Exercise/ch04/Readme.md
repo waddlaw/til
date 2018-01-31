@@ -157,7 +157,7 @@ Error: Liquid Type Mismatch
                     && i <= vlen vec}
 
 
- /home/bm12/repo/guchi/til/haskell/LiquidHaskell/programming_with_refinement_types/src/ch04/Ex4-4.hs:11:41-45: Error: Liquid Type Mismatch
+Error: Liquid Type Mismatch
 
  11 |       | i <= sz = go (acc + (vec ! i)) (i + 1)
                                               ^^^^^
