@@ -99,8 +99,77 @@ average' xs = divide (sum xs) $ size xs
 `LiquidHaskell` のような形式検証ツールにとって重要なことは、あなたの実装だけでなく、より重要な仕様についても性質を保証するための手助けをしてくれます。それを踏まえた上で、以下の `size` の変種がなぜ `LiquidHaskell` によって拒否されるかわかりますか？
 
 ```haskell
+{-@ size1 :: xs:NEList a -> Pos @-}
+size1 [] = 0
+size1 (_:xs) = 1 + size1 xs
+
 {-@ size2 :: xs:[a] -> { v:Int | notEmpty xs => v > 0} @-}
 size2 [] = 0
 size2 (_:xs) = 1 + size2 xs
 ```
+
+### LiquidHaskell の結果
+
+`size1` についての結果。
+
+```shell
+Error: Liquid Type Mismatch
+
+ 12 | size1 (_:xs) = 1 + size1 xs
+                         ^^^^^^^^
+
+   Inferred type
+     VV : {v : [a] | len v >= 0
+                     && v == xs}
+
+   not a subtype of Required type
+     VV : {VV : [a] | Main.notEmpty VV
+                      && len VV < len ?a
+                      && len VV >= 0}
+
+   In Context
+     xs : {v : [a] | len v >= 0}
+
+     ?a : {?a : [a] | Main.notEmpty ?a
+                      && len ?a >= 0}
+```
+
+`size2` についての結果。
+
+```shell
+Error: Liquid Type Mismatch
+
+ 17 | size2 (_:xs) = 1 + size2 xs
+                     ^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : Int | v == ?c + ?b}
+
+   not a subtype of Required type
+     VV : {VV : Int | Main.notEmpty ?a => VV > 0}
+
+   In Context
+     xs : {v : [a] | len v >= 0}
+
+     ?c : {?c : Int | ?c == (1 : int)}
+
+     ?b : {?b : Int | Main.notEmpty xs => ?b > 0}
+
+     ?a : {?a : [a] | len ?a >= 0}
+```
+
+### 解答
+
+**size1**
+
+`size1` の第1引数は `NEList a` だが、 `1 + size1 xs` で `xs` が空リストになるため。
+
+**size2**
+
+`size2` の返り値の型は `notEmpty xs` が成り立たない場合に負の数も取りうる （`Int`） ため、`1 + size2 xs` で怒られる。
+`Int` の代わりに `Nat` であれば、 `notEmpty xs` が成り立たない場合でも `v > 0` であることが保証される。
+
+
+
+
 
