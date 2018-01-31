@@ -1,5 +1,10 @@
 # Refined Datatypes
 
+```shell
+$ liquid
+LiquidHaskell Version 0.8.2.2, Git revision 82f5baa2e8e9eb70171d9cd49bde4297e94c2029 (dirty) (8382 commits) Copyright 2013-17 Regents of the University of California. All Rights Reserved.
+```
+
 ## Exercise 5.1 (Sanitization) *
 
 私たちのプログラム内部の計算については不変条件が常に満たされています。一方で、**現実世界**からやってくるデータの正当性を保証するための唯一の方法は `Sparse` ベクターを構築する前に、不変条件が満たされているかどうか確認するためのサニタイザーを定義することです。
