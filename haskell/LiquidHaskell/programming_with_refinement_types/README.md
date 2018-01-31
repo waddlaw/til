@@ -6,6 +6,9 @@ $ stack exec -- liquid src/chXX/XXX.hs
 
 # REPL
 $ stack repl src/chXX/XXX.hs
+
+# very useful for interactive use!
+$ spy run "stack exec -- liquid" .
 ```
 
 - [book (pdf ver)](http://ucsd-progsys.github.io/liquidhaskell-tutorial/book.pdf)
