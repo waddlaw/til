@@ -36,6 +36,20 @@ Error: Liquid Type Mismatch
 
 ### 解答
 
+```haskell
+{-@ type TRUE = { v:Bool | v } @-}
+
+{-@ (==>) :: p:Bool -> q:Bool -> { v:Bool | v <=> (p ==> q) } @-}
+
+False ==> False = True
+False ==> True  = True
+True  ==> True  = True
+True  ==> False = False
+
+{-@ ex3' :: Bool -> Bool -> TRUE @-}
+ex3' a b = a ==> (b || a)
+```
+
 ## Exercise 2.2 (DeMorgan's Law)
 
 以下のド・モルガンの法則は間違っている。修正して妥当な論理式にせよ。
