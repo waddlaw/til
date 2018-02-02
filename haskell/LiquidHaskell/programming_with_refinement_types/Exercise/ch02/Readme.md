@@ -61,7 +61,50 @@ exDeMorgan2 a b = not (a && b) <=> (not a && not b)
 
 ### LiquidHaskell の結果
 
+```haskell
+Error: Liquid Type Mismatch
+
+ 10 | exDeMorgan2 a b = not (a && b) <=> (not a && not b)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : Bool | v <=> (?b <=> ?d)}
+
+   not a subtype of Required type
+     VV : {VV : Bool | VV}
+
+   In Context
+     a : Bool
+
+     ?c : {?c : Bool | ?c <=> a
+                              && b}
+
+     b : Bool
+
+     ?e : {?e : Bool | ?e <=> not a}
+
+     ?b : {?b : Bool | ?b <=> not ?c}
+
+     ?d : {?d : Bool | ?d <=> ?e
+                              && ?a}
+
+     ?a : {?a : Bool | ?a <=> not b}
+```
+
 ### 解答
+
+```haskell
+{-@ type TRUE = { v:Bool | v } @-}
+
+{-@ (<=>) :: p:Bool -> q:Bool -> {v:Bool | v <=> (p <=> q) } @-}
+False <=> False = True
+False <=> True  = False
+True  <=> True  = True
+True  <=> False = False
+
+{-@ exDeMorgan2 :: Bool -> Bool -> TRUE @-}
+exDeMorgan2 a b = not (a && b) <=> (not a || not b)
+```
 
 ## Exercise 2.3 (Addition and Order)
 
