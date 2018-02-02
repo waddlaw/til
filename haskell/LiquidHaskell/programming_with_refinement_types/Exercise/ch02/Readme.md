@@ -110,7 +110,7 @@ exDeMorgan2 a b = not (a && b) <=> (not a || not b)
 
 以下の論理式は妥当ではない。何故か答えよ。
 
-また、仮定を変更して妥当な論理式にせよ。(`==>` の左側を変更するという意味である)
+また、仮定を変更して妥当な論理式にせよ。(`==>` の左側を修正すれば良い)
 
 ```haskell
 {-@ ax6 :: Int -> Int -> TRUE @-}
@@ -119,4 +119,43 @@ ax6 x y = True ==> (x <= x + y)
 
 ### LiquidHaskell の結果
 
+```haskell
+Error: Liquid Type Mismatch
+
+ 12 | ax6 x y = True ==> (x <= x + y)
+                ^^^^^^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : Bool | v <=> (GHC.Types.True => ?a)}
+
+   not a subtype of Required type
+     VV : {VV : Bool | VV}
+
+   In Context
+     ?b : {?b : Int | ?b == x + y}
+
+     x : Int
+
+     ?a : {?a : Bool | ?a <=> x <= ?b}
+
+     y : Int
+```
+
 ### 解答
+
+`Int` 型なので `y` が負数になる可能性があるため。
+
+```haskell
+{-@ type TRUE = { v:Bool | v } @-}
+
+{-@ (==>) :: p:Bool -> q:Bool -> { v:Bool | v <=> (p ==> q) } @-}
+
+False ==> False = True
+False ==> True  = True
+True  ==> True  = True
+True  ==> False = False
+
+{-@ ax6 :: Int -> Int -> TRUE @-}
+ax6 :: Int -> Int -> Bool
+ax6 x y = (0 <= y) ==> (x <= x + y)
+```
