@@ -13,6 +13,27 @@ ex3' a b = (a || b) ==> a
 
 ### LiquidHaskell の結果
 
+```shell
+Error: Liquid Type Mismatch
+
+ 12 | ex3' a b = (a || b) ==> a
+                 ^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : Bool | v <=> (?a => a)}
+
+   not a subtype of Required type
+     VV : {VV : Bool | VV}
+
+   In Context
+     a : Bool
+
+     b : Bool
+
+     ?a : {?a : Bool | ?a <=> a
+                              || b}
+```
+
 ### 解答
 
 ## Exercise 2.2 (DeMorgan's Law)
