@@ -392,7 +392,118 @@ test2 :: Bool
 test2 = elem 2 [1,3]
 ```
 
+## Exercise 8.6 (Merge)
 
+`prop_merge_app` が `LiquidHaskell` で `SAFE` になるように `merge` の仕様を書け。
+
+```haskell
+merge [] ys = ys
+merge xs [] = xs
+merge (x:xs) (y:ys)
+  | x <= y = x : merge xs (y:ys)
+  | otherwise = y : merge (x:xs) ys
+
+{-@ prop_merge_app :: _ -> _ -> True @-}
+prop_merge_app xs ys = elts zs == elts zs'
+  where
+    zs = append' xs ys
+    zs' = merge xs ys
+```
+
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 22 |   | otherwise = y : merge (x:xs) ys
+                          ^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : [a##xo] | Main.elts v == Set_cup (Set_sng x) (Main.elts xs)
+                         && listElts v == Set_cup (Set_sng x) (listElts xs)
+                         && len v == 1 + len xs
+                         && tail v == xs
+                         && head v == x
+                         && len v >= 0
+                         && v == ?a}
+
+   not a subtype of Required type
+     VV : {VV : [a##xo] | len VV < len ?b
+                          && len VV >= 0}
+
+   In Context
+     xs : {v : [a##xo] | len v >= 0}
+
+     ?b : {?b : [a##xo] | len ?b >= 0}
+
+     x : a##xo
+
+     ?a : {?a : [a##xo] | Main.elts ?a == Set_cup (Set_sng x) (Main.elts xs)
+                          && listElts ?a == Set_cup (Set_sng x) (listElts xs)
+                          && len ?a == 1 + len xs
+                          && tail ?a == xs
+                          && head ?a == x
+                          && len ?a >= 0}
+
+
+ Error: Liquid Type Mismatch
+
+ 25 | prop_merge_app xs ys = elts zs == elts zs'
+                             ^^^^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : Bool | v <=> ?b == ?a}
+
+   not a subtype of Required type
+     VV : {VV : Bool | VV}
+
+   In Context
+     xs : {v : [a##xo] | len v >= 0}
+
+     ys : {ys : [a##xo] | len ys >= 0}
+
+     ?b : {?b : (Set a##xo) | ?b == Main.elts zs}
+
+     zs' : {zs' : [a##xo] | len zs' >= 0}
+
+     ?a : {?a : (Set a##xo) | ?a == Main.elts zs'}
+
+     zs : {zs : [a##xo] | Main.elts zs == Set_cup (Main.elts xs) (Main.elts ys)
+                          && len zs >= 0}
+```
+
+### 解答
+
+```haskell
+import Data.Set (Set, empty, singleton, union)
+
+{-@ type True  = {v:Bool |     v} @-}
+{-@ type ListS a S = {v:[a] | elts v = S} @-}
+{-@ type ListUn a X Y = ListS a {Set_cup (elts X) (elts Y)} @-}
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ append' :: xs:_ -> ys:_ -> ListUn a xs ys @-}
+append' :: [a] -> [a] -> [a]
+append' [] ys     = ys
+append' (x:xs) ys = x : append' xs ys
+
+{-@ merge :: xs:[a] -> ys:[a] -> ListUn a xs ys / [len xs, len ys] @-}
+merge [] ys = ys
+merge xs [] = xs
+merge (x:xs) (y:ys)
+  | x <= y = x : merge xs (y:ys)
+  | otherwise = y : merge (x:xs) ys
+
+{-@ prop_merge_app :: _ -> _ -> True @-}
+prop_merge_app xs ys = elts zs == elts zs'
+  where
+    zs = append' xs ys
+    zs' = merge xs ys
+```
 
 
 
