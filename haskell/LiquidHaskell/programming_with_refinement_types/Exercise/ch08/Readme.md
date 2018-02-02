@@ -317,6 +317,84 @@ prop_halve_append n xs = elts xs == elts xs'
     (ys, zs) = halve n xs
 ```
 
+## Exercise 8.5 (Membership)
+
+`test1` と `test2` を満たすように `elem` のシグネチャを書け。
+
+```haskell
+{-@ elem :: (Eq a) => a -> [a] -> Bool @-}
+elem _ [] = False
+elem x (y:ys) = x == y || elem x ys
+
+{-@ test1 :: True @-}
+test1 = elem 2 [1,2,3]
+
+{-@ test2 :: False @-}
+test2 = elem 2 [1,3]
+```
+
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 20 | test1 = elem 2 [1,2,3]
+              ^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : Bool
+
+   not a subtype of Required type
+     VV : {VV : Bool | VV}
+
+   In Context
+
+
+Error: Liquid Type Mismatch
+
+ 24 | test2 = elem 2 [1,3]
+              ^^^^^^^^^^^^
+
+   Inferred type
+     VV : Bool
+
+   not a subtype of Required type
+     VV : {VV : Bool | not VV}
+
+   In Context
+```
+
+### 解答
+
+```haskell
+import Prelude hiding (elem)
+import Data.Set (Set, empty, singleton, union, member)
+
+{-@ type True  = {v:Bool |     v} @-}
+{-@ type False = {v:Bool | not v} @-}
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ elem :: (Eq a) => x:a -> xs:[a] -> { v:Bool | v = member x (elts xs) } @-}
+elem :: Eq a => a -> [a] -> Bool
+elem _ [] = False
+elem x (y:ys) = x == y || elem x ys
+
+{-@ test1 :: True @-}
+test1 :: Bool
+test1 = elem 2 [1,2,3]
+
+{-@ test2 :: False @-}
+test2 :: Bool
+test2 = elem 2 [1,3]
+```
+
+
+
+
 
 
 
