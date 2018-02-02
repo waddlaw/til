@@ -509,9 +509,34 @@ prop_merge_app xs ys = elts zs == elts zs'
 
 ## Exercise 8.7 (Merge Sort) **
 
+`merge` の正しい型が書ければ、次の `mergeSort` のシグネチャも同様にかけるだろう。
+
+1. 現在のシグネチャで証明可能であることを確認せよ
+1. 明らかに `mergeSort` は空リストを返したいわけではない。なのでこれはバグである。バグを明らかにし、出力が空の場合は証明できないため、代わりに出力が `ListEq a xs` の場合を証明せよ。
+
+```haskell
+{-@ mergeSort :: (Ord a) => xs:[a] -> ListEmp a @-}
+mergeSort []  = []
+mergeSort [x] = [x]
+mergeSort xs  = merge (mergeSort ys) (mergeSort zs)
+  where
+    (ys, zs) = halve mid xs
+    mid = length xs `div` 2
+```
+
 ### LiquidHaskell の結果
 
+`SAFE` となる。
+
 ### 解答
+
+**その1**
+
+refinement type の `{-@ mergeSort :: Ord a => xs:[a] -> ListEmp a @-}` から帰納部の右辺 `merge (mergeSort ys) (mergeSort zs)` の `mergeSort ys` と `mergeSort zs` の型は `ListEmp a` となる。
+
+`merge` に対して `ListEmp a` の値、すなわち空リストを渡すと空リストが結果となるので `SAFE` と判定する。
+
+**その2**
 
 ```haskell
 import Data.Set (Set, empty, singleton, union)
@@ -539,12 +564,11 @@ merge (x:xs) (y:ys)
   | x <= y = x : merge xs (y:ys)
   | otherwise = y : merge (x:xs) ys
 
-{-@ lazy mergeSort @-}
 {-@ mergeSort :: (Ord a) => xs:[a] -> ListEq a xs @-}
 mergeSort :: Ord a => [a] -> [a]
-mergeSort [] = []
+mergeSort []  = []
 mergeSort [x] = [x]
-mergeSort xs = merge (mergeSort ys) (mergeSort zs)
+mergeSort xs  = merge (mergeSort ys) (mergeSort zs)
   where
     (ys, zs) = halve mid xs
     mid = length xs `div` 2
