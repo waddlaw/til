@@ -2,7 +2,8 @@
 
 ```shell
 $ liquid
-LiquidHaskell Version 0.8.2.2, Git revision 82f5baa2e8e9eb70171d9cd49bde4297e94c2029 (dirty) (8382 commits) Copyright 2013-17 Regents of the University of California. All Rights Reserved.
+LiquidHaskell Version 0.8.2.2, Git revision 0eab6e5be11b889d5e2c83190594161120542c74 (dirty)
+Copyright 2013-18 Regents of the University of California. All Rights Reserved.
 ```
 
 ## Exercise 2.1 (Implications and Or)
