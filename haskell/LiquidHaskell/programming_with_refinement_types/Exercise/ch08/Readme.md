@@ -233,4 +233,98 @@ revHelper acc []     = acc
 revHelper acc (x:xs) = revHelper (x:acc) xs
 ```
 
-##
+## Exercise 8.4 (Halve) *
+
+`prop_halve_append` が `LiquidHaskell` で成り立つように `halve` の仕様を書け。
+
+```haskell
+halve :: Int -> [a] -> ([a], [a])
+halve 0 xs       = ([], xs)
+halve n (x:y:zs) = (x:xs, y:ys) where (xs, ys) = halve (n-1) zs
+halve _ xs       = ([], xs)
+
+{-@ prop_halve_append :: _ -> _ -> True @-}
+prop_halve_append n xs = elts xs == elts xs'
+  where
+    xs'      = append' ys zs
+    (ys, zs) = halve n xs
+```
+
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 37 | prop_halve_append n xs = elts xs == elts xs'
+                               ^^^^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : Bool | v <=> ?b == ?a}
+
+   not a subtype of Required type
+     VV : {VV : Bool | VV}
+
+   In Context
+     xs : {v : [a##xo] | len v >= 0}
+
+     xs' : {v : [a##xo] | Main.elts v == Set_cup (Main.elts ys) (Main.elts zs)
+                          && len v >= 0}
+
+     ?c : ([a##xo], [a##xo])
+
+     ys : {ys : [a##xo] | len ys >= 0
+                          && ys == fst ?c}
+
+     ?b : {?b : (Set a##xo) | ?b == Main.elts xs}
+
+     ?a : {?a : (Set a##xo) | ?a == Main.elts xs'}
+
+     zs : {zs : [a##xo] | len zs >= 0
+                          && zs == snd ?c}
+```
+
+### 解答
+
+```haskell
+import Data.Set (Set, empty, singleton, union)
+
+{-@ type True  = {v:Bool |     v} @-}
+{-@ type ListS a S = {v:[a] | elts v = S} @-}
+{-@ type ListUn a X Y = ListS a {Set_cup (elts X) (elts Y)} @-}
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ append' :: xs:_ -> ys:_ -> ListUn a xs ys @-}
+append' :: [a] -> [a] -> [a]
+append' [] ys     = ys
+append' (x:xs) ys = x : append' xs ys
+
+{-@ lazy halve @-}
+{-@ halve :: Int -> xs:[a] -> {v:([a], [a]) | union (elts (fst v)) (elts (snd v)) = elts xs } @-}
+halve :: Int -> [a] -> ([a], [a])
+halve 0 xs = ([], xs)
+halve n (x:y:zs) = (x:xs, y:ys) where (xs, ys) = halve (n-1) zs
+halve _ xs = ([], xs)
+
+{-@ prop_halve_append :: _ -> _ -> True @-}
+prop_halve_append :: Ord a => Int -> [a] -> Bool
+prop_halve_append n xs = elts xs == elts xs'
+  where
+    xs'      = append' ys zs
+    (ys, zs) = halve n xs
+```
+
+
+
+
+
+
+
+
+
+
+
+
