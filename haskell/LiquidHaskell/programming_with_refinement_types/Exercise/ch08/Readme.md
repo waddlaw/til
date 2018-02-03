@@ -708,10 +708,65 @@ reverse = go []
     go acc (x:xs) = go (x:acc) xs
 ```
 
+## Exercise 8.10 (Append) *
 
+なぜ2つの `UList` を結合した結果が `UList` にならないのだろうか？型シグネチャを修正して出力がユニークであることを保証せよ。
 
+```haskell
+{-@ append :: UList a -> UList a -> UList a @-}
+append [] ys = ys
+append (x:xs) ys = x : append xs ys
+```
 
+### LiquidHaskell の結果
 
+```shell
+Error: Liquid Type Mismatch
+
+ 18 | append [] ys = ys
+      ^^^^^^
+
+   Inferred type
+     VV : {v : [a##xo] | Main.elts v == Set_cup (Set_sng x) (Main.elts ?a)
+                         && (Main.unique v <=> Main.unique ?a
+                                               && not (Set_mem x (Main.elts ?a)))
+                         && listElts v == Set_cup (Set_sng x) (listElts ?a)
+                         && len v == 1 + len ?a
+                         && tail v == ?a
+                         && head v == x
+                         && len v >= 0}
+
+   not a subtype of Required type
+     VV : {VV : [a##xo] | Main.unique VV}
+
+   In Context
+     x : a##xo
+
+     ?a : {?a : [a##xo] | Main.unique ?a
+                          && len ?a >= 0}
+```
+
+### 解答
+
+```haskell
+import Data.Set (Set, empty, singleton, union, member, intersection)
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ measure unique @-}
+unique :: (Ord a) => [a] -> Bool
+unique [] = True
+unique (x:xs) = unique xs && not (member x (elts xs))
+
+{-@ type UList a = { v:[a] | unique v } @-}
+
+{-@ append :: xs:UList a -> ys:{v:UList a | intersection (elts xs) (elts v) = empty} -> {v:UList a | union (elts xs) (elts ys) = elts v } @-}
+append [] ys = ys
+append (x:xs) ys = x : append xs ys
+```
 
 
 
