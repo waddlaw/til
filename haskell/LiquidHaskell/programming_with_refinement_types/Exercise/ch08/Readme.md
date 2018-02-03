@@ -768,8 +768,80 @@ append [] ys = ys
 append (x:xs) ys = x : append xs ys
 ```
 
+## Exercise 8.11 (Range) **
 
+`range i j` は `i` から `j` までの `Int` のリストを返す関数である。`LiquidHaskell` は出力が `UList` であることを拒否する。
 
+コードを修正し、`LiquidHaskell` が与えられた型シグネチャを受理するようにせよ。(もちろん、変更後の関数の計算結果は同一でなければならない)
+
+```haskell
+{-@ type Btwn I J = { v:_ | I <= v && v < J } @-}
+
+{-@ range :: i:Int -> j:Int -> UList (Btwn i j) @-}
+range i j
+  | i < j     = i : range (i + 1) j
+  | otherwise = []
+```
+
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 20 | range i j
+      ^^^^^
+
+   Inferred type
+     VV : {v : [Int] | Main.elts v == Set_cup (Set_sng i) (Main.elts ?a)
+                       && (Main.unique v <=> Main.unique ?a
+                                             && not (Set_mem i (Main.elts ?a)))
+                       && listElts v == Set_cup (Set_sng i) (listElts ?a)
+                       && len v == 1 + len ?a
+                       && tail v == ?a
+                       && head v == i
+                       && len v >= 0}
+
+   not a subtype of Required type
+     VV : {VV : [{v : Int | i <= v
+                            && v < j}] | Main.unique VV}
+
+   In Context
+     j : Int
+
+     ?a : {?a : [Int] | Main.unique ?a
+                        && len ?a >= 0}
+
+     i : Int
+```
+
+### 解答
+
+```haskell
+import Data.Set (Set, empty, singleton, union, member, intersection)
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ measure unique @-}
+unique :: (Ord a) => [a] -> Bool
+unique [] = True
+unique (x:xs) = unique xs && not (member x (elts xs))
+
+{-@ type UList a = { v:[a] | unique v } @-}
+
+{-@ type Btwn I J = { v:_ | I <= v && v < J } @-}
+
+{-@ lazy range @-}
+{-@ range :: i:Int -> j:Int -> UList (Btwn i j) @-}
+range :: Int -> Int -> [Int]
+range i j
+  | i < j && unique xs = xs
+  | otherwise = []
+  where
+    xs = i : range (i + 1) j
+```
 
 
 
