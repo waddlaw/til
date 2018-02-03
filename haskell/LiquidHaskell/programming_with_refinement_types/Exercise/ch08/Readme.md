@@ -648,8 +648,65 @@ test4 :: [Int]
 test4 = filter' (> 3) [3,1,2,3]
 ```
 
+## Exercise 8.9 (Reverse) *
 
+`reverse` を使って順序を変更する時、要素の集合については変化させたくないため、入力がユニークであれば出力もユニークになるだろう。
 
+なぜ、以下のコードは `LiquidHaskell` によってリジェクトされるのだろうか？問題点を修正して出力が `UList a` の場合でも `SAFE` となるようにせよ。
+
+```haskell
+{-@ reverse :: xs:UList a -> UList a @-}
+reverse = go []
+  where
+    {-@ go :: acc:[a] -> xs:[a] -> [a] @-}
+    go acc []     = acc
+    go acc (x:xs) = go (x:acc) xs
+```
+
+### LiquidHaskell の結果
+
+```shell
+Error: Liquid Type Mismatch
+
+ 25 | reverse = go []
+                ^^^^^
+
+   Inferred type
+     VV : {v : [a##xo] | len v >= 0}
+
+   not a subtype of Required type
+     VV : {VV : [a##xo] | Main.unique VV}
+
+   In Context
+```
+
+### 解答
+
+`go` の戻り値のリファインメント型が `[a]` となっているが、`reverse` は `UList a` を期待しているため。
+
+```haskell
+import Data.Set (Set, empty, singleton, union, member, intersection)
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ measure unique @-}
+unique :: (Ord a) => [a] -> Bool
+unique [] = True
+unique (x:xs) = unique xs && not (member x (elts xs))
+
+{-@ type UList a = { v:[a] | unique v } @-}
+
+{-@ reverse :: xs:UList a -> UList a @-}
+reverse :: Ord a => [a] -> [a]
+reverse = go []
+  where
+    {-@ go :: acc:UList a -> { xs:UList a | intersection (elts acc) (elts xs) = empty } -> UList a / [len xs] @-}
+    go acc [] = acc
+    go acc (x:xs) = go (x:acc) xs
+```
 
 
 
