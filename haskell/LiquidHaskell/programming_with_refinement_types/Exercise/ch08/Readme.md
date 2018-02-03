@@ -843,10 +843,118 @@ range i j
     xs = i : range (i + 1) j
 ```
 
+## Exercise 8.12 (Deconstructing Zippers) *
 
+`differentiate` と対となる、ユニークジッパーの要素をユニークリストに変換する関数を考える。
 
+`reverse` と `append` の型を強化して `LiquidHaskell` で以下の `integrate` のシグネチャが受理されるようにせよ。
 
+```haskell
+{-@ integrate :: Ord a => Zipper a -> UList a @-}
+integrate (Zipper x l r) = reverse l `append` (x : r)
+```
 
+### LiquidHaskell の結果
 
+```shell
+Error: Liquid Type Mismatch
+
+ 48 | integrate (Zipper x l r) = reverse l `append` (x : r)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+   Inferred type
+     VV : {v : [a##xo] | Main.elts v == Set_cup (Set_sng x) (Main.elts r)
+                         && (Main.unique v <=> Main.unique r
+                                               && not (Set_mem x (Main.elts r)))
+                         && listElts v == Set_cup (Set_sng x) (listElts r)
+                         && len v == 1 + len r
+                         && tail v == r
+                         && head v == x
+                         && len v >= 0
+                         && v == ?a}
+
+   not a subtype of Required type
+     VV : {VV : [a##xo] | Main.unique VV
+                          && Set_cap (Main.elts ?b) (Main.elts VV) == Set_empty 0}
+
+   In Context
+     l : {l : [a##xo] | Main.unique l
+                        && not (Set_mem x (Main.elts l))
+                        && len l >= 0}
+
+     r : {r : [a##xo] | Main.unique r
+                        && not (Set_mem x (Main.elts r))
+                        && Set_empty 0 == Set_cap (Main.elts r) (Main.elts l)
+                        && len r >= 0}
+
+     ?b : {?b : [a##xo] | Main.unique ?b
+                          && len ?b >= 0}
+
+     x : a##xo
+
+     ?a : {?a : [a##xo] | Main.elts ?a == Set_cup (Set_sng x) (Main.elts r)
+                          && (Main.unique ?a <=> Main.unique r
+                                                 && not (Set_mem x (Main.elts r)))
+                          && listElts ?a == Set_cup (Set_sng x) (listElts r)
+                          && len ?a == 1 + len r
+                          && tail ?a == r
+                          && head ?a == x
+                          && len ?a >= 0}
+```
+
+### 解答
+
+わかりません。
+
+```haskell
+import Data.Set (Set, empty, singleton, union, member, intersection)
+import Prelude hiding (reverse)
+
+{-@ measure elts @-}
+elts :: (Ord a) => [a] -> Set a
+elts []     = empty
+elts (x:xs) = singleton x `union` elts xs
+
+{-@ measure unique @-}
+unique :: (Ord a) => [a] -> Bool
+unique [] = True
+unique (x:xs) = unique xs && not (member x (elts xs))
+
+{-@ type UList a = { v:[a] | unique v } @-}
+
+{-@ append :: xs:UList a -> ys:{v:UList a | intersection (elts xs) (elts v) = empty} -> {v:UList a | union (elts xs) (elts ys) = elts v } @-}
+append [] ys = ys
+append (x:xs) ys = x : append xs ys
+
+{-@ reverse :: xs:UList a -> UList a @-}
+reverse :: Ord a => [a] -> [a]
+reverse = go []
+  where
+    {-@ go :: acc:UList a -> { xs:UList a | intersection (elts acc) (elts xs) = empty } -> UList a / [len xs] @-}
+    go acc [] = acc
+    go acc (x:xs) = go (x:acc) xs
+
+{-@ predicate In X Xs = Set_mem X (elts Xs) @-}
+{-@ predicate Disj X Y = Disjoint (elts X) (elts Y) @-}
+{-@ predicate Disjoint X Y = Inter (Set_empty 0) X Y @-}
+{-@ predicate Inter X Y Z  = X = Set_cap Y Z         @-}
+
+{-@ data Zipper a = Zipper {
+      focus :: a
+    , left  :: { v: UList a | not (In focus v)}
+    , right :: { v: UList a | not (In focus v) && Disj v left }
+    }
+@-}
+
+data Zipper a = Zipper {
+    focus :: a
+  , left :: [a]
+  , right :: [a]
+}
+
+{-@ integrate :: Ord a => Zipper a -> UList a @-}
+integrate :: Ord a => Zipper a -> [a]
+integrate (Zipper x l r) = reverse l `append` (x : r)
+```
 
 
