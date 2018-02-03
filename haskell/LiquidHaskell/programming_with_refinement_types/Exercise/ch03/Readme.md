@@ -95,6 +95,8 @@ Error: Liquid Type Mismatch
      d : Int
 ```
 
+何を求めているのか良くわからない。
+
 ```haskell
 {-@ type NonZero = { v:Int | v /= 0 } @-}
 
@@ -116,17 +118,56 @@ isPositive :: Int -> Bool
 isPositive x = x > 0
 ```
 
+## Exercise 3.3 (Assertions)
 
+以下の `assert` 関数について考えよ。`LiquidHaskell` が `lAssert` と `yes` を受理し、`no` を拒否するように `lAssert` のリファインメント化された型シグネチャを書け。
 
+```haskell
+{-@ lAssert :: Bool -> a -> a @-}
+lAssert True x = x
+lAssert False _ = die "yikes, assertion fails!"
 
+yes = lAssert (1 + 1 == 2) ()
+no  = lAssert (1 + 1 == 3) ()
+```
 
+ヒント: `lAssert` が常に `True` で呼ばれるような事前条件を考えよ。
 
+### LiquidHaskell の結果
 
+```shell
+Error: Liquid Type Mismatch
 
+ 6 | lAssert False _ = die "yikes, assertion fails!"
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+   Inferred type
+     VV : {v : [Char] | v ~~ ?b
+                        && len v == strLen ?b
+                        && len v >= 0
+                        && v == ?a}
 
+   not a subtype of Required type
+     VV : {VV : [Char] | false}
 
+   In Context
+     ?b : {?b : Addr# | ?b == "yikes, assertion fails!"}
 
+     ?a : {?a : [Char] | ?a ~~ ?b
+                         && len ?a == strLen ?b
+                         && len ?a >= 0}
+```
 
+### 解答
 
+```haskell
+{-@ die :: { v:String | false } -> a @-}
+die msg = error msg
 
+{-@ lAssert :: { v:Bool | v == true } -> a -> a @-}
+lAssert True x = x
+lAssert False _ = die "yikes, assertion fails!"
+
+yes = lAssert (1 + 1 == 2) ()
+no  = lAssert (1 + 1 == 3) ()
+```
