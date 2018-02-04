@@ -54,14 +54,13 @@ sizeQ (Q f b) = size f + size b
 
 {-@ type QueueN a N = {v:Queue a | sizeQ v = N} @-}
 
-{-@ makeq :: f:SList a -> b:SList a -> QueueN a {size f + size b} @-}
+{-@ makeq :: f:SList a -> {b:SList a | size b > size f => size b - size f = 1 } -> QueueN a {size f + size b} @-}
 makeq :: SList a -> SList a -> Queue a
 makeq f b
   | size b <= size f = Q f b
   | otherwise        = Q (rot f b nil) nil
 
-{-@ lazy rot @-}
-{-@ rot :: f:SList a -> { b:SList a | size f - size b > 1 } -> SList a -> SList a @-}
+{-@ rot :: f:SList a -> b:SListN a {size f + 1} -> tmp:SList a -> SListN a {size f + size b + size tmp}  / [size f] @-}
 rot :: SList a -> SList a -> SList a -> SList a
 rot f b a
   | size f == 0 = hd b `cons` a

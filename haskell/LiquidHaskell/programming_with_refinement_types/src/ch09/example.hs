@@ -1,4 +1,4 @@
-import Prelude hiding (replicate)
+import Prelude hiding (replicate, take)
 
 {-@ measure realSize @-}
 realSize :: [a] -> Int
@@ -102,10 +102,32 @@ replicate n x = insert x (replicate (n-1) x)
 {-@ y3 :: QueueN _ 3 @-}
 y3 = replicate 3 "Yeah!"
 
-{-@ makeq :: f:SList a -> b:SList a -> QueueN a {size f + size b} @-}
+{-@ makeq :: f:SList a -> {b:SList a | size b > size f => size b - size f = 1 } -> QueueN a {size f + size b} @-}
 makeq :: SList a -> SList a -> Queue a
 makeq f b
   | size b <= size f = Q f b
   | otherwise        = Q (rot f b nil) nil
 
-rot = undefined
+{-@ rot :: f:SList a -> b:SListN a {size f + 1} -> tmp:SList a -> SListN a {size f + size b + size tmp}  / [size f] @-}
+rot :: SList a -> SList a -> SList a -> SList a
+rot f b a
+  | size f == 0 = hd b `cons` a
+  | otherwise   = hd f `cons` rot (tl f) (tl b) (hd b `cons` a)
+
+{-@ take :: {n:Int | n >= 0} -> {q:Queue a | sizeQ q >= n} -> (QueueN a n, QueueN a {sizeQ q - n}) @-}
+take :: Int -> Queue a -> (Queue a, Queue a)
+take 0 q = (emp, q)
+take n q = (insert x out, q'')
+  where
+    (x, q')    = remove q
+    (out, q'') = take (n-1) q'
+
+{-@ okTake :: (QueueN String 2, QueueN String 1) @-}
+okTake :: (Queue String, Queue String)
+okTake = take 2 exampleQ -- accept
+
+-- badTake = take 10 exampleQ -- reject
+
+{-@ exampleQ :: QueueN String 3 @-}
+exampleQ :: Queue String
+exampleQ = insert "nal" $ insert "bob" $ insert "alice" $ emp

@@ -46,6 +46,18 @@ nil = SL 0 []
 cons :: a -> SList a -> SList a
 cons x (SL n xs) = SL (n+1) (x:xs)
 
+{-@ makeq :: f:SList a -> {b:SList a | size b > size f => size b - size f = 1 } -> QueueN a {size f + size b} @-}
+makeq :: SList a -> SList a -> Queue a
+makeq f b
+  | size b <= size f = Q f b
+  | otherwise        = Q (rot f b nil) nil
+
+{-@ rot :: f:SList a -> b:SListN a {size f + 1} -> tmp:SList a -> SListN a {size f + size b + size tmp}  / [size f] @-}
+rot :: SList a -> SList a -> SList a -> SList a
+rot f b a
+  | size f == 0 = hd b `cons` a
+  | otherwise   = hd f `cons` rot (tl f) (tl b) (hd b `cons` a)
+
 -- 1
 {-@ measure sizeQ @-}
 {-@ sizeQ :: Queue a -> Int @-}
@@ -59,8 +71,6 @@ sizeQ (Q f b) = size f + size b
 {-@ remove :: { v:Queue a | sizeQ v > 0 } -> (a, QueueN a {sizeQ v - 1}) @-}
 remove :: Queue a -> (a, Queue a)
 remove (Q f b) = (hd f, makeq (tl f) b)
-
-makeq = undefined
 
 {-@ okRemove :: Num a => (a, Queue a) @-}
 okRemove :: Num a => (a, Queue a)
