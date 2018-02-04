@@ -70,20 +70,21 @@ p := (e r e)                -- binary relation
    | false | False
 ```
 
-## isPositive
+## 解説
 
-`<=>` は両辺に `predicate` を取るため、`p1 <=> p2` の形式となる。
+- `<=>` は両辺に `predicate` を取るため、 `p1 <=> p2` の形式となる
+- `==` は両辺に `expression` を取るため、 `e1 == e2` の形式となる
 
-また、変数は `Expression` だが、`Bool`型のみ `Predicate` として扱われるような特別規則があると思われる。
+また、変数は `Expression` だが、`Bool`型の変数のみ `Predicate` として扱われるような特別規則があると思われる。
 
 ### (<=>) の場合
 
-この場合は `SAFE` となる。
+#### isPositive
+
+`SAFE` となる。
 
 ```haskell
 {-@ isPositive :: x:Int -> { v:Bool | x > 0 <=> v } @-}
-isPositive :: Int -> Bool
-isPositive x = x > 0
 ```
 
 ```
@@ -94,14 +95,32 @@ e r e        e :: Bool
   p          p
 ```
 
+#### elem
+
+`SAFE` となる。
+
+```haskell
+{-@ elem :: (Eq a) => x:a -> xs:[a] -> { v:Bool | v <=> member x (elts xs) } @-}
+```
+
+`member` は `measure` によって `predicate application` として使えるようになっている。
+
+```
+v     <=>    member x (elts xs)
+=           ====================
+e :: Bool      v e1 e2
+=              =======
+p                 p
+```
+
 ### (==) の場合
 
-この場合は `UNSAFE` となる。
+#### isPositive
+
+`UNSAFE` となる。
 
 ```haskell
 {-@ isPositive :: x:Int -> { v:Bool | x > 0 ==   v } @-}
-isPositive :: Int -> Bool
-isPositive x = x > 0
 ```
 
 ```
@@ -113,3 +132,21 @@ e r e      e
 ```
 
 この時、`==` は `Relation` なので `e r e` の形式でなければならない。よって、構文エラーとなる。
+
+#### elem
+
+`SAFE` となる。
+
+```haskell
+{-@ elem :: (Eq a) => x:a -> xs:[a] -> { v:Bool | v == member x (elts xs) } @-}
+```
+
+`member` は `uninterpreted function application` として解釈される。
+
+```
+v  ==  member x (elts xs)
+=     ====================
+e          v e1 e2
+           =======
+              e
+```
