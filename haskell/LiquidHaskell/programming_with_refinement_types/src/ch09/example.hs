@@ -64,7 +64,7 @@ emp :: Queue a
 emp = Q nil nil
 
 {-@ measure sizeQ @-}
-{-@ sizeQ :: Queue a -> Int @-}
+{-@ sizeQ :: q:Queue a -> { v:Nat | v = sizeQ q } @-}
 sizeQ :: Queue a -> Int
 sizeQ (Q f b) = size f + size b
 
@@ -73,6 +73,7 @@ sizeQ (Q f b) = size f + size b
 {-@ remove :: { v:Queue a | sizeQ v > 0 } -> (a, QueueN a {sizeQ v - 1}) @-}
 remove :: Queue a -> (a, Queue a)
 remove (Q f b) = (hd f, makeq (tl f) b)
+-- remove (Q (SL n (x:xs)) b) = (x, makeq (SL (n-1) xs) b)
 
 {-@ okRemove :: Num a => (a, Queue a) @-}
 okRemove :: Num a => (a, Queue a)

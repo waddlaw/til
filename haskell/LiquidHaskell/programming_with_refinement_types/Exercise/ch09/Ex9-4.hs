@@ -39,7 +39,7 @@ data Queue a = Q
   }
 
 {-@ measure sizeQ @-}
-{-@ sizeQ :: Queue a -> Int @-}
+{-@ sizeQ :: q:Queue a -> { v:Nat | v = sizeQ q } @-}
 sizeQ :: Queue a -> Int
 sizeQ (Q f b) = size f + size b
 
