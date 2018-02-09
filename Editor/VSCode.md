@@ -22,6 +22,7 @@
 - [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
 - [vim](https://github.com/VSCodeVim/Vim)
 - Git History
+- [brittany](https://marketplace.visualstudio.com/items?itemName=MaxGabriel.brittany)
 
 ### 非推奨
 
