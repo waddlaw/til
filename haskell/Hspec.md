@@ -276,10 +276,71 @@ safeEvaluateExample example params around progress = do
 
 `Arg` のおかげで、`example` に引数があるか無いかに関わらず `safeEvaluateExample` 1つで処理できるようになった。
 
+### Example のインスタンス
 
+**Result**
 
+```haskell
+instance Example Result where
+  type Arg Result = ()
+  evaluateExample e = evaluateExample (\() -> e)
+  
+instance Example (a -> Result) where
+  type Arg (a -> Result) = a
+  evaluateExample example _params action _callback = do
+    ref <- newIORef (Success "")
+    action (writeIORef ref . example)
+    readIORef ref
+```
 
+**Bool**
 
+```haskell
+
+instance Example Bool where
+  type Arg Bool = ()
+  evaluateExample e = evaluateExample (\() -> e)
+
+instance Example (a -> Bool) where
+  type Arg (a -> Bool) = a
+  evaluateExample p _params action _callback = do
+    ref <- newIORef (Success "")
+    action $ \a -> example a >>= writeIORef ref
+    readIORef ref
+    where
+      example a
+        | p a = return (Success "")
+        | otherwise = return (Failure Nothing NoReason)
+```
+
+**Expectation**
+
+```haskell
+instance Example Expectation where
+  type Arg Expectation = ()
+  evaluateExample e = evaluateExample (\() -> e)
+  
+instance Example (a -> Expectation) where
+  type Arg (a -> Expectation) = a
+  evaluateExample e _ action _ = action e >> return (Success "")
+```
+
+**Property**
+
+```haskell
+instance Example QC.Property where
+  type Arg QC.Property = ()
+  evaluateExample e = evaluateExample (\() -> e)
+
+instance Example (a -> QC.Property) where
+  type Arg (a -> QC.Property) = a
+  evaluateExample p c action progressCallback = do
+    r <- QC.quickCheckWithResult (paramsQuickCheckArgs c) {QC.chatty = False} (QCP.callback qcProgressCallback $ aroundProperty action p)
+    return $ fromQuickCheckResult r
+    where
+      qcProgressCallback = QCP.PostTest QCP.NotCounterexample $
+        \st _ -> progressCallback (QC.numSuccessTests st, QC.maxSuccessTests st)
+```
 
 
 
