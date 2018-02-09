@@ -43,12 +43,12 @@ data Tree c a = Node String [Tree c a]
 ```
 
 ```haskell
-data Item a = Item {
-  itemRequirement :: String
-, itemLocation :: Maybe Location
-, itemIsParallelizable :: Maybe Bool
-, itemExample :: Params -> (ActionWith a -> IO ()) -> ProgressCallback -> IO Result
-}
+data Item a = Item
+  { itemRequirement :: String
+  , itemLocation :: Maybe Location
+  , itemIsParallelizable :: Maybe Bool
+  , itemExample :: Params -> (ActionWith a -> IO ()) -> ProgressCallback -> IO Result
+  }
 ```
 
 ### [Test.Hspec.Core.Example](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Example.hs)
