@@ -170,6 +170,45 @@ runSpecM (SpecM specs) = execWriterT specs
 
 つまり、 `Spec` に対して `execWriterT` しているだけだった。`execWriterT :: Monad m => WriterT w m a -> m w` なので `IO [Tree (ActionWith ()) (Item ())]` 型の値が返ってくることがわかる。
 
+### describe
+
+```haskell
+-- | The @describe@ function combines a list of specs into a larger spec.
+describe :: String -> SpecWith a -> SpecWith a
+describe label spec = runIO (runSpecM spec) >>= fromSpecList . return . specGroup label
+
+runSpecM :: SpecWith a -> IO [SpecTree a]
+runSpecM (SpecM specs) = execWriterT specs
+
+runIO :: IO r -> SpecM a r
+runIO = SpecM . liftIO
+```
+
+ややトリッキーだが整理するとこうなる
+
+```haskell
+describe label (SpecM specs) = do
+  r <- SpecM $ liftIO $ execWriterT specs
+  fromSpecList $ return $ specGroup label r
+```
+
+つまり `describe` が実行される度に、その子要素の `it` が全て実行されていくような順番となる。
+
+### it
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
