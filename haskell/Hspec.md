@@ -236,7 +236,7 @@ specItem s e = Leaf $ Item requirement location Nothing (safeEvaluateExample e)
 
 ### まとめ
 
-- 1つの `describe` で、それにぶら下がった `it` が全て評価される
+- 1つの `describe` で、それにぶら下がった `it` が先に全て評価される
 - それぞれの `describe` の結果を集めて最終的な結果とする
 
 ## Arg の謎
