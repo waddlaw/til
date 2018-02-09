@@ -19,7 +19,6 @@ type SpecWith a = SpecM a ()
 
 -- Spec = SpecM () ()
 
--- a (ction)
 -- r (eturn)
 newtype SpecM a r = SpecM (WriterT [SpecTree a] IO r)
   deriving (Functor, Applicative, Monad)
@@ -37,7 +36,6 @@ type SpecTree a = Tree (ActionWith a) (Item a)
 
 ```haskell
 -- c (reanup)
--- a (ction)
 data Tree c a = Node String [Tree c a]
               | NodeWithCleanup c [Tree c a]
               | Leaf a
@@ -45,7 +43,6 @@ data Tree c a = Node String [Tree c a]
 ```
 
 ```haskell
--- a (ction)
 data Item a = Item
   { itemRequirement      :: String
   , itemLocation         :: Maybe Location
