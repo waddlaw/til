@@ -1,9 +1,10 @@
-# 問題点
+# VSCode
+
+## 問題点
 
 - サイドバーのフォントサイズが変更できない問題
   - [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
 
-# まとめ
 ## 拡張機能
 - Haskell Language Server
 - Haskell Syntax Highlighting
@@ -11,7 +12,7 @@
 - Zenkaku
 - Haskell GHCi debug viewer Phoityne
 - [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
-- vim
+- [vim](https://github.com/VSCodeVim/Vim)
 
 ## 設定
 
