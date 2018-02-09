@@ -274,7 +274,7 @@ safeEvaluateExample example params around progress = do
       Failure _ m -> m `deepseq` r
 ```
 
-
+`Arg` のおかげで、`example` に引数があるか無いかに関わらず `safeEvaluateExample` 1つで処理できるようになった。
 
 
 
