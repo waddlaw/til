@@ -209,9 +209,8 @@ describe label (SpecM specs) = do
 
 ```haskell
 -- w = [SpecTree a]
--- m = WriterT [SpecTree a] IO
--- r = ()
-WriterT [SpecTree a] IO r
+-- m = IO
+tell :: w -> WriterT w m ()
 
 SpecM :: WriterT [SpecTree a] IO r -> SpecM
 tell  :: [SpecTree a] -> WriterT [SpecTree a] IO r
@@ -224,9 +223,21 @@ specGroup label r :: SpecTree a
 ```haskell
 it :: (HasCallStack, Example a) => String -> a -> SpecWith (Arg a)
 it label action = fromSpecList [specItem label action]
+
+specItem :: (HasCallStack, Example a) => String -> a -> SpecTree (Arg a)
+specItem s e = Leaf $ Item requirement location Nothing (safeEvaluateExample e)
+  where
+    requirement
+      | null s = "(unspecified behavior)"
+      | otherwise = s
 ```
 
+`describe` とほぼ同じ。
 
+### まとめ
+
+- `describe` が `単一の Leaf`、 `it` が `1つ以上のLeaf` に対応した `Forest Tree` として内部的に表現しているっぽい
+- 1つの `describe` で、それにぶら下がった `it` が全て評価されるっぽい
 
 
 
