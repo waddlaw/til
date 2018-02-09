@@ -2,8 +2,8 @@
 
 ## 問題点
 
-- サイドバーのフォントサイズが変更できない問題
-  - [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
+- サイドバーのフォントサイズが変更できない問題 => [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
+- haskell-ide-engine でプロジェクトごとに hie のビルドが必要な問題 => [Matching hie GHC version to the project GHC version #439](https://github.com/haskell/haskell-ide-engine/issues/439)
 
 ## 拡張機能
 - Haskell Language Server
