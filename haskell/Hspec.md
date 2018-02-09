@@ -168,7 +168,7 @@ runSpecM :: SpecWith a -> IO [SpecTree a]
 runSpecM (SpecM specs) = execWriterT specs
 ```
 
-つまり、それぞれの `Spec` に対して `execWriterT` しているだけだった。`execWriterT :: Monad m => WriterT w m a -> m w` なので `IO [Tree (ActionWith ()) (Item ())]` 型の値が返ってくることがわかる。
+つまり、 `Spec` に対して `execWriterT` しているだけだった。`execWriterT :: Monad m => WriterT w m a -> m w` なので `IO [Tree (ActionWith ()) (Item ())]` 型の値が返ってくることがわかる。
 
 
 
