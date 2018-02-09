@@ -37,6 +37,7 @@ type SpecTree a = Tree (ActionWith a) (Item a)
 
 ```haskell
 -- c (reanup)
+-- Forest
 data Tree c a = Node String [Tree c a]
               | NodeWithCleanup c [Tree c a]
               | Leaf a
@@ -182,6 +183,16 @@ runSpecM (SpecM specs) = execWriterT specs
 
 runIO :: IO r -> SpecM a r
 runIO = SpecM . liftIO
+
+fromSpecList :: [SpecTree a] -> SpecWith a
+fromSpecList = SpecM . tell
+
+specGroup :: String -> [SpecTree a] -> SpecTree a
+specGroup s = Node msg
+  where
+    msg
+      | null s = "(no description given)"
+      | otherwise = s
 ```
 
 ややトリッキーだが整理するとこうなる
@@ -189,12 +200,31 @@ runIO = SpecM . liftIO
 ```haskell
 describe label (SpecM specs) = do
   r <- SpecM $ liftIO $ execWriterT specs
-  fromSpecList $ return $ specGroup label r
+  SpecM $ tell $ return $ specGroup label r
 ```
 
 つまり `describe` が実行される度に、その子要素の `it` が全て実行されていくような順番となる。
 
+具体的な型は以下の通り、特に `return` はリストモナドに持ち上げられる点に注意。
+
+```haskell
+-- w = [SpecTree a]
+-- m = WriterT [SpecTree a] IO
+-- r = ()
+WriterT [SpecTree a] IO r
+
+SpecM :: WriterT [SpecTree a] IO r -> SpecM
+tell  :: [SpecTree a] -> WriterT [SpecTree a] IO r
+return :: SpecTree a -> [SpecTree a]
+specGroup label r :: SpecTree a
+```
+
 ### it
+
+```haskell
+it :: (HasCallStack, Example a) => String -> a -> SpecWith (Arg a)
+it label action = fromSpecList [specItem label action]
+```
 
 
 
