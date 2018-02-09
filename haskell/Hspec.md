@@ -117,12 +117,58 @@ function name | type | package
 [shouldThrow](https://github.com/hspec/hspec-expectations/blob/master/src/Test/Hspec/Expectations.hs#L161) | `(HasCallStack, Exception e) => IO a -> Selector e -> Expectation` |hspec-expectations
 evaluate | `a -> IO a` | base
 
+### hspec
 
+- `doExpr` は実際のテストケース
 
+```haskell
+main :: IO ()
+main = hspec doExpr
+     = hspecWith defaultConfig doExpr
+     = do
+         r <- hspecWithResult defaultConfig doExpr
+         unless (isSuccess r) exitFailure
+```
 
+`hspec` を展開して行くと `hspecWithResult` が重要そうだとわかる。ここでは `Config` の詳細は追わない。
 
+```haskell
+hspecWithResult :: Config -> Spec -> IO Summary
+hspecWithResult config spec = do
+  prog <- getProgName
+  args <- getArgs
+  (oldFailureReport, c_) <- getConfig config prog args
+  c <- ensureSeed c_
+  if configRerunAllOnSuccess c
+    then rerunAllMode c oldFailureReport
+    else normalMode c
+  where
+    normalMode c = runSpec c spec
+    rerunAllMode c oldFailureReport = do
+      summary <- runSpec c spec
+      if rerunAll c oldFailureReport summary
+        then hspecWithResult config spec
+        else return summary
+```
 
+`normalMode` と `rerunAllMode` で分岐しているが、本質的には `runSpec` を追えば良さそう。
 
+```haskell
+runSpec :: Config -> Spec -> IO Summary
+runSpec config spec = do
+    ...
+    filteredSpec <- map (toEvalTree params) . filterSpecs config . applyDryRun config <$> runSpecM spec
+    ...
+```
+
+色々と長いが `runSpecM` を追いかける。
+
+```haskell
+runSpecM :: SpecWith a -> IO [SpecTree a]
+runSpecM (SpecM specs) = execWriterT specs
+```
+
+つまり、それぞれの `Spec` に対して `execWriterT` しているだけだった。`execWriterT :: Monad m => WriterT w m a -> m w` なので `IO [Tree (ActionWith ()) (Item ())]` 型の値が返ってくることがわかる。
 
 
 
