@@ -15,6 +15,8 @@
 
 ## 設定
 
+### 共通設定
+
 ```json
 {
     "editor.fontSize": 14,
@@ -33,15 +35,24 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "git.autofetch": true,
-    // ターミナルのパスを変更する場合
-    // "terminal.integrated.shell.osx": "/usr/local/Cellar/bash/4.4.18/bin/bash",
     "stylishHaskell.showConsoleOnError": false,
     "stylishHaskell.runOnSave": false,
-    // 1.20.0 で追加
-    "workbench.fontAliasing": "auto",
     "editor.suggestSelection": "recentlyUsedByPrefix",
-    "terminal.integrated.copyOnSelection": true
+    "terminal.integrated.copyOnSelection": true
 }
+```
+
+### macOS のみ
+
+```json
+"workbench.fontAliasing": "auto"
+```
+
+### 自分のPCのみ
+
+```json
+// ターミナルを更新したらパスが変更されたので追加
+"terminal.integrated.shell.osx": "/usr/local/Cellar/bash/4.4.18/bin/bash"
 ```
 
 # 空白の設定
