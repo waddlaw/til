@@ -21,12 +21,16 @@ type SpecWith a = SpecM a ()
 
 newtype SpecM a r = SpecM (WriterT [SpecTree a] IO r)
   deriving (Functor, Applicative, Monad)
+  
+-- Spec = WriterT [SpecTree ()] IO ()
 ```
 
 [Test.Hspec.Core.Tree](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Tree.hs)
 
 ```haskell
 type SpecTree a = Tree (ActionWith a) (Item a)
+
+-- Spec = WriterT [Tree (ActionWith ()) (Item ())] IO ()
 ```
 
 ```haskell
@@ -55,9 +59,9 @@ data Item a = Item {
 
 ```haskell
 type ActionWith a = a -> IO ()
+
+-- Spec = WriterT [Tree (() -> IO ()) (Item ())] IO ()
 ```
-
-
 
 
 
