@@ -41,8 +41,8 @@
     "editor.suggestSelection": "recentlyUsedByPrefix",
     "terminal.integrated.copyOnSelection": true,
     // stylish-haskell
-    // 勝手にターミナルが消えたりして面倒なので追加
     "stylishHaskell.showConsoleOnError": false,
+    "stylishHaskell.runOnSave": false
 }
 ```
 
