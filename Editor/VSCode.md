@@ -26,7 +26,16 @@
     "files.trimTrailingWhitespace": true,
     "workbench.startupEditor": "newUntitledFile",
     "workbench.iconTheme": "material-icon-theme",
-    "window.restoreWindows": "all"
+    "window.zoomLevel": 0,
+    "material-icon-theme.showUpdateMessage": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.autofetch": true,
+    "terminal.integrated.shell.osx": "/usr/local/Cellar/bash/4.4.18/bin/bash",
+    // 1.20.0 で追加
+    "workbench.fontAliasing": "auto",
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "terminal.integrated.copyOnSelection": true
 }
 ```
 
