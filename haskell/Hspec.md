@@ -45,14 +45,9 @@ data Tree c a =
 
 ```haskell
 data Item a = Item {
-  -- | Textual description of behavior
   itemRequirement :: String
-  -- | Source location of the spec item
 , itemLocation :: Maybe Location
-  -- | A flag that indicates whether it is safe to evaluate this spec item in
-  -- parallel with other spec items
 , itemIsParallelizable :: Maybe Bool
-  -- | Example for behavior
 , itemExample :: Params -> (ActionWith a -> IO ()) -> ProgressCallback -> IO Result
 }
 ```
