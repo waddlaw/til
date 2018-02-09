@@ -59,7 +59,24 @@ type ActionWith a = a -> IO ()
 -- Spec = WriterT [Tree (() -> IO ()) (Item ())] IO ()
 ```
 
+### [Test.Hspec.Core.Example.Location](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Example/Location.hs)
 
+```haskell
+data Location = Location
+  { locationFile :: FilePath
+  , locationLine :: Int
+  , locationColumn :: Int
+  } deriving (Eq, Show, Read)
+```
+
+### [Test.Hspec.Core.Example](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Example.hs)
+
+```haskell
+data Params = Params
+  { paramsQuickCheckArgs  :: Test.QuickCheck.Args
+  , paramsSmallCheckDepth :: Int
+  } deriving (Show)
+```
 
 
 
