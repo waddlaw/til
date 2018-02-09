@@ -9,7 +9,7 @@ package name | GitHub | Hackage | Stackage
 hspec | [LINK](https://github.com/hspec/hspec) | [LINK](https://hackage.haskell.org/package/hspec-2.4.7) | [LINK](https://www.stackage.org/package/hspec)
 hspec-core | [LINK](https://github.com/hspec/hspec/tree/master/hspec-core) | [LINK](https://hackage.haskell.org/package/hspec-core-2.4.7) | [LINK](https://www.stackage.org/package/hspec-core)
 
-## Type
+## Types
 
 ### [Test.Hspec.Core.Spec.Monad](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Spec/Monad.hs)
 
@@ -78,6 +78,16 @@ data Params = Params
   } deriving (Show)
 ```
 
+## Classes
+
+### [Test.Hspec.Core.Example](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Example.hs)
+
+```haskell
+class Example e where
+  type Arg e
+  type Arg e = ()
+  evaluateExample :: e -> Params -> (ActionWith (Arg e) -> IO ()) -> ProgressCallback -> IO Result
+```
 
 
 
