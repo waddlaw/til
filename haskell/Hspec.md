@@ -236,10 +236,43 @@ specItem s e = Leaf $ Item requirement location Nothing (safeEvaluateExample e)
 
 ### まとめ
 
-- `describe` が `単一の Leaf`、 `it` が `1つ以上のLeaf` に対応した `Forest Tree` として内部的に表現しているっぽい
-- 1つの `describe` で、それにぶら下がった `it` が全て評価されるっぽい
+- 1つの `describe` で、それにぶら下がった `it` が全て評価される
+- それぞれの `describe` の結果を集めて最終的な結果とする
 
+## Arg の謎
 
+`it` に出てきた `Arg a` について考察を進める。
+
+```haskell
+specItem :: (HasCallStack, Example a) => String -> a -> SpecTree (Arg a)
+specItem s e = Leaf $ Item requirement location Nothing (safeEvaluateExample e)
+```
+
+`Item` と `safeEvaluateExample` の定義は以下の通り。
+
+```haskell
+data Item a = Item
+  { itemRequirement      :: String
+  , itemLocation         :: Maybe Location
+  , itemIsParallelizable :: Maybe Bool
+  , itemExample          :: Params -> (ActionWith a -> IO ()) -> ProgressCallback -> IO Result
+  }
+
+safeEvaluateExample :: Example e => e -> Params -> (ActionWith (Arg e) -> IO ()) -> ProgressCallback -> IO Result
+safeEvaluateExample example params around progress = do
+  r <- safeTry $ forceResult <$> evaluateExample example params around progress
+  return $ case r of
+    Left e | Just result <- fromException e -> result
+    Left e | Just hunit <- fromException e -> hunitFailureToResult Nothing hunit
+    Left e -> Failure Nothing $ Error Nothing e
+    Right result -> result
+  where
+    forceResult :: Result -> Result
+    forceResult r = case r of
+      Success s -> s `deepseq` r
+      Pending _ m -> m `deepseq` r
+      Failure _ m -> m `deepseq` r
+```
 
 
 
