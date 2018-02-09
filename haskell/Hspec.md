@@ -8,6 +8,7 @@ package name | GitHub | Hackage | Stackage
 -------------|:------:|:-------:|:--------:
 hspec | [LINK](https://github.com/hspec/hspec) | [LINK](https://hackage.haskell.org/package/hspec-2.4.7) | [LINK](https://www.stackage.org/package/hspec)
 hspec-core | [LINK](https://github.com/hspec/hspec/tree/master/hspec-core) | [LINK](https://hackage.haskell.org/package/hspec-core-2.4.7) | [LINK](https://www.stackage.org/package/hspec-core)
+hspec-expectations | [LINK](https://github.com/hspec/hspec-expectations) | [LINK](http://hackage.haskell.org/package/hspec-expectations) | [LINK](https://www.stackage.org/package/hspec-expectations)
 
 ## Types
 
@@ -88,6 +89,35 @@ class Example e where
   type Arg e = ()
   evaluateExample :: e -> Params -> (ActionWith (Arg e) -> IO ()) -> ProgressCallback -> IO Result
 ```
+
+## hspec の動作についての考察
+
+```haskell
+main :: IO ()
+main = hspec $ do
+  describe "Prelude.head" $ do
+    it "returns the first element of a list" $ do
+      head [23 ..] `shouldBe` (23 :: Int)
+
+    it "returns the first element of an *arbitrary* list" $
+      property $ \x xs -> head (x:xs) == (x :: Int)
+
+    it "throws an exception if used with an empty list" $ do
+      evaluate (head []) `shouldThrow` anyException
+```
+
+### 主要な関数のそれぞれの型
+
+function name | type | package
+--------------|------|----------
+[hspec](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Runner.hs#L86) | `Spec -> IO ()` | hspec-core
+[describe](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Spec.hs#L47) | `String -> SpecWith a -> SpecWith a` | hspec-core
+[it](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Spec.hs#L66) | `(HasCallStack, Example a) => String -> a -> SpecWith (Arg a)` | hspec-core
+[shouldBe](https://github.com/hspec/hspec-expectations/blob/master/src/Test/Hspec/Expectations.hs#L87) | `(HasCallStack, Show a, Eq a) => a -> a -> Expectation` | hspec-expectations
+[shouldThrow](https://github.com/hspec/hspec-expectations/blob/master/src/Test/Hspec/Expectations.hs#L161) | `(HasCallStack, Exception e) => IO a -> Selector e -> Expectation` |hspec-expectations
+evaluate | `a -> IO a` | base
+
+
 
 
 
