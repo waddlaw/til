@@ -38,7 +38,7 @@
     "stylishHaskell.showConsoleOnError": false,
     "stylishHaskell.runOnSave": false,
     "editor.suggestSelection": "recentlyUsedByPrefix",
-    "terminal.integrated.copyOnSelection": true
+    "terminal.integrated.copyOnSelection": true
 }
 ```
 
