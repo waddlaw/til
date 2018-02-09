@@ -21,6 +21,7 @@
 - Haskell GHCi debug viewer Phoityne
 - [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
 - [vim](https://github.com/VSCodeVim/Vim)
+- Git History
 
 ### 非推奨
 
