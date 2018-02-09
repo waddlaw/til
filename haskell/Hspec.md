@@ -44,10 +44,10 @@ data Tree c a = Node String [Tree c a]
 
 ```haskell
 data Item a = Item
-  { itemRequirement :: String
-  , itemLocation :: Maybe Location
+  { itemRequirement      :: String
+  , itemLocation         :: Maybe Location
   , itemIsParallelizable :: Maybe Bool
-  , itemExample :: Params -> (ActionWith a -> IO ()) -> ProgressCallback -> IO Result
+  , itemExample          :: Params -> (ActionWith a -> IO ()) -> ProgressCallback -> IO Result
   }
 ```
 
