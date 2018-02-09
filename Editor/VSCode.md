@@ -11,11 +11,13 @@
 - Zenkaku
 - Haskell GHCi debug viewer Phoityne
 - [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
+- vim
 
 ## 設定
 
 ```json
 {
+    "editor.fontSize": 14,
     "editor.insertSpaces": true,
     "editor.renderIndentGuides": true,
     "editor.renderWhitespace": "all",
@@ -31,7 +33,10 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "git.autofetch": true,
-    "terminal.integrated.shell.osx": "/usr/local/Cellar/bash/4.4.18/bin/bash",
+    // ターミナルのパスを変更する場合
+    // "terminal.integrated.shell.osx": "/usr/local/Cellar/bash/4.4.18/bin/bash",
+    "stylishHaskell.showConsoleOnError": false,
+    "stylishHaskell.runOnSave": false,
     // 1.20.0 で追加
     "workbench.fontAliasing": "auto",
     "editor.suggestSelection": "recentlyUsedByPrefix",
