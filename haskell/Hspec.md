@@ -11,7 +11,7 @@ hspec-core | [LINK](https://github.com/hspec/hspec/tree/master/hspec-core) | [LI
 
 ## Type
 
-[Test.Hspec.Core.Spec.Monad](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Spec/Monad.hs)
+### [Test.Hspec.Core.Spec.Monad](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Spec/Monad.hs)
 
 ```haskell
 type Spec = SpecWith ()
@@ -19,13 +19,15 @@ type SpecWith a = SpecM a ()
 
 -- Spec = SpecM () ()
 
+-- a (ction)
+-- r (eturn)
 newtype SpecM a r = SpecM (WriterT [SpecTree a] IO r)
   deriving (Functor, Applicative, Monad)
   
 -- Spec = WriterT [SpecTree ()] IO ()
 ```
 
-[Test.Hspec.Core.Tree](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Tree.hs)
+### [Test.Hspec.Core.Tree](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Tree.hs)
 
 ```haskell
 type SpecTree a = Tree (ActionWith a) (Item a)
@@ -55,7 +57,7 @@ data Item a = Item {
 }
 ```
 
-[Test.Hspec.Core.Example](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Example.hs)
+### [Test.Hspec.Core.Example](https://github.com/hspec/hspec/blob/master/hspec-core/src/Test/Hspec/Core/Example.hs)
 
 ```haskell
 type ActionWith a = a -> IO ()
