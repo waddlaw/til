@@ -36,11 +36,10 @@ type SpecTree a = Tree (ActionWith a) (Item a)
 ```
 
 ```haskell
-data Tree c a =
-    Node String [Tree c a]
-  | NodeWithCleanup c [Tree c a]
-  | Leaf a
-  deriving (Functor, Foldable, Traversable)
+data Tree c a = Node String [Tree c a]
+              | NodeWithCleanup c [Tree c a]
+              | Leaf a
+              deriving (Functor, Foldable, Traversable)
 ```
 
 ```haskell
