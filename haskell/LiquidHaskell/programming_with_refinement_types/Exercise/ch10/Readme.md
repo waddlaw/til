@@ -13,12 +13,5 @@ evalAny g e
   | ok = Just $ eval g e
   | otherwise = Nothing
   where
-    ok = validateExpr e && free e `isSubsetOf` keys g
-
-{-@ lazy validateExpr @-}
-validateExpr :: Expr -> Bool
-validateExpr (Const _)     = True
-validateExpr (Var _)       = True
-validateExpr (Plus e1 e2)  = validateExpr e1 && validateExpr e2
-validateExpr (Let _ e1 e2) = validateExpr e1 && validateExpr e2
+    ok = free e `isSubsetOf` keys g
 ```
