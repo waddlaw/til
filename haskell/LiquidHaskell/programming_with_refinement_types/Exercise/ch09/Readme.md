@@ -98,3 +98,20 @@ take n q = (insert x out, q'')
     (x, q')    = remove q
     (out, q'') = take (n-1) q'
 ```
+
+### 補足
+
+`take` の結果出てきた `Queue` は逆順となってしまうため、通常の順序にしたい場合は以下のように定義すれば良い。
+
+```haskell
+{-@ take' :: n:Nat -> {q: Queue a | sizeQueue q >= n} -> (QueueN a n, QueueN a {sizeQueue q - n}) @-}
+take' :: Int -> Queue a -> (Queue a, Queue a)
+take' n q = take'' n q emp
+
+{-@ take'' :: n:Nat -> {q: Queue a | sizeQueue q >= n} -> acc:Queue a -> (QueueN a {n + sizeQueue acc}, QueueN a {sizeQueue q - n}) @-}
+take'' :: Int -> Queue a -> Queue a -> (Queue a, Queue a)
+take'' 0 q accQ = (accQ, q)
+take'' n q accQ = take'' (n - 1) q' (insert x accQ)
+    where
+      (x  , q')  = remove q
+```
