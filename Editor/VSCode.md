@@ -22,6 +22,8 @@
 - [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
 - Git History
 
+`stylish-haskell` は保存時の自動適用より、コマンドパレットから実行する方が良い。
+
 ### 気に入らなかったプラグイン
 
 プラグイン名 | やれること | 備考
