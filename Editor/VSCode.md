@@ -34,7 +34,7 @@
 
 ### 共通設定
 
-```json
+```
 {
     "editor.fontSize": 14,
     "editor.insertSpaces": true,
