@@ -1,5 +1,7 @@
 # VSCode
 
+- [Visual Studio Code (VS Code) Docsの日本語訳](https://vscode-doc-jp.github.io/)
+
 ## 問題点
 
 - サイドバーのフォントサイズが変更できない問題 => [Allow to change the font size and font of the workbench #519](https://github.com/Microsoft/vscode/issues/519)
