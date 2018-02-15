@@ -56,7 +56,7 @@
     "terminal.integrated.copyOnSelection": true,
     
     // zenkaku
-    editor.renderWhitespace: "all",
+    "editor.renderWhitespace": "all",
     
     // stylish-haskell
     "stylishHaskell.showConsoleOnError": false,
