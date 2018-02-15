@@ -20,15 +20,14 @@
 - [zenkaku](https://marketplace.visualstudio.com/items?itemName=mosapride.zenkaku)
 - Haskell GHCi debug viewer Phoityne
 - [stylish-haskell](https://marketplace.visualstudio.com/items?itemName=vigoo.stylish-haskell)
-- [vim](https://github.com/VSCodeVim/Vim)
 - Git History
-- [brittany](https://marketplace.visualstudio.com/items?itemName=MaxGabriel.brittany)
 
-### 非推奨
+### 気に入らなかったプラグイン
 
 プラグイン名 | やれること | 備考
 --------|------- |------
 [Auto-Open Markdown Preview](https://marketplace.visualstudio.com/items?itemName=hnw.vscode-auto-open-markdown-preview) | 自動でプレビューしたり、パネルを閉じたりする | コードの差分を表示する際に markdown のプレビューが表示されるので、使えない！
+[vim](https://github.com/VSCodeVim/Vim) | vim の操作が可能になる | 入れたらめっちゃ重かった。
 
 ## 設定
 
