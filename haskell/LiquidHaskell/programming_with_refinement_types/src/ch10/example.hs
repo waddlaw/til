@@ -2,12 +2,12 @@ import Data.Set (Set, union, singleton, empty, difference, isSubsetOf)
 
 {-@
 data Map k v = Node
-  { key   :: k
-  , value :: v
-  , left  :: Map { v:k | v < key } v
-  , right :: Map { v:k | key < v } v
-  }
-             | Tip
+            { key   :: k
+            , value :: v
+            , left  :: Map { v:k | v < key } v
+            , right :: Map { v:k | key < v } v
+            }
+            | Tip
 @-}
 data Map k v = Node
   { key   :: k
@@ -97,6 +97,8 @@ data Expr = Const Int
           | Var Var
           | Plus Expr Expr
           | Let Var Expr Expr
+          | Fun Var Expr
+          | App Expr Expr
 
 {-@ measure val @-}
 val :: Expr -> Bool
@@ -112,6 +114,19 @@ plus :: Expr -> Expr -> Expr
 plus (Const i) (Const j) = Const (i+j)
 plus _ _ = die "Bad call to plus"
 
+{-@ measure isFun @-}
+isFun :: Expr -> Bool
+isFun (Fun _ _) = True
+isFun _ = False
+
+{-@ type Fun = { v:Expr | isFun v } @-}
+
+{-@ app :: Fun -> Expr -> Expr @-}
+app :: Expr -> Expr -> Expr
+app (Fun x e1) e2 = Let x e2 e1
+app _ _ = die "Bad call to app"
+
+{-@ LIQUID "--no-totality" @-}
 {-@ lazy eval @-}
 {-@ eval :: g:Env -> ClosedExpr g -> Val @-}
 eval :: Map Var Expr -> Expr -> Expr
@@ -122,6 +137,27 @@ eval g (Let x e1 e2) = eval g' e2
   where
     g' = set x v1 g
     v1 = eval g e1
+eval g (Fun x e) = undefined -- eval g' e
+  -- where
+  --   g' = del x g
+eval g (App (Fun x e1) e2) = eval g' e1
+  where
+    g' = set x v1 g
+    v1 = eval g e2
+
+subst :: Var -> Expr -> Expr
+subst v e = undefined
+
+{-@ predicate DelKey K M N = keys N = Set_dif (Set_sng K) (keys M) @-}
+
+{-@ lazy del @-}
+{-@ del :: (Ord k) => k:k -> m:{ Map k v | HasKey k m } -> { n:Map k v | DelKey k m n } @-}
+del :: Ord k => k -> Map k v -> Map k v
+del k' (Node k v l r)
+  | k' == k   = -- TODO delMin
+  | k' < k    = assert (lemma_notMem k' r) $ del k' l
+  | otherwise = assert (lemma_notMem k' l) $ del k' r
+del _ Tip = die "Lookup Never Fails"
 
 {-@ lazy free @-}
 {-@ measure free @-}
@@ -137,6 +173,8 @@ free (Let x e1 e2) = xs1 `union` (xs2 `difference` xs)
     xs1 = free e1
     xs2 = free e2
     xs = singleton x
+free (Fun x e) = free e `difference` singleton x
+free (App e1 e2) = free e1 `union` free e2
 
 {-@ topEval :: { v:Expr | Set_emp (free v) } -> Val @-}
 topEval :: Expr -> Expr
@@ -151,14 +189,17 @@ evalAny g e
   where
     ok = free e `isSubsetOf` keys g
 
--- test = [v1, v2]
+-- test = [v2, v3]
 --   where
---     v1 = topEval e1
+--     -- v1 = topEval e1
 --     v2 = topEval e2
+--     v3 = topEval e3
 --     e1 = (Var x) `Plus` c1
 --     e2 = Let x c10 e1
+--     e3 = App fun c1
 --     x = "x"
 --     c1 = Const 1
 --     c10 = Const 10
+--     fun = Fun x e1
 
 -- | Exercise 10.2 (Closures)
