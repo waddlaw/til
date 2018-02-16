@@ -16,6 +16,7 @@ dependencies:
 - vector
 - QuickCheck
 - containers
+- bytestring
 
 library:
   source-dirs: src
