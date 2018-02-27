@@ -1,6 +1,4 @@
-import           Data.ByteString.Char8    (pack, unpack)
 import           Data.ByteString.Internal (c2w)
-import           Data.ByteString.Unsafe   (unsafeTake)
 import           Data.Word                (Word8)
 import           Foreign.ForeignPtr       (ForeignPtr, mallocForeignPtrBytes,
                                            withForeignPtr)
@@ -146,6 +144,14 @@ bsGHC = create 3 $ \p -> do
   poke (p `plusPtr` 0) (c2w 'G')
   poke (p `plusPtr` 1) (c2w 'H')
   poke (p `plusPtr` 2) (c2w 'C')
+
+pack :: String -> ByteString
+pack str = create n $ \p -> go p xs
+  where
+    n = length str
+    xs = map c2w str
+    go _ [] = return ()
+    go p (x:xs) = poke p x >> go (p `plusPtr` 1) xs
 
 -- util
 bsPut :: ByteString -> IO ()

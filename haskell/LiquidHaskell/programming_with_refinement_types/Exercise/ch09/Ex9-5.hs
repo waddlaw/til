@@ -60,7 +60,7 @@ makeq f b
   | size b <= size f = Q f b
   | otherwise        = Q (rot f b nil) nil
 
-{-@ rot :: f:SList a -> b:SListN a {size f + 1} -> tmp:SList a -> SListN a {size f + size b + size tmp}  / [size f] @-}
+{-@ rot :: f:SList a -> b:SListN a {size f + 1} -> tmp:SList a -> SListN a {size f + size b + size tmp} / [size f] @-}
 rot :: SList a -> SList a -> SList a -> SList a
 rot f b a
   | size f == 0 = hd b `cons` a
