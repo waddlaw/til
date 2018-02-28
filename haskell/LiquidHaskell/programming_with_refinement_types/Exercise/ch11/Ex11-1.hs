@@ -20,15 +20,14 @@ data ByteString = BS
   , bLen :: !Int
   }
 
-{-@ type ForeignPtrN a N = { v:ForeignPtr a | fplen v = N } @-}
 {-@ mallocForeignPtrBytes :: n:Nat -> IO (ForeignPtrN a n) @-}
 
 {-@
-  data ByteString = BS
-    { bPtr :: ForeignPtr Word8
-    , bOff :: {v:Nat | v <= fplen bPtr}
-    , bLen :: {v:Nat | v + bOff <= fplen bPtr}
-    }
+data ByteString = BS
+  { bPtr :: ForeignPtr Word8
+  , bOff :: {v:Nat | v <= fplen bPtr}
+  , bLen :: {v:Nat | v + bOff <= fplen bPtr}
+  }
 @-}
 
-{-@ type ByteStringN N = {v:ByteString | bLen v = N} @-}
+{-@ type ByteStringN N = { v:ByteString | bLen v = N } @-}

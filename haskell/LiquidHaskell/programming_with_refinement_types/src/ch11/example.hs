@@ -1,9 +1,9 @@
-import           Data.ByteString.Internal (c2w)
+import           Data.ByteString.Internal (c2w, w2c)
 import           Data.Word                (Word8)
 import           Foreign.ForeignPtr       (ForeignPtr, mallocForeignPtrBytes,
                                            withForeignPtr)
 import           Foreign.Ptr              (Ptr, plusPtr)
-import           Foreign.Storable         (peek, poke)
+import           Foreign.Storable         (Storable, peek, poke)
 import           System.IO                (stdout, hPutBuf)
 import           System.IO.Unsafe         (unsafePerformIO)
 
@@ -14,33 +14,37 @@ import           System.IO.Unsafe         (unsafePerformIO)
 --   b' = unsafeTake n b
 --   s' = unpack b'
 
--- zero4 = do
---   fp <- mallocForeignPtrBytes 4
---   withForeignPtr fp $ \p -> do
---     poke (p `plusPtr` 0) zero
---     poke (p `plusPtr` 1) zero
---     poke (p `plusPtr` 2) zero
---     poke (p `plusPtr` 3) zero
---   return fp
---   where zero = 0 :: Word8
+zero4 :: IO (ForeignPtr a)
+zero4 = do
+  fp <- mallocForeignPtrBytes 4
+  withForeignPtr fp $ \p -> do
+    poke (p `plusPtr` 0) zero
+    poke (p `plusPtr` 1) zero
+    poke (p `plusPtr` 2) zero
+    poke (p `plusPtr` 3) zero
+  return fp
+  where zero = 0 :: Word8
 
--- zero4' = do
---   fp <- mallocForeignPtrBytes 4
---   withForeignPtr fp $ \p -> do
---     poke (p `plusPtr` 0) zero
---     poke (p `plusPtr` 1) zero
---     poke (p `plusPtr` 2) zero
---     poke (p `plusPtr` 8) zero
---   return fp
---   where zero = 0 :: Word8
+{- UNSAFE
+zero4' :: IO (ForeignPtr a)
+zero4' = do
+  fp <- mallocForeignPtrBytes 4
+  withForeignPtr fp $ \p -> do
+    poke (p `plusPtr` 0) zero
+    poke (p `plusPtr` 1) zero
+    poke (p `plusPtr` 2) zero
+    poke (p `plusPtr` 8) zero
+  return fp
+  where zero = 0 :: Word8
+-}
 
 -- | 定義済み
 -- {-@ measure plen :: Ptr a -> Int @-}
 -- {-@ measure fplen :: ForeignPtr a -> Int @-}
 -- {-@ type PtrN a N = { v:Ptr a | plen v = N } @-}
+-- {-@ type ForeignPtrN a N = { v:ForeignPtr a | fplen v = N } @-}
 -- {-@ withForeignPtr :: fp:ForeignPtr a -> (PtrN a (fplen fp) -> IO b) -> IO b @-}
 
-{-@ type ForeignPtrN a N = { v:ForeignPtr a | fplen v = N } @-}
 {-@ mallocForeignPtrBytes :: n:Nat -> IO (ForeignPtrN a n) @-}
 
 zero3 :: IO (ForeignPtr a)
@@ -53,14 +57,12 @@ zero3 = do
   return fp
   where zero = 0 :: Word8
 
-{-@ type OkPtr a = {v:Ptr a | 0 < plen v} @-}
-
 -- | 定義済み
+-- {-@ type OkPtr a = {v:Ptr a | 0 < plen v} @-}
 -- {-@ peek :: OkPtr a -> IO a @-}
 -- {-@ poke :: OkPtr a -> a -> IO () @-}
 -- {-@ plusPtr :: p:Ptr a -> off:BNat (plen p) -> PtrN b {plen p - off} @-}
-
-{-@ type BNat N = {v:Nat | v <= N} @-}
+-- {-@ type BNat N = {v:Nat | v <= N} @-}
 
 {- UNSAFE
 exBad :: IO (ForeignPtr a)
@@ -75,19 +77,18 @@ exBad = do
   where zero = 0 :: Word8
 -}
 
+{-@
+data ByteString = BS
+  { bPtr :: ForeignPtr Word8
+  , bOff :: {v:Nat | v        <= fplen bPtr}
+  , bLen :: {v:Nat | v + bOff <= fplen bPtr}
+  }
+@-}
 data ByteString = BS
   { bPtr :: ForeignPtr Word8
   , bOff :: !Int
   , bLen :: !Int
   }
-
-{-@
-  data ByteString = BS
-    { bPtr :: ForeignPtr Word8
-    , bOff :: {v:Nat | v <= fplen bPtr}
-    , bLen :: {v:Nat | v + bOff <= fplen bPtr}
-    }
-@-}
 
 {-@ type ByteStringN N = {v:ByteString | bLen v = N} @-}
 
@@ -145,15 +146,68 @@ bsGHC = create 3 $ \p -> do
   poke (p `plusPtr` 1) (c2w 'H')
   poke (p `plusPtr` 2) (c2w 'C')
 
+-- | Ex 11.3 (Pack)
+{-@ pack :: v:String -> ByteStringN (len v) @-}
 pack :: String -> ByteString
 pack str = create n $ \p -> go p xs
+ where
+  n  = length str
+  xs = map c2w str
+  go _ []     = return ()
+  go p (x:xs) = poke p x >> go (p `plusPtr` 1) xs
+
+{-@ type TRUE = { v:Bool | true } @-}
+
+{-@ prop_pack_length :: String -> TRUE @-}
+prop_pack_length :: String -> Bool
+prop_pack_length xs = bLen (pack xs) == length xs
+
+-- | Ex 11.4 (Pack Invariant)
+packEx :: String -> ByteString
+packEx str = create n $ \p -> pLoop p xs
+ where
+  n  = length str
+  xs = map c2w str
+
+{-@ pLoop :: (Storable a) => p:Ptr a -> { xs:[a] | len xs == plen p }  -> IO () @-}
+pLoop :: (Storable a) => Ptr a -> [a] -> IO ()
+pLoop _ []     = return ()
+pLoop p (x:xs) = poke p x >> pLoop (p `plusPtr` 1) xs
+
+-- | Ex 11.5 (Unsafe Take and Drop)
+{-@ unsafeTake :: n:Nat -> {v:ByteString | n <= bLen v } -> ByteStringN n @-}
+unsafeTake :: Int -> ByteString -> ByteString
+unsafeTake n (BS x s _) = BS x s n
+
+{-@ unsafeDrop :: n:Nat -> b:{v:ByteString | n <= bLen v } -> ByteStringN {bLen b - n} @-}
+unsafeDrop :: Int -> ByteString -> ByteString
+unsafeDrop n (BS x s l) = BS x (s + n) (l - n)
+
+unpack :: ByteString -> String
+unpack (BS _ _ 0) = []
+unpack (BS ps s l) =
+  unsafePerformIO $ withForeignPtr ps $ \p -> go (p `plusPtr` s) (l - 1) []
   where
-    n = length str
-    xs = map c2w str
-    go _ [] = return ()
-    go p (x:xs) = poke p x >> go (p `plusPtr` 1) xs
+    {-@ go :: p:_ -> n:_ -> acc:_ -> IO {v:_ | true } @-}
+    go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
+    go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
+    peekAt p n = peek (p `plusPtr` n)
+
+-- unpack' :: ByteString -> String
+-- unpack' (BS _ _ 0) = []
+-- unpack' (BS ps s l) =
+--   unsafePerformIO $ withForeignPtr ps $ \p -> go (p `plusPtr` s) l []
+--   where
+--     {-@ go :: p:_ -> n:_ -> acc:_ -> IO {v:_ | true } @-}
+--     go p n acc
+--       | n
+--     go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
+--     go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
+--     peekAt p n = peek (p `plusPtr` n)
+
+-- | Ex 11.6 (Unpack) *
 
 -- util
 bsPut :: ByteString -> IO ()
 bsPut (BS _  _ 0) = return ()
-bsPut (BS ps s l) = withForeignPtr ps $ \p-> hPutBuf stdout (p `plusPtr` s) l
+bsPut (BS ps s l) = withForeignPtr ps $ \p -> hPutBuf stdout (p `plusPtr` s) l
