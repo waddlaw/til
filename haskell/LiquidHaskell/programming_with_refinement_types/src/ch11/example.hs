@@ -1,12 +1,17 @@
+{-# LANGUAGE MagicHash #-}
 {-@ LIQUID "--diff" @-}
 import           Data.ByteString.Internal (c2w, w2c)
 import           Data.Word                (Word8)
-import           Foreign.ForeignPtr       (ForeignPtr, mallocForeignPtrBytes,
+import           Foreign.ForeignPtr       (mallocForeignPtrBytes,
                                            withForeignPtr)
+import GHC.ForeignPtr    (ForeignPtr(ForeignPtr))
 import           Foreign.Ptr              (Ptr, plusPtr)
-import           Foreign.Storable         (Storable, peek, poke)
+import           Foreign.Storable         (Storable, peek, poke, peekByteOff)
 import           System.IO                (stdout, hPutBuf)
 import           System.IO.Unsafe         (unsafePerformIO)
+import GHC.Base          (nullAddr#)
+import Prelude hiding (null)
+import Data.Foldable hiding (null)
 
 -- chop' :: String -> Int -> String
 -- chop' s n = s'
@@ -254,6 +259,69 @@ queryAndChop = do
   ns <- getLine
   let n = read ns :: Int
   return $ safeChop str n
+
+{-@ predicate Null B = bLen B == 0 @-}
+{-@ type ByteStringNE = {v:ByteString | not (Null v)} @-}
+
+{-@ null :: b:_ -> {v:Bool | v <=> Null b} @-}
+null :: ByteString -> Bool
+null (BS _ _ l) = l == 0
+
+{-@ unsafeHead :: ByteStringNE -> Word8 @-}
+unsafeHead :: ByteString -> Word8
+unsafeHead (BS x s _) = unsafePerformIO $
+                          withForeignPtr x $ \p ->
+                            peekByteOff p s
+
+{-@ unsafeTail :: b:ByteStringNE -> ByteStringN {bLen b -1} @-}
+unsafeTail :: ByteString -> ByteString
+unsafeTail (BS ps s l) = BS ps (s + 1) (l - 1)
+
+{-@ group :: b:_ -> {v: [ByteStringNE] | bsLen v = bLen b} @-}
+group :: ByteString -> [ByteString]
+group xs
+  | null xs = []
+  | otherwise = let y = unsafeHead xs
+                    (ys, zs) = spanByte y (unsafeTail xs)
+                in (y `cons` ys) : group zs
+
+cons :: Word8 -> ByteString -> ByteString
+cons = undefined
+
+{- Error
+{-@ measure bsLen @-}
+bsLen :: [ByteString] -> Int
+bsLen [] = 0
+bsLen (b:bs) = bLen b + bsLen bs
+-}
+
+-- 定義済み
+-- peekByteOff :: (Storable a) => forall b. p:Ptr b -> {v:Int | PValid p v} -> IO a
+
+{-@ spanByte :: Word8 -> b:ByteString -> ByteString2 b @-}
+spanByte :: Word8 -> ByteString -> (ByteString, ByteString)
+spanByte = undefined
+-- spanByte c ps@(BS x s ln) = unsafePerformIO
+--                               $ withForeignPtr x $ \p ->
+--                                 go (p `plusPtr` s) 0
+--   where
+--     {-@ lazy go @-}
+--     go p i
+--       | i >= ln = return (ps, empty)
+--       | otherwise = do
+--                       c' <- peekByteOff p i
+--                       if c /= c'
+--                       then return $ splitAt i
+--                       else go p (i+1)
+--     splitAt i = (unsafeTake i ps, unsafeDrop i ps)
+
+{-@ type ByteString2 B = {v:_ | bLen (fst v) + bLen (snd v) = bLen B} @-}
+
+-- | Ex 11.8
+{-@ empty :: ByteStringN 0 @-}
+empty :: ByteString
+empty = BS nullForeignPtr 0 0
+  where nullForeignPtr = ForeignPtr nullAddr# undefined
 
 -- util
 bsPut :: ByteString -> IO ()
