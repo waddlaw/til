@@ -9,7 +9,12 @@
 
 - [Niki Vazou](https://nikivazou.github.io/)
 
+## チュートリアル
+
+- [Liquid Haskell Tutorial](https://liquid.kosmikus.org/)
+
 ## slide
+
 1. [Liquid Types For Haskell](http://goto.ucsd.edu/~rjhala/flops14/lhs/00_Index.lhs.slides.html#/)
 1. [Simple Refinement Types](http://goto.ucsd.edu/~rjhala/flops14/lhs/01_SimpleRefinements.lhs.slides.html#/)
 1. [Measuring Data Types](http://goto.ucsd.edu/~rjhala/flops14/lhs/02_Measures.lhs.slides.html#/)
