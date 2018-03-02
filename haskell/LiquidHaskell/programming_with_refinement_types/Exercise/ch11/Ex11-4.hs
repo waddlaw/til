@@ -17,7 +17,6 @@ pLoop :: (Storable a) => Ptr a -> [a] -> IO ()
 pLoop _ []     = return ()
 pLoop p (x:xs) = poke p x >> pLoop (p `plusPtr` 1) xs
 
-
 {-@ mallocForeignPtrBytes :: n:Nat -> IO (ForeignPtrN a n) @-}
 
 {-@

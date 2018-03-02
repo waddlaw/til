@@ -88,3 +88,25 @@ unsafeTake n (BS x s _) = BS x s n
 unsafeDrop :: Int -> ByteString -> ByteString
 unsafeDrop n (BS x s l) = BS x (s + n) (l - n)
 ```
+
+## Exercise 11.6 (Unpack) *
+
+### LiquidHaskell の結果
+
+### 解答
+
+```haskell
+{-@ unpack :: b:ByteString -> { v:String | bLen b == len v } @-}
+unpack :: ByteString -> String
+unpack (BS _ _ 0) = []
+unpack (BS ps s l) =
+  unsafePerformIO $ withForeignPtr ps $ \p -> go (p `plusPtr` s) (l - 1) []
+  where
+    {-@ go :: p:OkPtr a -> n:{v:Nat | v < plen p} -> acc:_ -> IO { v:_ | len v = n + len acc + 1 } @-}
+    go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
+    go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
+    {-@ peekAt :: p:OkPtr a -> {v:Nat | v < plen p} -> _ @-}
+    peekAt p n = peek (p `plusPtr` n)
+```
+
+`peekAt` は自動的に推論されるので無くても良い。

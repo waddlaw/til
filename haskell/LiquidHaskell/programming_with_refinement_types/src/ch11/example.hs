@@ -1,3 +1,4 @@
+{-@ LIQUID "--diff" @-}
 import           Data.ByteString.Internal (c2w, w2c)
 import           Data.Word                (Word8)
 import           Foreign.ForeignPtr       (ForeignPtr, mallocForeignPtrBytes,
@@ -183,15 +184,25 @@ unsafeTake n (BS x s _) = BS x s n
 unsafeDrop :: Int -> ByteString -> ByteString
 unsafeDrop n (BS x s l) = BS x (s + n) (l - n)
 
+-- | Ex 11.6 (Unpack) *
+
+{-@ type OkPtr a = {v:Ptr a | 0 < plen v} @-}
+
+{-@ unpack :: b:ByteString -> { v:String | bLen b == len v } @-}
 unpack :: ByteString -> String
 unpack (BS _ _ 0) = []
 unpack (BS ps s l) =
   unsafePerformIO $ withForeignPtr ps $ \p -> go (p `plusPtr` s) (l - 1) []
   where
-    {-@ go :: p:_ -> n:_ -> acc:_ -> IO {v:_ | true } @-}
+    {-@ go :: p:OkPtr a -> n:{v:Nat | v < plen p} -> acc:_ -> IO { v:_ | len v = n + len acc + 1 } @-}
     go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
     go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
+    {-@ peekAt :: p:OkPtr a -> {v:Nat | v < plen p} -> _ @-}
     peekAt p n = peek (p `plusPtr` n)
+
+{-@ prop_unpack_length :: ByteString -> TRUE @-}
+prop_unpack_length :: ByteString -> Bool
+prop_unpack_length b = bLen b == length (unpack b)
 
 -- unpack' :: ByteString -> String
 -- unpack' (BS _ _ 0) = []
@@ -204,8 +215,6 @@ unpack (BS ps s l) =
 --     go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
 --     go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
 --     peekAt p n = peek (p `plusPtr` n)
-
--- | Ex 11.6 (Unpack) *
 
 -- util
 bsPut :: ByteString -> IO ()
