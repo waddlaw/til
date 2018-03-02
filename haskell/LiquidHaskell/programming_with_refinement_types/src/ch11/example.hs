@@ -197,7 +197,6 @@ unpack (BS ps s l) =
     {-@ go :: p:OkPtr a -> n:{v:Nat | v < plen p} -> acc:_ -> IO { v:_ | len v = n + len acc + 1 } @-}
     go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
     go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
-    {-@ peekAt :: p:OkPtr a -> {v:Nat | v < plen p} -> _ @-}
     peekAt p n = peek (p `plusPtr` n)
 
 {-@ prop_unpack_length :: ByteString -> TRUE @-}
@@ -215,6 +214,46 @@ prop_unpack_length b = bLen b == length (unpack b)
 --     go p 0 acc = peekAt p 0 >>= \e -> return (w2c e : acc)
 --     go p n acc = peekAt p n >>= \e -> go p (n-1) (w2c e : acc)
 --     peekAt p n = peek (p `plusPtr` n)
+
+{-@ chop :: s:String -> n:BNat (len s) -> String @-}
+chop :: String -> Int -> String
+chop s n = s'
+  where
+    b = pack s
+    b' = unsafeTake n b
+    s' = unpack b'
+
+{- UNSAFE
+demo :: [String]
+demo = [ex6, ex30]
+  where
+    ex = "LIQUID"
+    ex6 = chop ex 6
+    ex30 = chop ex 30
+-}
+
+{-@ prop_chop_length :: String -> Nat -> TRUE @-}
+prop_chop_length :: String -> Int -> Bool
+prop_chop_length s n
+  | n <= length s = length (chop s n) == n
+  | otherwise = True
+
+-- | Ex 11.7 (Checked Chop)
+safeChop :: String -> Int -> String
+safeChop str n
+  | ok = chop str n
+  | otherwise = ""
+  where
+    ok = length str >= n && n > 0
+
+queryAndChop :: IO String
+queryAndChop = do
+  putStrLn "Give me a string:"
+  str <- getLine
+  putStrLn "Give me a number:"
+  ns <- getLine
+  let n = read ns :: Int
+  return $ safeChop str n
 
 -- util
 bsPut :: ByteString -> IO ()

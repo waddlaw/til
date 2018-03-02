@@ -1,7 +1,6 @@
 import           Data.ByteString.Internal (w2c)
 import           Data.Word                (Word8)
-import           Foreign.ForeignPtr       (ForeignPtr)
-import           Foreign.ForeignPtr       (withForeignPtr)
+import           Foreign.ForeignPtr       (ForeignPtr, withForeignPtr)
 import           Foreign.Ptr              (Ptr, plusPtr)
 import           Foreign.Storable         (peek)
 import           System.IO.Unsafe         (unsafePerformIO)

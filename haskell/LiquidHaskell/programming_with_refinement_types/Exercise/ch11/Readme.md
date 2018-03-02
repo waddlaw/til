@@ -110,3 +110,18 @@ unpack (BS ps s l) =
 ```
 
 `peekAt` は自動的に推論されるので無くても良い。
+
+## Exercise 11.7 (Checked Chop)
+
+### LiquidHaskell の結果
+
+### 解答
+
+```haskell
+safeChop :: String -> Int -> String
+safeChop str n
+  | ok = chop str n
+  | otherwise = ""
+  where
+    ok = length str >= n && n > 0
+```
