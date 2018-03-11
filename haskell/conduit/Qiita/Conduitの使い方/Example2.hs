@@ -3,7 +3,7 @@
 
 -- 複数のSourceの全ての値をリストで取得する
 
-import Data.Conduit (Source, ($$))
+import Data.Conduit
 import Data.Conduit.List as CL
 import Data.Monoid ((<>))
 
@@ -15,7 +15,7 @@ srcB = CL.sourceList [11..20]
 
 main :: IO ()
 main = do
-  xs <- srcA <> srcB $$ CL.consume
+  xs <- runConduit $ srcA <> srcB .| CL.consume
   print xs
 
 {-

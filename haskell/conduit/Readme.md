@@ -6,46 +6,77 @@ conduit | [hackage](http://hackage.haskell.org/package/conduit) | [stackage](htt
 conduit-extra | [hackage](https://hackage.haskell.org/package/conduit-extra) | [stackage](https://www.stackage.org/package/conduit-extra) | [github](https://github.com/snoyberg/conduit/tree/master/conduit-extra)
 binary-conduit | [hackage](https://github.com/qnikst/binary-conduit/) | [stackage](https://www.stackage.org/package/binary-conduit) | [github](https://hackage.haskell.org/package/binary-conduit)
 
+## 公式マテリアル
+
+- [github README.md](https://github.com/snoyberg/conduit/blob/master/README.md)
+- [Web Programming and Streaming Data in Haskell](https://www.snoyman.com/reveal/conduit-yesod#/)
+
 ## よく使う型・関数まとめ
+
+```hs
+import Conduit
+```
+
+```hs
+runConduit $ foo .| bar .| baz
+
+newtype ConduitM (i :: *) (o :: *) (m :: * -> *) (r :: *)
+
+foo :: ConduitM () a    m ()
+bar :: ConduitM a  b    m ()
+baz :: ConduitM b  Void m r
+
+foo .| bar :: ConduitM () b    m ()
+bar .| baz :: ConduitM b  Void m r
+
+foo .| bar .| baz :: ConduitM () Void m r
+runConduit $ foo .| bar .| baz :: m r
+```
 
 ```hs
 -- i は処理の入力として取る値の型
 -- o は次の処理に流す値の型
 -- m は基底モナドの型
 -- r は処理終了後に返す値の型
-data ConduitM i o m r
+data ConduitT i o m r
 ```
 
 ```hs
-type Source m o    = ConduitM () o    m ()
-type Conduit i m o = ConduitM i  o    m ()
-type Sink i m r    = ConduitM i  Void m r
+(.|) :: Monad m => ConduitM a b m ()
+                -> ConduitM b c m r
+                -> ConduitM a c m r
+connect :: Monad m => ConduitT () a m () -> ConduitT a Void m r -> m r
+fuse    :: Monad m => Conduit a m b -> ConduitM b c m r -> ConduitM a c m r
 ```
 
 ```hs
-type Producer m o   = forall i. ConduitM i o m ()
-type Consumer i m r = forall o. ConduitM i o m r
+($$+) :: Monad m => Source m a -> Sink a m b -> m (SealedConduitT () a m (), b)
+($$++) :: Monad m => SealedConduitT () a m () -> Sink a m b -> m (SealedConduitT () a m (), b)
+($$+-) :: Monad m => SealedConduitT () a m () -> Sink a m b -> m b
+($=+) :: Monad m => SealedConduitT () a m () -> Conduit a m b -> SealedConduitT () b m ()
+```
+
+### Primitives
+
+```hs
+runConduit     :: Monad m => ConduitT () Void m r -> m r
+runConduitPure :: ConduitT () Void Identity r -> r
+runConduitRes  :: MonadUnliftIO m => ConduitT () Void (ResourceT m) r -> m r
 ```
 
 ```hs
-await  :: Monad m => Consumer i m (Maybe i)
+await :: Monad m => Consumer i m (Maybe i)
 
-yield  :: Monad m =>   o -> ConduitM i o m ()
-yieldM :: Monad m => m o -> ConduitM i o m ()
+yield  :: Monad m =>   o -> ConduitT i o m ()
+yieldM :: Monad m => m o -> ConduitT i o m ()
 
-leftover :: i -> ConduitM i o m ()
+leftover :: i -> ConduitT i o m ()
 ```
 
-```hs
-($$+) :: Monad m => Source m a -> Sink a m b -> m (ResumableSource m a, b)
-($$++) :: Monad m => ResumableSource m a -> Sink a m b -> m (ResumableSource m a, b)
-($$+-) :: Monad m => ResumableSource m a -> Sink a m b -> m b
-($=+) :: Monad m => ResumableSource m a -> Conduit a m b -> ResumableSource m b
-```
+### Producers
 
 ```hs
-($$)  :: Monad m => Source m a    -> Sink a m b       -> m b
-(=$=) :: Monad m => Conduit a m b -> ConduitM b c m r -> ConduitM a c m r
+yieldMany :: (Monad m, MonoFoldable mono) => mono -> ConduitT i (Element mono) m ()
 ```
 
 ## Qiita
@@ -56,6 +87,7 @@ leftover :: i -> ConduitM i o m ()
 2013年01月19日 | [Data.Conduit](https://qiita.com/hiratara/items/0c5af17feeae5c03479e) | 不明 | X
 2013年09月16日 | [Data.Binary.Get with Data.Conduit](https://qiita.com/liquid_amber/items/7c69271ae5c19beee383) | 不明 | O
 2013年09月15日 | [特定の値を読み込むまでのConduit](https://qiita.com/liquid_amber/items/22e3d791c3396b3ab13d) | 不明 | O
+2012年04月13日 | [Conduitで遊んでみた](https://qiita.com/seagull_kamome/items/e6788d581c952db518d6) | 不明 | X
 
 ### [Conduitの使い方](https://qiita.com/siphilia_rn/items/f3d8d83496a8eab65274)
 
@@ -81,3 +113,7 @@ leftover :: i -> ConduitM i o m ()
 
 - `lines` の使い方が載っている
 - `import Control.Monad.Trans.Resource` を追加しないと動かない
+
+### [Conduitで遊んでみた](https://qiita.com/seagull_kamome/items/e6788d581c952db518d6)
+
+- 古いので非推奨 (読むのは時間の無駄に近い)

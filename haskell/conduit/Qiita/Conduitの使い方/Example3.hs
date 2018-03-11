@@ -4,7 +4,7 @@
 -- 自作Sourceを作成する
 
 import Control.Monad.IO.Class (MonadIO, liftIO)
-import Data.Conduit (Source, ($$), yield)
+import Data.Conduit
 import qualified Data.Conduit.List as CL
 
 mySrc :: (Monad m, MonadIO m) => Source m String
@@ -15,7 +15,7 @@ mySrc = do
     else yield x >> mySrc
 
 main :: IO ()
-main = mySrc $$ CL.mapM_ putStrLn
+main = runConduit $ mySrc .| CL.mapM_ putStrLn
 
 {-
 $ ./Example3.hs
