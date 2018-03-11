@@ -55,6 +55,7 @@ leftover :: i -> ConduitM i o m ()
 2014年03月21日 | [Conduitの使い方](https://qiita.com/siphilia_rn/items/f3d8d83496a8eab65274) | 1.0.8 | O
 2013年01月19日 | [Data.Conduit](https://qiita.com/hiratara/items/0c5af17feeae5c03479e) | 不明 | X
 2013年09月16日 | [Data.Binary.Get with Data.Conduit](https://qiita.com/liquid_amber/items/7c69271ae5c19beee383) | 不明 | O
+2013年09月15日 | [特定の値を読み込むまでのConduit](https://qiita.com/liquid_amber/items/22e3d791c3396b3ab13d) | 不明 | O
 
 ### [Conduitの使い方](https://qiita.com/siphilia_rn/items/f3d8d83496a8eab65274)
 
@@ -75,3 +76,8 @@ leftover :: i -> ConduitM i o m ()
 - `binary` パッケージを利用する時は `binary-conduit` パッケージを使うようだ
 - インポートリストを明示的に書いてあれば親切だと思う
 - 実用性高いのでおすすめ
+
+### [特定の値を読み込むまでのConduit](https://qiita.com/liquid_amber/items/22e3d791c3396b3ab13d)
+
+- `lines` の使い方が載っている
+- `import Control.Monad.Trans.Resource` を追加しないと動かない
