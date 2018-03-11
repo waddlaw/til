@@ -4,6 +4,7 @@
 -------------|---------|----------|--------|-----
 conduit | [hackage](http://hackage.haskell.org/package/conduit) | [stackage](https://www.stackage.org/package/conduit) | [github](https://github.com/snoyberg/conduit/tree/master/conduit)
 conduit-extra | [hackage](https://hackage.haskell.org/package/conduit-extra) | [stackage](https://www.stackage.org/package/conduit-extra) | [github](https://github.com/snoyberg/conduit/tree/master/conduit-extra)
+binary-conduit | [hackage](https://github.com/qnikst/binary-conduit/) | [stackage](https://www.stackage.org/package/binary-conduit) | [github](https://hackage.haskell.org/package/binary-conduit)
 
 ## よく使う型・関数まとめ
 
@@ -53,6 +54,7 @@ leftover :: i -> ConduitM i o m ()
 -----------|----------|:---------------:|:----------:
 2014年03月21日 | [Conduitの使い方](https://qiita.com/siphilia_rn/items/f3d8d83496a8eab65274) | 1.0.8 | O
 2013年01月19日 | [Data.Conduit](https://qiita.com/hiratara/items/0c5af17feeae5c03479e) | 不明 | X
+2013年09月16日 | [Data.Binary.Get with Data.Conduit](https://qiita.com/liquid_amber/items/7c69271ae5c19beee383) | 不明 | O
 
 ### [Conduitの使い方](https://qiita.com/siphilia_rn/items/f3d8d83496a8eab65274)
 
@@ -66,3 +68,10 @@ leftover :: i -> ConduitM i o m ()
 - `Data.Conduit.Util` というのは今はもう無い
 - `conduitState` はもう使わない。代わりに `CL.map` を使う
 - 型の都合で `$=` と `=$` と `=$=` を使い分けないとならない。とあるが、 `$=` と `=$` は `=$=` のエイリアスになってるので `=$=` だけ使えば良い
+- 今読むには少しきつい
+
+### [Data.Binary.Get with Data.Conduit](https://qiita.com/liquid_amber/items/7c69271ae5c19beee383)
+
+- `binary` パッケージを利用する時は `binary-conduit` パッケージを使うようだ
+- インポートリストを明示的に書いてあれば親切だと思う
+- 実用性高いのでおすすめ
