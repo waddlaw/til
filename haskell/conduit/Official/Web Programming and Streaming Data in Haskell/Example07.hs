@@ -17,6 +17,7 @@ main :: IO ()
 main = runConduit $ source .| sink
 
 {-
+$ ./Example07.hs
 Sink 1
 Source 1
 Sink 2
