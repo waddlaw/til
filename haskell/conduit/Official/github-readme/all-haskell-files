@@ -1,0 +1,1070 @@
+#!/usr/bin/env stack
+-- stack --resolver lts-10.9 script
+
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import Data.Monoid (Sum(..))
+
+main :: IO ()
+main =
+  print $ getSum $ runConduitPure $ yieldMany [1 .. 100 :: Int] .| foldMapC Sum
+
+{-
+$ ./Example09.hs
+5050
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import qualified Data.Text as T
+import Data.Char (toUpper)
+
+main :: IO ()
+main = runConduitRes
+     $ sourceFile "input.txt"
+    .| decodeUtf8C
+    .| takeWhileCE (/= '\n')
+    .| encodeUtf8C
+    .| stdoutC#!/usr/bin/env stack
+-- stack --resolver lts-11.0 script
+
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+source :: Monad m => ConduitM i Int m ()
+source = do
+  yieldMany [1 .. 10]
+  yieldMany [11 .. 20]
+
+main :: IO ()
+main = runConduit $ source .| mapM_C print
+
+{-
+$ ./Example21.hs
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+myTakeWhileC :: Monad m => (i -> Bool) -> ConduitM i i m ()
+myTakeWhileC f = loop
+ where
+  loop = do
+    mx <- await
+    case mx of
+      Nothing -> return ()
+      Just x
+        | f x -> do
+          yield x
+          loop
+        | otherwise -> return ()
+
+main :: IO ()
+main = print $ runConduitPure $ yieldMany [1 .. 10] .| do
+  x <- myTakeWhileC (<= 5) .| sinkList
+  y <- sinkList
+  return (x, y)
+
+{-
+$ ./Example33.hs
+([1,2,3,4,5],[7,8,9,10])
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit
+     $ yieldMany [1..10]
+    .| iterMC print
+    .| liftIO (putStrLn "I was called")
+    .| sinkNull
+
+{-
+$ ./Example40.hs
+I was called
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = print $ runConduitPure $ return () .| do
+    mapM_ leftover [1..10]
+    sinkList
+
+{-
+$ ./Example36.hs
+[10,9,8,7,6,5,4,3,2,1]
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany [1 .. 10] .| intersperseC 0 .| mapM_C print
+
+{-
+$ ./Example16.hs
+1
+0
+2
+0
+3
+0
+4
+0
+5
+0
+6
+0
+7
+0
+8
+0
+9
+0
+10
+-}#!/usr/bin/env stack
+-- stack --resolver lts-10.9 script
+
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = print $ runConduitPure $ yieldMany [1 .. 100 :: Int] .| foldlC (+) 0
+
+{-
+$ ./Example08.hs
+5050
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+{-# LANGUAGE OverloadedStrings #-}
+import Conduit
+import Data.Text (Text)
+
+message :: Text
+message = "This is my message. Try to decode it with the base64 command.\n"
+
+main :: IO ()
+main = runConduit $ yield message .| encodeUtf8C .| encodeBase64C .| stdoutC
+
+{-
+$ ./Example18.hs
+VGhpcyBpcyBteSBtZXNzYWdlLiBUcnkgdG8gZGVjb2RlIGl0IHdpdGggdGhlIGJhc2U2NCBjb21tYW5kLgo=
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduitRes $ sourceFileBS "input.txt" .| sinkFileBS "output.txt"
+
+{-
+$ ./Example43.hs
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = do
+    putStrLn "List version:"
+    print $ takeWhile (< 18) $ map (* 2) $ take 10 [1 ..]
+    putStrLn ""
+    putStrLn "Conduit version:"
+    print
+        $  runConduitPure
+        $  yieldMany [1 ..]
+        .| takeC 10
+        .| mapC (* 2)
+        .| takeWhileC (< 18)
+        .| sinkList
+
+{-
+$ ./Example03.hs
+List version:
+[2,4,6,8,10,12,14,16]
+
+Conduit version:
+[2,4,6,8,10,12,14,16]
+-}
+
+#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = do
+    putStrLn "List version:"
+    mapM_ print $ takeWhile (< 18) $ map (* 2) $ take 10 [1 ..]
+    putStrLn ""
+    putStrLn "Conduit version:"
+    runConduit
+        $  yieldMany [1 ..]
+        .| takeC 10
+        .| mapC (* 2)
+        .| takeWhileC (< 18)
+        .| mapM_C print
+
+{-
+$ ./Example04.hs
+List version:
+2
+4
+6
+8
+10
+12
+14
+16
+
+Conduit version:
+2
+4
+6
+8
+10
+12
+14
+16
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany [1..10] .| iterMC print .| return ()
+
+{-
+$ ./Example37.hs
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import qualified System.IO as IO
+import Data.ByteString (ByteString)
+
+sourceFile' :: MonadResource m => FilePath -> ConduitM i ByteString m ()
+sourceFile' fp = bracketP (IO.openBinaryFile fp IO.ReadMode) IO.hClose sourceHandle
+
+sinkFile' :: MonadResource m => FilePath -> ConduitM ByteString o m ()
+sinkFile' fp = bracketP (IO.openBinaryFile fp IO.WriteMode) IO.hClose sinkHandle
+
+main :: IO ()
+main = runResourceT
+     $ runConduit
+     $ sourceFile' "input.txt"
+    .| sinkFile' "output.txt"
+
+{-
+$ ./Example42.hs
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+myMapC :: Monad m => (i -> o) -> ConduitM i o m ()
+myMapC f =
+    loop
+  where
+    loop = do
+        mx <- await
+        case mx of
+            Nothing -> return ()
+            Just x -> do
+                yield (f x)
+                loop
+
+main :: IO ()
+main = runConduit $ yieldMany [1..10] .| myMapC (+ 1) .| mapM_C print
+
+{-
+$ ./Example30.hs
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+trans :: Monad m => ConduitM Int Int m ()
+trans = do
+  takeC 5 .| mapC (+ 1)
+  mapC (* 2)
+
+main :: IO ()
+main = runConduit $ yieldMany [1 .. 10] .| trans .| mapM_C print
+
+{-
+$ ./Example24.hs
+2
+3
+4
+5
+6
+12
+14
+16
+18
+20
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+trans :: Monad m => ConduitM Int Int m ()
+trans = do
+  takeC 3 .| mapC (+ 1)
+  takeC 3 .| mapC (+ 10)
+  dropC 1
+  takeC 3 .| mapC (+ 100)
+
+main :: IO ()
+main = runConduit $ yieldMany [1 .. 10] .| trans .| mapM_C print
+
+{-
+$ ./Example25.hs
+2
+3
+4
+14
+15
+16
+108
+109
+110
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany [1 .. 10] .| filterC even .| mapM_C print
+
+{-
+$ ./Example15.hs
+2
+4
+6
+8
+10
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ (yield 1 >> yield 2) .| mapM_C print
+
+{-
+$ ./Example27.hs
+1
+2
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = print $ runConduitPure $ yieldMany [1 .. 100 :: Int] .| sumC
+
+{-
+$ ./Example07.hs
+5050
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = do
+    putStrLn "List version:"
+    print $ take 10 [1 ..]
+    putStrLn ""
+    putStrLn "Conduit version:"
+    print $ runConduitPure $ yieldMany [1 ..] .| takeC 10 .| sinkList
+
+{-
+$ ./Example02.hs
+List version:
+[1,2,3,4,5,6,7,8,9,10]
+
+Conduit version:
+[1,2,3,4,5,6,7,8,9,10]
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+myGoodTakeWhileC :: Monad m => (i -> Bool) -> ConduitM i i m ()
+myGoodTakeWhileC f = loop
+ where
+  loop = do
+    mx <- await
+    case mx of
+      Nothing -> return ()
+      Just x
+        | f x -> do
+          yield x
+          loop
+        | otherwise -> leftover x
+
+main :: IO ()
+main = print $ runConduitPure $ yieldMany [1 .. 10] .| do
+  x <- myGoodTakeWhileC (<= 5) .| sinkList
+  y <- sinkList
+  return (x, y)
+#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main =
+  putStrLn
+    $  runConduitPure
+    $  yieldMany [1 .. 10 :: Int]
+    .| mapC (\i -> show i ++ "\n")
+    .| foldC
+
+{-
+$ ./Example10.hs
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+myPeekC :: Monad m => ConduitM i o m (Maybe i)
+myPeekC = do
+  mx <- await
+  case mx of
+    Nothing -> return Nothing
+    Just x -> do
+      leftover x
+      return (Just x)
+
+main :: IO ()
+main = print $ runConduitPure $ yieldMany [1 .. 10] .| do
+  x <- myPeekC
+  y <- myPeekC
+  return (x, y)
+
+{-
+$ ./Example35.hs
+([1,2,3,4,5],[7,8,9,10])
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduitRes
+     $ sourceFile "input.txt"
+    .| takeCE 5
+    .| stdoutC#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import qualified Data.Text as T
+import Data.Char (toUpper)
+
+main :: IO ()
+main = runConduitRes
+     $ sourceFile "input.txt"
+    .| decodeUtf8C
+    .| mapC (T.map toUpper)
+    .| encodeUtf8C
+    .| stdoutC#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import qualified Data.Text as T
+import Data.Char (toUpper)
+
+main :: IO ()
+main = runConduitRes
+     $ sourceFile "input.txt"
+    .| decodeUtf8C
+    .| omapCE toUpper
+    .| encodeUtf8C
+    .| stdoutC#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+
+magic :: Int -> IO Int
+magic x = do
+    putStrLn $ "I'm doing magic with " ++ show x
+    return $ x * 2
+
+main :: IO ()
+main = do
+    let go []       = return ()
+        go (x : xs) = do
+            y <- magic x
+            if y < 18
+                then do
+                    print y
+                    go xs
+                else return ()
+
+    go $ take 10 [1 ..]
+
+{-
+$ ./Example06.hs
+I'm doing magic with 1
+2
+I'm doing magic with 2
+4
+I'm doing magic with 3
+6
+I'm doing magic with 4
+8
+I'm doing magic with 5
+10
+I'm doing magic with 6
+12
+I'm doing magic with 7
+14
+I'm doing magic with 8
+16
+I'm doing magic with 9
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yield 1 .| mapM_C print
+
+{-
+$ ./Example26.hs
+1
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+{-# LANGUAGE OverloadedStrings #-}
+import Conduit
+
+evenM :: Int -> IO Bool
+evenM i = do
+  let res = even i
+  print (i, res)
+  return res
+
+main :: IO ()
+main = runConduit $ yieldMany [1 .. 10] .| filterMC evenM .| mapM_C print
+
+{-
+$ ./Example19.hs
+(1,False)
+(2,True)
+2
+(3,False)
+(4,True)
+4
+(5,False)
+(6,True)
+6
+(7,False)
+(8,True)
+8
+(9,False)
+(10,True)
+10
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+sink :: Monad m => ConduitM Int o m (String, Int)
+sink = (,) <$> (takeC 5 .| mapC show .| foldC) <*> sumC
+
+main :: IO ()
+main = do
+  let res = runConduitPure $ yieldMany [1 .. 10] .| sink
+  print res
+
+{-
+$ ./Example22.hs
+("12345",40)
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = do
+  -- prints: Just 1
+  print $ runConduitPure $ yield 1 .| await
+  -- prints: Nothing
+  print $ runConduitPure $ yieldMany [] .| await
+
+  -- Note, that the above is equivalent to the following. Work out
+  -- why this works:
+  print $ runConduitPure $ return () .| await
+  print $ runConduitPure await#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = do
+  res <- runConduit $ yieldMany [1 .. 10] .| iterMC print .| sumC
+  print res
+
+{-
+$ ./Example20.hs
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+55
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany' [1,2].| mapM_C print
+
+yieldMany' :: Monad m => [o] -> ConduitM i o m ()
+yieldMany' = mapM_ yield
+
+{-
+$ ./Example28.hs
+1
+2
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+myFilterC :: Monad m => (a -> Bool) -> ConduitM a a m ()
+myFilterC p =
+  loop
+    where
+      loop = do
+        mx <- await
+        case mx of
+          Nothing -> return ()
+          Just x ->
+            if p x then
+              yield x >> loop
+            else
+              loop
+
+myMapM_C :: Monad m => (a -> m ()) -> ConduitM a o m ()
+myMapM_C f =
+  loop
+    where
+      loop = do
+        mx <- await
+        case mx of
+          Nothing -> return ()
+          Just x -> (lift $ f x) >> loop
+
+main :: IO ()
+main = runConduit $ yieldMany [1..10] .| myFilterC even .| myMapM_C print#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main =
+    putStrLn
+        $  runConduitPure
+        $  yieldMany [1 .. 10 :: Int]
+        .| mapC show
+        .| unlinesC
+        .| foldC
+
+{-
+$ ./Example11.hs
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+magic :: Int -> IO Int
+magic x = do
+    putStrLn $ "I'm doing magic with " ++ show x
+    return $ x * 2
+
+main :: IO ()
+main = do
+    putStrLn "List version:"
+    mapM magic (take 10 [1 ..]) >>= mapM_ print . takeWhile (< 18)
+    putStrLn ""
+    putStrLn "Conduit version:"
+    runConduit
+        $  yieldMany [1 ..]
+        .| takeC 10
+        .| mapMC magic
+        .| takeWhileC (< 18)
+        .| mapM_C print
+
+{-
+$ ./Example05.hs
+List version:
+I'm doing magic with 1
+I'm doing magic with 2
+I'm doing magic with 3
+I'm doing magic with 4
+I'm doing magic with 5
+I'm doing magic with 6
+I'm doing magic with 7
+I'm doing magic with 8
+I'm doing magic with 9
+I'm doing magic with 10
+2
+4
+6
+8
+10
+12
+14
+16
+
+Conduit version:
+I'm doing magic with 1
+2
+I'm doing magic with 2
+4
+I'm doing magic with 3
+6
+I'm doing magic with 4
+8
+I'm doing magic with 5
+10
+I'm doing magic with 6
+12
+I'm doing magic with 7
+14
+I'm doing magic with 8
+16
+I'm doing magic with 9
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany [1..10] .| iterMC print .| return () .| sinkNull
+
+{-
+$ ./Example39.hs
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany [1..10] .| iterMC print .| sinkNull
+
+{-
+$ ./Example38.hs
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+sink :: Monad m => ConduitM Int o m (String, Int)
+sink = do
+  x <- takeC 5 .| mapC show .| foldC
+  y <- sumC
+  return (x, y)
+
+main :: IO ()
+main = do
+  let res = runConduitPure $ yieldMany [1 .. 10] .| sink
+  print res
+
+{-
+$ ./Example22.hs
+("12345",40)
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import System.FilePath (takeExtension)
+
+main :: IO ()
+main = runConduitRes
+     $ sourceDirectoryDeep True "."
+    .| filterC (\fp -> takeExtension fp == ".hs")
+    .| awaitForever sourceFileBS
+    .| sinkFileBS "all-haskell-files"#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import Data.Monoid (Product (..))
+
+magic :: Int -> IO (Product Int)
+magic i = do
+    putStrLn $ "Doing magic on " ++ show i
+    return $ Product i
+
+main :: IO ()
+main = do
+    Product res <- runConduit $ yieldMany [1 .. 10] .| foldMapMC magic
+    print res
+
+{-
+$ ./Example12.hs
+Doing magic on 1
+Doing magic on 2
+Doing magic on 3
+Doing magic on 4
+Doing magic on 5
+Doing magic on 6
+Doing magic on 7
+Doing magic on 8
+Doing magic on 9
+Doing magic on 10
+3628800
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import Data.Monoid (Product (..))
+
+magic :: Int -> Int -> IO Int
+magic total i = do
+    putStrLn $ "Doing magic on " ++ show i
+    return $! total * i
+
+main :: IO ()
+main = do
+    res <- runConduit $ yieldMany [1 .. 10] .| foldMC magic 1
+    print res
+
+{-
+$ ./Example13.hs
+Doing magic on 1
+Doing magic on 2
+Doing magic on 3
+Doing magic on 4
+Doing magic on 5
+Doing magic on 6
+Doing magic on 7
+Doing magic on 8
+Doing magic on 9
+Doing magic on 10
+3628800
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = print $ runConduitPure $ yieldMany [1 .. 10] .| do
+  x <- takeWhileC (<= 5) .| sinkList
+  y <- sinkList
+  return (x, y)
+
+{-
+$ ./Example32.hs
+([1,2,3,4,5],[6,7,8,9,10])
+-}
+#!/usr/bin/env stack
+-- stack --resolver lts-10.9 script
+
+-- Synopsis
+
+import Conduit
+
+main :: IO ()
+main = do
+  print $ runConduitPure $ yieldMany [1 .. 10] .| sumC
+
+  writeFile "input.txt" "This is a test."
+  runConduitRes $ sourceFileBS "input.txt" .| sinkFile "output.txt"
+  readFile "output.txt" >>= putStrLn
+
+  print $ runConduitPure $ yieldMany [1 .. 10] .| mapC (+ 1) .| sinkList
+
+{-
+$ ./Example01.hs
+55
+This is a test.
+[2,3,4,5,6,7,8,9,10,11]
+-}
+#!/usr/bin/env stack
+-- stack script --resolver lts-11.0
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+import qualified System.IO as IO
+import qualified Data.Conduit.Binary as CB
+
+main :: IO ()
+main = IO.withBinaryFile "input.txt" IO.ReadMode $ \inH ->
+       IO.withBinaryFile "output.txt" IO.WriteMode $ \outH ->
+       runConduit $ CB.sourceHandle inH .| CB.sinkHandle outH
+
+{-
+$ ./Example41.hs
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main = runConduit $ yieldMany [1 .. 10] .| mapC (* 2) .| mapM_C print
+
+{-
+$ ./Example14.hs
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+-}#!/usr/bin/env stack
+-- stack script --resolver lts-10.9
+{-# LANGUAGE ExtendedDefaultRules #-}
+import Conduit
+
+main :: IO ()
+main =
+    runConduit
+        $  yieldMany (map (replicate 5) [1 .. 10])
+        .| concatC
+        .| mapM_C print
+
+{-
+$ ./Example17.hs
+1
+1
+1
+1
+1
+2
+2
+2
+2
+2
+3
+3
+3
+3
+3
+4
+4
+4
+4
+4
+5
+5
+5
+5
+5
+6
+6
+6
+6
+6
+7
+7
+7
+7
+7
+8
+8
+8
+8
+8
+9
+9
+9
+9
+9
+10
+10
+10
+10
+10
+-}
