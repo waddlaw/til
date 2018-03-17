@@ -10,19 +10,19 @@ main = runConduit
       -- mapC (*100) .| pipeLeftover .| pipe2
       pipeLeftover .| pipe2
       -- pipeYield .| pipe2
-      printC
+      -- printC
 
 pipeYield :: ConduitM Int Int IO ()
 pipeYield = do
-  x <- await
-  maybe (return ()) yield x
+  mx <- await
+  maybe (return ()) yield mx
 
 pipeLeftover :: ConduitM Int Int IO ()
 pipeLeftover = do
-  x <- await
-  maybe (return ()) leftover x
+  mx <- await
+  maybe (return ()) leftover mx
 
 pipe2 :: ConduitM Int o IO ()
 pipe2 = do
-  x <- await
-  liftIO $ print x
+  mx <- await
+  liftIO $ print mx
