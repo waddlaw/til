@@ -7,6 +7,7 @@
 - [A-tutorial-on-the-universality-and-expressiveness-of-fold](A-tutorial-on-the-universality-and-expressiveness-of-fold.pdf)
 - [Algebraic Data Types and Program Transformation](Algebraic-Data-Types-and-Program-Transformation.pdf)
 - [Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire](Functional-Programming-with-Bananas-Lenses-Envelopes-and-Barbed-Wire.pdf)
+- [Bananas in Space: Extending Fold and Unfold to Exponential Types](bananas.pdf)
 
 ## slide
 
