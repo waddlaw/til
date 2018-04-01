@@ -17,6 +17,7 @@
 
 - [The Universal Properties of Map, Fold, and Filter](https://jeremykun.com/2013/09/30/the-universal-properties-of-map-fold-and-filter/)
 - [somehow-morphisms on fixed point written in Haskell](https://qiita.com/cutsea110/items/69889a99d30b627bc04a)
+- [Category Theory Lecture Notes](https://bartoszmilewski.com/2014/05/05/understanding-products-and-universal-constructions/)
 
 ## universal property
 
