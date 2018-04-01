@@ -10,6 +10,7 @@
 - [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
 - [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
 
-## youtube
+## video
 
 - [TheCatsters](https://www.youtube.com/user/TheCatsters)
+- [Category Theory for the Working Hacker](https://www.infoq.com/presentations/category-theory-propositions-principle)
