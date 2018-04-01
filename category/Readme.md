@@ -8,6 +8,7 @@
 - [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf)
 - [圏論](http://alg-d.com/math/kan_extension/)
 - [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
+- [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
 
 ## youtube
 
