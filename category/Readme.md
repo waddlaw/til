@@ -7,6 +7,7 @@
 - [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
 - [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf)
 - [圏論](http://alg-d.com/math/kan_extension/)
+- [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
 
 ## youtube
 
