@@ -14,3 +14,4 @@
 
 - [TheCatsters](https://www.youtube.com/user/TheCatsters)
 - [Category Theory for the Working Hacker](https://www.infoq.com/presentations/category-theory-propositions-principle)
+- [圏論勉強会 第1回](https://www.youtube.com/watch?v=uWST7UivqeM)
