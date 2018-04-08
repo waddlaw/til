@@ -30,6 +30,6 @@
 - [2013年 圏論勉強会 資料](http://nineties.github.io/category-seminar/#/)
 
  /  | youtube | slide
-----|---------|-------
+----|:-------:|:-----:
 第1回 | [link](https://www.youtube.com/watch?v=uWST7UivqeM) | [link](http://nineties.github.io/category-seminar/1.html)
 第2回 | [link](https://www.youtube.com/watch?v=s-aj6cqiuA4) | [link](http://nineties.github.io/category-seminar/2.html)
