@@ -10,6 +10,16 @@
 - [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
 - [Computational Category Theory](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
 
+## Book
+
+### 洋書
+
+- [Basic Category Theory for Computer Scientists (Foundations of Computing)](https://www.amazon.co.jp/dp/0262660717)
+
+### 訳本
+
+- [ベーシック圏論 普遍性からの速習コース](https://www.amazon.co.jp/dp/4621300709)
+
 ## video
 
 - [TheCatsters](https://www.youtube.com/user/TheCatsters)
