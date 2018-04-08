@@ -8,6 +8,7 @@
 - [圏論](http://alg-d.com/math/kan_extension/)
 - [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
 - [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
+- [Computational Category Theory](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
 
 ## video
 
