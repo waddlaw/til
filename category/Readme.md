@@ -1,7 +1,6 @@
 # Cateogry theory
 
 - [Lecture Notes](http://www.andrew.cmu.edu/course/80-413-713/notes/)
-- [2013年 圏論勉強会 資料](http://nineties.github.io/category-seminar/#/)
 - [hmemcpy/milewski-ctfp-pdf](https://github.com/hmemcpy/milewski-ctfp-pdf)
 - [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
 - [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
@@ -14,4 +13,12 @@
 
 - [TheCatsters](https://www.youtube.com/user/TheCatsters)
 - [Category Theory for the Working Hacker](https://www.infoq.com/presentations/category-theory-propositions-principle)
-- [圏論勉強会 第1回](https://www.youtube.com/watch?v=uWST7UivqeM)
+
+## 圏論勉強会
+
+- [2013年 圏論勉強会 資料](http://nineties.github.io/category-seminar/#/)
+
+ /  | youtube | slide
+----|---------|-------
+第1回 | [link](https://www.youtube.com/watch?v=uWST7UivqeM) | [link](http://nineties.github.io/category-seminar/1.html)
+第2回 | [link](https://www.youtube.com/watch?v=s-aj6cqiuA4) | [link](http://nineties.github.io/category-seminar/2.html)
