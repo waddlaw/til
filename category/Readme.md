@@ -12,12 +12,11 @@
 
 ## Book
 
-### 洋書
-
 - [Basic Category Theory for Computer Scientists (Foundations of Computing)](https://www.amazon.co.jp/dp/0262660717)
-
-### 訳本
-
+- [Category Theory (Oxford Logic Guides)](https://www.amazon.co.jp/dp/0199237182/)
+- [圏論の基礎](https://www.amazon.co.jp/dp/4621063243)
+- [圏論の歩き方](https://www.amazon.co.jp/dp/4535787204)
+- [圏論 原著第2版](https://www.amazon.co.jp/dp/432011115X)
 - [数学教室 πの焼き方: 日常生活の数学的思考](https://www.amazon.co.jp/dp/4562052856/)
 - [ベーシック圏論 普遍性からの速習コース](https://www.amazon.co.jp/dp/4621300709)
 
