@@ -10,6 +10,7 @@
 
 - [Basic Category Theory for Computer Scientists (Foundations of Computing)](https://www.amazon.co.jp/dp/0262660717)
 - [Category Theory (Oxford Logic Guides)](https://www.amazon.co.jp/dp/0199237182/)
+- [Category Theory in Context (Aurora: Dover Modern Math Originals)](https://www.amazon.co.jp/dp/048680903X)
 - [圏論の基礎](https://www.amazon.co.jp/dp/4621063243)
 - [圏論の歩き方](https://www.amazon.co.jp/dp/4535787204)
 - [圏論 原著第2版](https://www.amazon.co.jp/dp/432011115X)
@@ -22,6 +23,7 @@
 - [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
 - [Computational Category Theory](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
 - [Category Theory in Context](http://www.math.jhu.edu/~eriehl/context.pdf)
+- [Basic Concepts of Enriched Category Theory](http://www.tac.mta.ca/tac/reprints/articles/10/tr10.pdf)
 
 ## article & tutorial
 
