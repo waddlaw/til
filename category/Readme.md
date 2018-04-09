@@ -37,6 +37,7 @@
 - [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
 - [Functional Programming and Category Theory [Part 2] – Applicative Functors](http://nikgrozev.com/2016/04/11/functional-programming-and-category-theory-part-2-applicative-functors/)
 - [Haskell/Category theory](https://en.wikibooks.org/wiki/Haskell/Category_theory)
+- [An Introduction to Category Theory and Categorical Logic](http://cs.ioc.ee/~tarmo/tsem11/jeltsch1904-slides.pdf)
 
 ## video
 
