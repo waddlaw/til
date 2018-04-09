@@ -63,3 +63,7 @@
 第11回 | 指数対象・デカルト閉圏  | [その1](https://www.youtube.com/watch?v=gmVxVp2oLCw), [その2](https://www.youtube.com/watch?v=vYkkIQSwras) | [link](http://nineties.github.io/category-seminar/11.html)
 第12回 | 自然性・米田の補題  | [その1](https://www.youtube.com/watch?v=Paf-VXD1HxA), [その2](https://www.youtube.com/watch?v=W0ZdWg-BnaI) | [link](http://nineties.github.io/category-seminar/12.html)
 第13回 | 随伴・モナド  | [その1](https://www.youtube.com/watch?v=D__Ik4qPXWY), [その2](https://www.youtube.com/watch?v=9jfVkoEe_iw) | [link](http://nineties.github.io/category-seminar/13.html)
+
+## その他
+
+- [『計算論理学』講義資料](http://www.cs.tsukuba.ac.jp/~kam/complogic/main.pdf)
