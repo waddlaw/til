@@ -23,6 +23,7 @@
 - [Category Theory (STEVE AWODEY)](http://www.andrew.cmu.edu/course/80-413-713/notes/)
 - [Category Theory for Programmers](https://github.com/hmemcpy/milewski-ctfp-pdf)
 - [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf)
+- [Basic Category Theory](https://arxiv.org/pdf/1612.09375.pdf)
 
 ## slide
 
