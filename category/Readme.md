@@ -1,7 +1,6 @@
 # Cateogry theory
 
 - [nLab](https://ncatlab.org/nlab/show/HomePage)
-- [Lecture Notes](http://www.andrew.cmu.edu/course/80-413-713/notes/)
 - [hmemcpy/milewski-ctfp-pdf](https://github.com/hmemcpy/milewski-ctfp-pdf)
 - [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
 - [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
@@ -25,6 +24,7 @@
 - [Computational Category Theory](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
 - [Category Theory in Context](http://www.math.jhu.edu/~eriehl/context.pdf)
 - [Basic Concepts of Enriched Category Theory](http://www.tac.mta.ca/tac/reprints/articles/10/tr10.pdf)
+- [Category Theory (STEVE AWODEY)](http://www.andrew.cmu.edu/course/80-413-713/notes/)
 
 ## article & tutorial
 
