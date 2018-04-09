@@ -23,7 +23,9 @@
 ## video
 
 - [TheCatsters](https://www.youtube.com/user/TheCatsters)
-- [Category Theory for the Working Hacker](https://www.infoq.com/presentations/category-theory-propositions-principle)
+- [Category Theory for the Working Hacker (2016)](https://www.infoq.com/presentations/category-theory-propositions-principle)
+- [Category Theory for the Working Hacker (2018)](https://www.infoq.com/presentations/category-theory-data-types)
+- [Theorems for Free, Blame for All](https://www.infoq.com/br/presentations/theorems-for-free-blame-for-all)
 
 ## 圏論勉強会
 
