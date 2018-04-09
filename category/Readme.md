@@ -1,10 +1,6 @@
 # Cateogry theory
 
 - [nLab](https://ncatlab.org/nlab/show/HomePage)
-- [hmemcpy/milewski-ctfp-pdf](https://github.com/hmemcpy/milewski-ctfp-pdf)
-- [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
-- [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
-- [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf)
 
 ## Book
 
@@ -25,11 +21,18 @@
 - [Category Theory in Context](http://www.math.jhu.edu/~eriehl/context.pdf)
 - [Basic Concepts of Enriched Category Theory](http://www.tac.mta.ca/tac/reprints/articles/10/tr10.pdf)
 - [Category Theory (STEVE AWODEY)](http://www.andrew.cmu.edu/course/80-413-713/notes/)
+- [Category Theory for Programmers](https://github.com/hmemcpy/milewski-ctfp-pdf)
+- [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf)
+
+## slide
+
+- [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
 
 ## article & tutorial
 
 - [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
 - [圏論](http://alg-d.com/math/kan_extension/)
+- [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
 
 ## video
 
