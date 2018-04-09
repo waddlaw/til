@@ -5,10 +5,6 @@
 - [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
 - [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
 - [Physics, Topology, Logic and Computation: A Rosetta Stone](http://math.ucr.edu/home/baez/rosetta.pdf)
-- [圏論](http://alg-d.com/math/kan_extension/)
-- [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
-- [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
-- [Computational Category Theory](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
 
 ## Book
 
@@ -19,6 +15,18 @@
 - [圏論 原著第2版](https://www.amazon.co.jp/dp/432011115X)
 - [数学教室 πの焼き方: 日常生活の数学的思考](https://www.amazon.co.jp/dp/4562052856/)
 - [ベーシック圏論 普遍性からの速習コース](https://www.amazon.co.jp/dp/4621300709)
+- [圏論の技法](https://www.amazon.co.jp/dp/4535786674/)
+
+## eBook (pdf)
+
+- [Category Theory Applied to Functional Programming](http://www1.eafit.edu.co/asr/pubs/others/cain-screen.pdf)
+- [Computational Category Theory](http://www.cs.man.ac.uk/~david/categories/book/book.pdf)
+- [Category Theory in Context](http://www.math.jhu.edu/~eriehl/context.pdf)
+
+## article & tutorial
+
+- [Blog articles/Mathematics](https://wiki.haskell.org/Blog_articles/Mathematics)
+- [圏論](http://alg-d.com/math/kan_extension/)
 
 ## video
 
