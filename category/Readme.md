@@ -35,6 +35,7 @@
 - [圏論](http://alg-d.com/math/kan_extension/)
 - [Functional Programming and Category Theory [Part 1] - Categories and Functors](http://nikgrozev.com/2016/03/14/functional-programming-and-category-theory-part-1-categories-and-functors/)
 - [Functional Programming and Category Theory [Part 2] – Applicative Functors](http://nikgrozev.com/2016/04/11/functional-programming-and-category-theory-part-2-applicative-functors/)
+- [Haskell/Category theory](https://en.wikibooks.org/wiki/Haskell/Category_theory)
 
 ## video
 
