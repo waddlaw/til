@@ -28,6 +28,7 @@
 ## slide
 
 - [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
+- [Category Theory & Programming](http://yogsototh.github.io/Category-Theory-Presentation/)
 
 ## article & tutorial
 
