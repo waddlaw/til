@@ -1,8 +1,6 @@
 # Cateogry theory
 
 - [nLab](https://ncatlab.org/nlab/show/HomePage)
-- 
-
 - [Lecture Notes](http://www.andrew.cmu.edu/course/80-413-713/notes/)
 - [hmemcpy/milewski-ctfp-pdf](https://github.com/hmemcpy/milewski-ctfp-pdf)
 - [An introduction to Category Theory for Software Engineers*](http://www.cs.toronto.edu/~sme/presentations/cat101.pdf)
