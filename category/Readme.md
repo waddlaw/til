@@ -29,7 +29,18 @@
 
 - [2013年 圏論勉強会 資料](http://nineties.github.io/category-seminar/#/)
 
- /  | youtube | slide
-----|:-------:|:-----:
-第1回 | [link](https://www.youtube.com/watch?v=uWST7UivqeM) | [link](http://nineties.github.io/category-seminar/1.html)
-第2回 | [link](https://www.youtube.com/watch?v=s-aj6cqiuA4) | [link](http://nineties.github.io/category-seminar/2.html)
+ /  | 内容 | youtube | slide
+----|------|:-------:|:-----:
+第1回 | 圏論って何? | [link](https://www.youtube.com/watch?v=uWST7UivqeM) | [link](http://nineties.github.io/category-seminar/1.html)
+第2回 | モノイド・群 | [link](https://www.youtube.com/watch?v=s-aj6cqiuA4) | [link](http://nineties.github.io/category-seminar/2.html)
+第3回 | 様々な圏 | [link](https://www.youtube.com/watch?v=9C985w2menY) | [link](http://nineties.github.io/category-seminar/3.html)
+第4回 | 射で考える | [link](https://www.youtube.com/watch?v=7uvs62qxhKA) | [link](http://nineties.github.io/category-seminar/4.html)
+第5回 | 様々な射  | [link](https://www.youtube.com/watch?v=vSXBdZW7Qxc) | [link](http://nineties.github.io/category-seminar/5.html)
+第6回 | 積・余積・極限  | [link](https://www.youtube.com/watch?v=AjpCJ5QRTrE) | [link](http://nineties.github.io/category-seminar/6.html)
+第7回 | 様々な極限,代数的データ型  | [link](https://www.youtube.com/watch?v=j3bY_djVjiQ) | [link](http://nineties.github.io/category-seminar/7.html)
+第8回 | ω余極限,連続性,プログラム運算  | [link](https://www.youtube.com/watch?v=ldcyxy5oxOg) | [link](http://nineties.github.io/category-seminar/8.html)
+第9回 | 領域理論・不動点意味論  | [link](https://www.youtube.com/watch?v=ZmM41UxGWqo) | [link](http://nineties.github.io/category-seminar/9.html)
+第10回 | 始代数・終余代数と不動点,型函手  | [link](https://www.youtube.com/watch?v=1VMsh6xU2Ok) | [link](http://nineties.github.io/category-seminar/10.html)
+第11回 | 指数対象・デカルト閉圏  | [link](https://www.youtube.com/watch?v=gmVxVp2oLCw) | [link](http://nineties.github.io/category-seminar/11.html)
+第12回 | 自然性・米田の補題  | [link](https://www.youtube.com/watch?v=Paf-VXD1HxA) | [link](http://nineties.github.io/category-seminar/12.html)
+第13回 | 随伴・モナド  | [link](https://www.youtube.com/watch?v=D__Ik4qPXWY) | [link](http://nineties.github.io/category-seminar/13.html)
