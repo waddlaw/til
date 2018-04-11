@@ -1,17 +1,17 @@
 {-# LANGUAGE MagicHash #-}
 {-@ LIQUID "--diff" @-}
 import           Data.ByteString.Internal (c2w, w2c)
+import           Data.Foldable            hiding (null)
 import           Data.Word                (Word8)
 import           Foreign.ForeignPtr       (mallocForeignPtrBytes,
                                            withForeignPtr)
-import GHC.ForeignPtr    (ForeignPtr(ForeignPtr))
 import           Foreign.Ptr              (Ptr, plusPtr)
-import           Foreign.Storable         (Storable, peek, poke, peekByteOff)
-import           System.IO                (stdout, hPutBuf)
+import           Foreign.Storable         (Storable, peek, peekByteOff, poke)
+import           GHC.Base                 (nullAddr#)
+import           GHC.ForeignPtr           (ForeignPtr (ForeignPtr))
+import           Prelude                  hiding (null)
+import           System.IO                (hPutBuf, stdout)
 import           System.IO.Unsafe         (unsafePerformIO)
-import GHC.Base          (nullAddr#)
-import Prelude hiding (null)
-import Data.Foldable hiding (null)
 
 -- chop' :: String -> Int -> String
 -- chop' s n = s'
@@ -273,27 +273,26 @@ unsafeHead (BS x s _) = unsafePerformIO $
                           withForeignPtr x $ \p ->
                             peekByteOff p s
 
-{-@ unsafeTail :: b:ByteStringNE -> ByteStringN {bLen b -1} @-}
+{-@ unsafeTail :: b:ByteStringNE -> ByteStringN { bLen b -1} @-}
 unsafeTail :: ByteString -> ByteString
 unsafeTail (BS ps s l) = BS ps (s + 1) (l - 1)
 
-{-@ group :: b:_ -> {v: [ByteStringNE] | bsLen v = bLen b} @-}
-group :: ByteString -> [ByteString]
-group xs
-  | null xs = []
-  | otherwise = let y = unsafeHead xs
-                    (ys, zs) = spanByte y (unsafeTail xs)
-                in (y `cons` ys) : group zs
+-- ここから
+-- {-@ group :: b:ByteString -> {v: [ByteStringNE] | bsLen v = bLen b} @-}
+-- group :: ByteString -> [ByteString]
+-- group xs
+--   | null xs = []
+--   | otherwise = let y = unsafeHead xs
+--                     (ys, zs) = spanByte y (unsafeTail xs)
+--                 in (y `cons` ys) : group zs
 
 cons :: Word8 -> ByteString -> ByteString
 cons = undefined
 
-{- Error
 {-@ measure bsLen @-}
 bsLen :: [ByteString] -> Int
 bsLen [] = 0
 bsLen (b:bs) = bLen b + bsLen bs
--}
 
 -- 定義済み
 -- peekByteOff :: (Storable a) => forall b. p:Ptr b -> {v:Int | PValid p v} -> IO a
