@@ -6,7 +6,6 @@
    --package text
    --package optional-args
    --package bytestring
-   -- keys.hs
 -}
 
 {-# LANGUAGE OverloadedLabels #-}
