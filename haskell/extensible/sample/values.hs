@@ -1,5 +1,5 @@
 #!/usr/bin/env stack
--- stack script --resolver nightly-2018-04-21 --package extensible -- keys.hs
+-- stack script --resolver nightly-2018-04-21 --package extensible
 
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE TypeApplications #-}
