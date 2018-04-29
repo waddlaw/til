@@ -2,6 +2,7 @@
 
 ## 作者 (@fumieval さん) の資料
 
+- [ぼくのかんがえた最強の拡張可能レコード](http://fumieval.hatenablog.com/entry/2015/01/21/175227)
 - [割とすぐに始められるextensibleチュートリアル(レコード編)](http://fumieval.hatenablog.com/entry/2016/10/10/000011)
 - [快速のExtensible effects](http://fumieval.hatenablog.com/entry/2017/08/02/230422)
 - [波打たせるものの正体(エクステンシブル・タングル)](http://fumieval.hatenablog.com/entry/2016/12/18/181540)
