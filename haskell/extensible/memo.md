@@ -5,7 +5,7 @@
 
 ## なかま
 
-### そうりょ [@fumieval](https://github.com/fumieval)
+### 僧侶 [@fumieval](https://github.com/fumieval)
 
  ひづけ   | せんれき
 -----------|---------------
@@ -18,7 +18,7 @@
 2016/10/10 | [割とすぐに始められるextensibleチュートリアル(レコード編)](http://fumieval.hatenablog.com/entry/2016/10/10/000011)
 2015/01/21 | [ぼくのかんがえた最強の拡張可能レコード](http://fumieval.hatenablog.com/entry/2015/01/21/175227)
 
-### ゆうしゃ [@matsubara0507](https://github.com/matsubara0507)
+### 勇者 [@matsubara0507](https://github.com/matsubara0507)
 
  ひづけ   | せんれき
 -----------|---------------
@@ -33,13 +33,13 @@
 - [extensible パッケージのメモ](https://matsubara0507.github.io/test-extensible/)
 - [Haskell と Elm と JSON の話](https://www.slideshare.net/noob00/haskell-elm-json)
 
-## Qiita のさかば
+## Qiita の酒場
 
 - [extensibleのAssociateを使ったEff型を具体型にする](https://qiita.com/aiya000/items/fad822b2e01478af5bbb)
 - [extensibleのEffectでIOを使う](https://qiita.com/aiya000/items/c4f79f0f8ffcf909ee03)
 - [extensible-effects/extensible/freer-effectsの良いところ悪いところ](https://qiita.com/aiya000/items/e5a8f93649a2239522d4)
 
-## でんせつのあいてむ
+## 伝説の装備
 
 - [fumieval/extensible-forms](https://github.com/fumieval/extensible-forms)
 - [fumieval/winery](https://github.com/fumieval/winery)
