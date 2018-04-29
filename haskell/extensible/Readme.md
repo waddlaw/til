@@ -27,10 +27,6 @@
 - [拡張可能タングルでDo記法レスプログラミング♪](https://matsubara0507.github.io/posts/2018-02-22-fun-of-extensible-3.html)
 - [多相バリアントを使いこなそう with Haskell](https://matsubara0507.github.io/posts/2018-03-24-poly-variant-with-haskell.html)
 
-### github
-
-- [matsubara0507/test-extensible](https://github.com/matsubara0507/test-extensible)
-
 ## extensible を利用したアプリケーション/ライブラリ
 
 - [fumieval/extensible-forms](https://github.com/fumieval/extensible-forms)
