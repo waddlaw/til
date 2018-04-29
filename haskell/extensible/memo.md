@@ -1,13 +1,22 @@
-# えくすてんしぶる
+# エクステンシブル
 
 - [fumieval/extensible](https://github.com/fumieval/extensible)
 - [matsubara0507/extensible-instances](https://github.com/matsubara0507/extensible-instances)
+
+大魔王**エクステンシブル**の野望に打ち勝て！
+
+エクステンシブルを倒すためには、まずは四天王に挑戦しよう！
+
+- レコード
+- エフェクト
+- バリアント
+- タングル
 
 ## なかま
 
 ### 僧侶 [@fumieval](https://github.com/fumieval)
 
- 　    | せんれき
+ひづけ | せんれき
 :---------:|---------------
 2017/10/24 | [GetOpt and extensible records](https://www.schoolofhaskell.com/user/fumieval/extensible/getopt-and-extensible-records)
 2017/08/02 | [快速のExtensible effects](http://fumieval.hatenablog.com/entry/2017/08/02/230422)
