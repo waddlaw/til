@@ -1,6 +1,6 @@
 # extensible について
 
-## 作者の資料
+## 作者 (@fumieval さん) の資料
 
 - [割とすぐに始められるextensibleチュートリアル(レコード編)](http://fumieval.hatenablog.com/entry/2016/10/10/000011)
 - [快速のExtensible effects](http://fumieval.hatenablog.com/entry/2017/08/02/230422)
@@ -27,3 +27,13 @@
 ### github
 
 - [matsubara0507/test-extensible](https://github.com/matsubara0507/test-extensible)
+
+## extensible を利用したパッケージ
+
+- [fumieval/extensible](https://github.com/fumieval/extensible)
+- [fumieval/extensible-forms](https://github.com/fumieval/extensible-forms)
+- [fumieval/winery](https://github.com/fumieval/winery)
+- [matsubara0507/chatwork](https://github.com/matsubara0507/chatwork)
+- [matsubara0507/scrapbook](https://github.com/matsubara0507/scrapbook)
+- [matsubara0507/rakuten](https://github.com/matsubara0507/rakuten)
+- [matsubara0507/extensible-instances](https://github.com/matsubara0507/extensible-instances)
