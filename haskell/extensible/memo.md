@@ -5,8 +5,7 @@
 
 ## なかま
 
-- [@fumieval](https://github.com/fumieval)
-
+### そうりょ [@fumieval](https://github.com/fumieval)
 
  ひづけ   | せんれき
 -----------|---------------
@@ -19,16 +18,19 @@
 2016/10/10 | [割とすぐに始められるextensibleチュートリアル(レコード編)](http://fumieval.hatenablog.com/entry/2016/10/10/000011)
 2015/01/21 | [ぼくのかんがえた最強の拡張可能レコード](http://fumieval.hatenablog.com/entry/2015/01/21/175227)
 
-## 勇者 [@matsubara0507](https://github.com/matsubara0507)
+### ゆうしゃ [@matsubara0507](https://github.com/matsubara0507)
+
+ ひづけ   | せんれき
+-----------|---------------
+2018/03/24 | [多相バリアントを使いこなそう with Haskell](https://matsubara0507.github.io/posts/2018-03-24-poly-variant-with-haskell.html)
+2018/02/22 | [拡張可能タングルでDo記法レスプログラミング♪](https://matsubara0507.github.io/posts/2018-02-22-fun-of-extensible-3.html)
+2018/02/19 | [自己紹介ページを生成する whoami CLI を作った](https://matsubara0507.github.io/posts/2018-02-19-create-whoami-cli.html)
+2018/01/31 | [拡張可能直和型を引数に取る関数の定義 (Haskell)](https://matsubara0507.github.io/posts/2018-01-31-fun-of-extensible-2.html)
+2017/12/09 | [Extensible Effects ステップ・バイ・ステップ](https://matsubara0507.github.io/posts/2017-12-09-extensible-effects-step-by-step.html)
+2017/11/28 | [拡張可能レコードでレコード型を拡縮する (Haskell)](https://matsubara0507.github.io/posts/2017-11-28-fun-of-extensible-1.html)
+2017/08/13 | [extensible の拡張可能レコードを使って REST API Haskell パッケージを作る](https://matsubara0507.github.io/posts/2017-08-13-create-rest-api-package-with-extensible.html)
 
 - [extensible パッケージのメモ](https://matsubara0507.github.io/test-extensible/)
-- [extensible の拡張可能レコードを使って REST API Haskell パッケージを作る](https://matsubara0507.github.io/posts/2017-08-13-create-rest-api-package-with-extensible.html)
-- [拡張可能レコードでレコード型を拡縮する (Haskell)](https://matsubara0507.github.io/posts/2017-11-28-fun-of-extensible-1.html)
-- [Extensible Effects ステップ・バイ・ステップ](https://matsubara0507.github.io/posts/2017-12-09-extensible-effects-step-by-step.html)
-- [拡張可能直和型を引数に取る関数の定義 (Haskell)](https://matsubara0507.github.io/posts/2018-01-31-fun-of-extensible-2.html)
-- [自己紹介ページを生成する whoami CLI を作った](https://matsubara0507.github.io/posts/2018-02-19-create-whoami-cli.html)
-- [拡張可能タングルでDo記法レスプログラミング♪](https://matsubara0507.github.io/posts/2018-02-22-fun-of-extensible-3.html)
-- [多相バリアントを使いこなそう with Haskell](https://matsubara0507.github.io/posts/2018-03-24-poly-variant-with-haskell.html)
 - [Haskell と Elm と JSON の話](https://www.slideshare.net/noob00/haskell-elm-json)
 
 ## Qiita の酒場
