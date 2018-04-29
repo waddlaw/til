@@ -33,13 +33,13 @@
 - [extensible パッケージのメモ](https://matsubara0507.github.io/test-extensible/)
 - [Haskell と Elm と JSON の話](https://www.slideshare.net/noob00/haskell-elm-json)
 
-## Qiita の酒場
+## Qiita のさかば
 
 - [extensibleのAssociateを使ったEff型を具体型にする](https://qiita.com/aiya000/items/fad822b2e01478af5bbb)
 - [extensibleのEffectでIOを使う](https://qiita.com/aiya000/items/c4f79f0f8ffcf909ee03)
 - [extensible-effects/extensible/freer-effectsの良いところ悪いところ](https://qiita.com/aiya000/items/e5a8f93649a2239522d4)
 
-## 伝説の武器/防具
+## でんせつのあいてむ
 
 - [fumieval/extensible-forms](https://github.com/fumieval/extensible-forms)
 - [fumieval/winery](https://github.com/fumieval/winery)
